@@ -1,18 +1,6 @@
-+------------------------------------------------------------------------------+
-|                                                                              |
-|                     CATKIN WORKSPACE FOR THE UGV PROJECT                     |
-|                                                                              |
-|                     Transcend Robotics | ARTI DEV PACKAGES                   |
-|                                                                              |
-|                                                                              |
-|                                                                              |
-+------------------------------------------------------------------------------+
-
-
-This directory is the source code for the ARTI robots from Transcend Robotics.
+This directory is the source code for the ARTI4 robots from Transcend Robotics.
 
 Currently this repostory should compsed of all the packages about ARTI.
-
 Later needs to be split into different repositorys
 
 arti_control: handle the control system source code
