@@ -1,0 +1,15 @@
+build/
+devel/
+
+# Ignore generated docs
+*.dox
+*.wikidoc
+
+*~
+.#*
+
+src/*.kdev4/
+*.kdev4
+
+# Catkin custom files
+CATKIN_IGNORE

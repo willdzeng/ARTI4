@@ -1,2 +1,22 @@
-# ARTI4
-The ARTI4 mobility platform ROS API. 
++------------------------------------------------------------------------------+
+|                                                                              |
+|                     CATKIN WORKSPACE FOR THE UGV PROJECT                     |
+|                                                                              |
+|                     Transcend Robotics | ARTI DEV PACKAGES                   |
+|                                                                              |
+|                                                                              |
+|                                                                              |
++------------------------------------------------------------------------------+
+
+
+This directory is the source code for the ARTI robots from Transcend Robotics.
+
+Currently this repostory should compsed of all the packages about ARTI.
+
+Later needs to be split into different repositorys
+
+arti_control: handle the control system source code
+arti_description:  handle the urdf of ARTI
+arti_gazebo: handle the gazebo plugins of ARTI
+arti_hardware: handle the hardware code and interface of ROS
+arti_system_launch: handle all the launch files of ARTI
