@@ -1,0 +1,12 @@
+<joint name="joint_1_2" type="revolute">
+<pose>-0.135 0 0 0 0 0</pose>
+<child>link_2</child>
+<parent>link_1</parent>
+<axis>
+    <limit>
+        <lower>-0.4</lower>
+        <upper>0.4</upper>
+    </limit>
+    <xyz>0 1 0</xyz>
+</axis>
+</joint>

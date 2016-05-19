@@ -13,3 +13,6 @@ src/*.kdev4/
 
 # Catkin custom files
 CATKIN_IGNORE
+
+# pycharm stuff
+**/.idea/

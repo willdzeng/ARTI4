@@ -1,0 +1,1927 @@
+<sdf version="1.5">
+<model name="track">
+<static>0</static>
+<allow_auto_disable>1</allow_auto_disable>
+<pose frame="">0 0 0 0 -0 0</pose>
+<link name="link_0">
+<pose frame="">0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<visual name="visual">
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      <scale>1 1 1</scale>
+    </mesh>
+  </geometry>
+  <material>
+    <lighting>1</lighting>
+    <script>
+      <uri>file://media/materials/scripts/gazebo.material</uri>
+      <name>Gazebo/Grey</name>
+    </script>
+    <ambient>0.3 0.3 0.3 1</ambient>
+    <diffuse>0.7 0.7 0.7 1</diffuse>
+    <specular>0.01 0.01 0.01 1</specular>
+    <emissive>0 0 0 1</emissive>
+    <shader type="pixel" />
+  </material>
+  <cast_shadows>1</cast_shadows>
+  <transparency>0</transparency>
+</visual>
+<collision name="collision">
+  <laser_retro>0</laser_retro>
+  <max_contacts>10</max_contacts>
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+    </mesh>
+  </geometry>
+  <surface>
+    <friction>
+      <ode>
+        <mu>1</mu>
+        <mu2>1</mu2>
+        <fdir1>0 0 0</fdir1>
+        <slip1>0</slip1>
+        <slip2>0</slip2>
+      </ode>
+    </friction>
+    <bounce>
+      <restitution_coefficient>0</restitution_coefficient>
+      <threshold>1e+06</threshold>
+    </bounce>
+    <contact>
+      <collide_without_contact>0</collide_without_contact>
+      <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+      <collide_bitmask>1</collide_bitmask>
+      <ode>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+        <max_vel>0.01</max_vel>
+        <min_depth>0</min_depth>
+      </ode>
+      <bullet>
+        <split_impulse>1</split_impulse>
+        <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+      </bullet>
+    </contact>
+  </surface>
+</collision>
+<self_collide>0</self_collide>
+<inertial>
+  <inertia>
+    <ixx>1</ixx>
+    <ixy>0</ixy>
+    <ixz>0</ixz>
+    <iyy>1</iyy>
+    <iyz>0</iyz>
+    <izz>1</izz>
+  </inertia>
+  <mass>1</mass>
+</inertial>
+<kinematic>0</kinematic>
+<gravity>1</gravity>
+</link><link name="link_1">
+<pose frame="">0.2700 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<visual name="visual">
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      <scale>1 1 1</scale>
+    </mesh>
+  </geometry>
+  <material>
+    <lighting>1</lighting>
+    <script>
+      <uri>file://media/materials/scripts/gazebo.material</uri>
+      <name>Gazebo/Grey</name>
+    </script>
+    <ambient>0.3 0.3 0.3 1</ambient>
+    <diffuse>0.7 0.7 0.7 1</diffuse>
+    <specular>0.01 0.01 0.01 1</specular>
+    <emissive>0 0 0 1</emissive>
+    <shader type="pixel" />
+  </material>
+  <cast_shadows>1</cast_shadows>
+  <transparency>0</transparency>
+</visual>
+<collision name="collision">
+  <laser_retro>0</laser_retro>
+  <max_contacts>10</max_contacts>
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+    </mesh>
+  </geometry>
+  <surface>
+    <friction>
+      <ode>
+        <mu>1</mu>
+        <mu2>1</mu2>
+        <fdir1>0 0 0</fdir1>
+        <slip1>0</slip1>
+        <slip2>0</slip2>
+      </ode>
+    </friction>
+    <bounce>
+      <restitution_coefficient>0</restitution_coefficient>
+      <threshold>1e+06</threshold>
+    </bounce>
+    <contact>
+      <collide_without_contact>0</collide_without_contact>
+      <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+      <collide_bitmask>1</collide_bitmask>
+      <ode>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+        <max_vel>0.01</max_vel>
+        <min_depth>0</min_depth>
+      </ode>
+      <bullet>
+        <split_impulse>1</split_impulse>
+        <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+      </bullet>
+    </contact>
+  </surface>
+</collision>
+<self_collide>0</self_collide>
+<inertial>
+  <inertia>
+    <ixx>1</ixx>
+    <ixy>0</ixy>
+    <ixz>0</ixz>
+    <iyy>1</iyy>
+    <iyz>0</iyz>
+    <izz>1</izz>
+  </inertia>
+  <mass>1</mass>
+</inertial>
+<kinematic>0</kinematic>
+<gravity>1</gravity>
+</link><link name="link_2">
+<pose frame="">0.5400 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<visual name="visual">
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      <scale>1 1 1</scale>
+    </mesh>
+  </geometry>
+  <material>
+    <lighting>1</lighting>
+    <script>
+      <uri>file://media/materials/scripts/gazebo.material</uri>
+      <name>Gazebo/Grey</name>
+    </script>
+    <ambient>0.3 0.3 0.3 1</ambient>
+    <diffuse>0.7 0.7 0.7 1</diffuse>
+    <specular>0.01 0.01 0.01 1</specular>
+    <emissive>0 0 0 1</emissive>
+    <shader type="pixel" />
+  </material>
+  <cast_shadows>1</cast_shadows>
+  <transparency>0</transparency>
+</visual>
+<collision name="collision">
+  <laser_retro>0</laser_retro>
+  <max_contacts>10</max_contacts>
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+    </mesh>
+  </geometry>
+  <surface>
+    <friction>
+      <ode>
+        <mu>1</mu>
+        <mu2>1</mu2>
+        <fdir1>0 0 0</fdir1>
+        <slip1>0</slip1>
+        <slip2>0</slip2>
+      </ode>
+    </friction>
+    <bounce>
+      <restitution_coefficient>0</restitution_coefficient>
+      <threshold>1e+06</threshold>
+    </bounce>
+    <contact>
+      <collide_without_contact>0</collide_without_contact>
+      <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+      <collide_bitmask>1</collide_bitmask>
+      <ode>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+        <max_vel>0.01</max_vel>
+        <min_depth>0</min_depth>
+      </ode>
+      <bullet>
+        <split_impulse>1</split_impulse>
+        <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+      </bullet>
+    </contact>
+  </surface>
+</collision>
+<self_collide>0</self_collide>
+<inertial>
+  <inertia>
+    <ixx>1</ixx>
+    <ixy>0</ixy>
+    <ixz>0</ixz>
+    <iyy>1</iyy>
+    <iyz>0</iyz>
+    <izz>1</izz>
+  </inertia>
+  <mass>1</mass>
+</inertial>
+<kinematic>0</kinematic>
+<gravity>1</gravity>
+</link><link name="link_3">
+<pose frame="">0.8100 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<visual name="visual">
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      <scale>1 1 1</scale>
+    </mesh>
+  </geometry>
+  <material>
+    <lighting>1</lighting>
+    <script>
+      <uri>file://media/materials/scripts/gazebo.material</uri>
+      <name>Gazebo/Grey</name>
+    </script>
+    <ambient>0.3 0.3 0.3 1</ambient>
+    <diffuse>0.7 0.7 0.7 1</diffuse>
+    <specular>0.01 0.01 0.01 1</specular>
+    <emissive>0 0 0 1</emissive>
+    <shader type="pixel" />
+  </material>
+  <cast_shadows>1</cast_shadows>
+  <transparency>0</transparency>
+</visual>
+<collision name="collision">
+  <laser_retro>0</laser_retro>
+  <max_contacts>10</max_contacts>
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+    </mesh>
+  </geometry>
+  <surface>
+    <friction>
+      <ode>
+        <mu>1</mu>
+        <mu2>1</mu2>
+        <fdir1>0 0 0</fdir1>
+        <slip1>0</slip1>
+        <slip2>0</slip2>
+      </ode>
+    </friction>
+    <bounce>
+      <restitution_coefficient>0</restitution_coefficient>
+      <threshold>1e+06</threshold>
+    </bounce>
+    <contact>
+      <collide_without_contact>0</collide_without_contact>
+      <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+      <collide_bitmask>1</collide_bitmask>
+      <ode>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+        <max_vel>0.01</max_vel>
+        <min_depth>0</min_depth>
+      </ode>
+      <bullet>
+        <split_impulse>1</split_impulse>
+        <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+      </bullet>
+    </contact>
+  </surface>
+</collision>
+<self_collide>0</self_collide>
+<inertial>
+  <inertia>
+    <ixx>1</ixx>
+    <ixy>0</ixy>
+    <ixz>0</ixz>
+    <iyy>1</iyy>
+    <iyz>0</iyz>
+    <izz>1</izz>
+  </inertia>
+  <mass>1</mass>
+</inertial>
+<kinematic>0</kinematic>
+<gravity>1</gravity>
+</link><link name="link_4">
+<pose frame="">1.0800 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<visual name="visual">
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      <scale>1 1 1</scale>
+    </mesh>
+  </geometry>
+  <material>
+    <lighting>1</lighting>
+    <script>
+      <uri>file://media/materials/scripts/gazebo.material</uri>
+      <name>Gazebo/Grey</name>
+    </script>
+    <ambient>0.3 0.3 0.3 1</ambient>
+    <diffuse>0.7 0.7 0.7 1</diffuse>
+    <specular>0.01 0.01 0.01 1</specular>
+    <emissive>0 0 0 1</emissive>
+    <shader type="pixel" />
+  </material>
+  <cast_shadows>1</cast_shadows>
+  <transparency>0</transparency>
+</visual>
+<collision name="collision">
+  <laser_retro>0</laser_retro>
+  <max_contacts>10</max_contacts>
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+    </mesh>
+  </geometry>
+  <surface>
+    <friction>
+      <ode>
+        <mu>1</mu>
+        <mu2>1</mu2>
+        <fdir1>0 0 0</fdir1>
+        <slip1>0</slip1>
+        <slip2>0</slip2>
+      </ode>
+    </friction>
+    <bounce>
+      <restitution_coefficient>0</restitution_coefficient>
+      <threshold>1e+06</threshold>
+    </bounce>
+    <contact>
+      <collide_without_contact>0</collide_without_contact>
+      <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+      <collide_bitmask>1</collide_bitmask>
+      <ode>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+        <max_vel>0.01</max_vel>
+        <min_depth>0</min_depth>
+      </ode>
+      <bullet>
+        <split_impulse>1</split_impulse>
+        <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+      </bullet>
+    </contact>
+  </surface>
+</collision>
+<self_collide>0</self_collide>
+<inertial>
+  <inertia>
+    <ixx>1</ixx>
+    <ixy>0</ixy>
+    <ixz>0</ixz>
+    <iyy>1</iyy>
+    <iyz>0</iyz>
+    <izz>1</izz>
+  </inertia>
+  <mass>1</mass>
+</inertial>
+<kinematic>0</kinematic>
+<gravity>1</gravity>
+</link><link name="link_5">
+<pose frame="">1.3500 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<visual name="visual">
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      <scale>1 1 1</scale>
+    </mesh>
+  </geometry>
+  <material>
+    <lighting>1</lighting>
+    <script>
+      <uri>file://media/materials/scripts/gazebo.material</uri>
+      <name>Gazebo/Grey</name>
+    </script>
+    <ambient>0.3 0.3 0.3 1</ambient>
+    <diffuse>0.7 0.7 0.7 1</diffuse>
+    <specular>0.01 0.01 0.01 1</specular>
+    <emissive>0 0 0 1</emissive>
+    <shader type="pixel" />
+  </material>
+  <cast_shadows>1</cast_shadows>
+  <transparency>0</transparency>
+</visual>
+<collision name="collision">
+  <laser_retro>0</laser_retro>
+  <max_contacts>10</max_contacts>
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+    </mesh>
+  </geometry>
+  <surface>
+    <friction>
+      <ode>
+        <mu>1</mu>
+        <mu2>1</mu2>
+        <fdir1>0 0 0</fdir1>
+        <slip1>0</slip1>
+        <slip2>0</slip2>
+      </ode>
+    </friction>
+    <bounce>
+      <restitution_coefficient>0</restitution_coefficient>
+      <threshold>1e+06</threshold>
+    </bounce>
+    <contact>
+      <collide_without_contact>0</collide_without_contact>
+      <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+      <collide_bitmask>1</collide_bitmask>
+      <ode>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+        <max_vel>0.01</max_vel>
+        <min_depth>0</min_depth>
+      </ode>
+      <bullet>
+        <split_impulse>1</split_impulse>
+        <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+      </bullet>
+    </contact>
+  </surface>
+</collision>
+<self_collide>0</self_collide>
+<inertial>
+  <inertia>
+    <ixx>1</ixx>
+    <ixy>0</ixy>
+    <ixz>0</ixz>
+    <iyy>1</iyy>
+    <iyz>0</iyz>
+    <izz>1</izz>
+  </inertia>
+  <mass>1</mass>
+</inertial>
+<kinematic>0</kinematic>
+<gravity>1</gravity>
+</link><link name="link_6">
+<pose frame="">1.6200 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<visual name="visual">
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      <scale>1 1 1</scale>
+    </mesh>
+  </geometry>
+  <material>
+    <lighting>1</lighting>
+    <script>
+      <uri>file://media/materials/scripts/gazebo.material</uri>
+      <name>Gazebo/Grey</name>
+    </script>
+    <ambient>0.3 0.3 0.3 1</ambient>
+    <diffuse>0.7 0.7 0.7 1</diffuse>
+    <specular>0.01 0.01 0.01 1</specular>
+    <emissive>0 0 0 1</emissive>
+    <shader type="pixel" />
+  </material>
+  <cast_shadows>1</cast_shadows>
+  <transparency>0</transparency>
+</visual>
+<collision name="collision">
+  <laser_retro>0</laser_retro>
+  <max_contacts>10</max_contacts>
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+    </mesh>
+  </geometry>
+  <surface>
+    <friction>
+      <ode>
+        <mu>1</mu>
+        <mu2>1</mu2>
+        <fdir1>0 0 0</fdir1>
+        <slip1>0</slip1>
+        <slip2>0</slip2>
+      </ode>
+    </friction>
+    <bounce>
+      <restitution_coefficient>0</restitution_coefficient>
+      <threshold>1e+06</threshold>
+    </bounce>
+    <contact>
+      <collide_without_contact>0</collide_without_contact>
+      <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+      <collide_bitmask>1</collide_bitmask>
+      <ode>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+        <max_vel>0.01</max_vel>
+        <min_depth>0</min_depth>
+      </ode>
+      <bullet>
+        <split_impulse>1</split_impulse>
+        <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+      </bullet>
+    </contact>
+  </surface>
+</collision>
+<self_collide>0</self_collide>
+<inertial>
+  <inertia>
+    <ixx>1</ixx>
+    <ixy>0</ixy>
+    <ixz>0</ixz>
+    <iyy>1</iyy>
+    <iyz>0</iyz>
+    <izz>1</izz>
+  </inertia>
+  <mass>1</mass>
+</inertial>
+<kinematic>0</kinematic>
+<gravity>1</gravity>
+</link><link name="link_7">
+<pose frame="">1.8900 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<visual name="visual">
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      <scale>1 1 1</scale>
+    </mesh>
+  </geometry>
+  <material>
+    <lighting>1</lighting>
+    <script>
+      <uri>file://media/materials/scripts/gazebo.material</uri>
+      <name>Gazebo/Grey</name>
+    </script>
+    <ambient>0.3 0.3 0.3 1</ambient>
+    <diffuse>0.7 0.7 0.7 1</diffuse>
+    <specular>0.01 0.01 0.01 1</specular>
+    <emissive>0 0 0 1</emissive>
+    <shader type="pixel" />
+  </material>
+  <cast_shadows>1</cast_shadows>
+  <transparency>0</transparency>
+</visual>
+<collision name="collision">
+  <laser_retro>0</laser_retro>
+  <max_contacts>10</max_contacts>
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+    </mesh>
+  </geometry>
+  <surface>
+    <friction>
+      <ode>
+        <mu>1</mu>
+        <mu2>1</mu2>
+        <fdir1>0 0 0</fdir1>
+        <slip1>0</slip1>
+        <slip2>0</slip2>
+      </ode>
+    </friction>
+    <bounce>
+      <restitution_coefficient>0</restitution_coefficient>
+      <threshold>1e+06</threshold>
+    </bounce>
+    <contact>
+      <collide_without_contact>0</collide_without_contact>
+      <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+      <collide_bitmask>1</collide_bitmask>
+      <ode>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+        <max_vel>0.01</max_vel>
+        <min_depth>0</min_depth>
+      </ode>
+      <bullet>
+        <split_impulse>1</split_impulse>
+        <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+      </bullet>
+    </contact>
+  </surface>
+</collision>
+<self_collide>0</self_collide>
+<inertial>
+  <inertia>
+    <ixx>1</ixx>
+    <ixy>0</ixy>
+    <ixz>0</ixz>
+    <iyy>1</iyy>
+    <iyz>0</iyz>
+    <izz>1</izz>
+  </inertia>
+  <mass>1</mass>
+</inertial>
+<kinematic>0</kinematic>
+<gravity>1</gravity>
+</link><link name="link_8">
+<pose frame="">2.1600 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<visual name="visual">
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      <scale>1 1 1</scale>
+    </mesh>
+  </geometry>
+  <material>
+    <lighting>1</lighting>
+    <script>
+      <uri>file://media/materials/scripts/gazebo.material</uri>
+      <name>Gazebo/Grey</name>
+    </script>
+    <ambient>0.3 0.3 0.3 1</ambient>
+    <diffuse>0.7 0.7 0.7 1</diffuse>
+    <specular>0.01 0.01 0.01 1</specular>
+    <emissive>0 0 0 1</emissive>
+    <shader type="pixel" />
+  </material>
+  <cast_shadows>1</cast_shadows>
+  <transparency>0</transparency>
+</visual>
+<collision name="collision">
+  <laser_retro>0</laser_retro>
+  <max_contacts>10</max_contacts>
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+    </mesh>
+  </geometry>
+  <surface>
+    <friction>
+      <ode>
+        <mu>1</mu>
+        <mu2>1</mu2>
+        <fdir1>0 0 0</fdir1>
+        <slip1>0</slip1>
+        <slip2>0</slip2>
+      </ode>
+    </friction>
+    <bounce>
+      <restitution_coefficient>0</restitution_coefficient>
+      <threshold>1e+06</threshold>
+    </bounce>
+    <contact>
+      <collide_without_contact>0</collide_without_contact>
+      <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+      <collide_bitmask>1</collide_bitmask>
+      <ode>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+        <max_vel>0.01</max_vel>
+        <min_depth>0</min_depth>
+      </ode>
+      <bullet>
+        <split_impulse>1</split_impulse>
+        <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+      </bullet>
+    </contact>
+  </surface>
+</collision>
+<self_collide>0</self_collide>
+<inertial>
+  <inertia>
+    <ixx>1</ixx>
+    <ixy>0</ixy>
+    <ixz>0</ixz>
+    <iyy>1</iyy>
+    <iyz>0</iyz>
+    <izz>1</izz>
+  </inertia>
+  <mass>1</mass>
+</inertial>
+<kinematic>0</kinematic>
+<gravity>1</gravity>
+</link><link name="link_9">
+<pose frame="">2.4300 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<visual name="visual">
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      <scale>1 1 1</scale>
+    </mesh>
+  </geometry>
+  <material>
+    <lighting>1</lighting>
+    <script>
+      <uri>file://media/materials/scripts/gazebo.material</uri>
+      <name>Gazebo/Grey</name>
+    </script>
+    <ambient>0.3 0.3 0.3 1</ambient>
+    <diffuse>0.7 0.7 0.7 1</diffuse>
+    <specular>0.01 0.01 0.01 1</specular>
+    <emissive>0 0 0 1</emissive>
+    <shader type="pixel" />
+  </material>
+  <cast_shadows>1</cast_shadows>
+  <transparency>0</transparency>
+</visual>
+<collision name="collision">
+  <laser_retro>0</laser_retro>
+  <max_contacts>10</max_contacts>
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+    </mesh>
+  </geometry>
+  <surface>
+    <friction>
+      <ode>
+        <mu>1</mu>
+        <mu2>1</mu2>
+        <fdir1>0 0 0</fdir1>
+        <slip1>0</slip1>
+        <slip2>0</slip2>
+      </ode>
+    </friction>
+    <bounce>
+      <restitution_coefficient>0</restitution_coefficient>
+      <threshold>1e+06</threshold>
+    </bounce>
+    <contact>
+      <collide_without_contact>0</collide_without_contact>
+      <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+      <collide_bitmask>1</collide_bitmask>
+      <ode>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+        <max_vel>0.01</max_vel>
+        <min_depth>0</min_depth>
+      </ode>
+      <bullet>
+        <split_impulse>1</split_impulse>
+        <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+      </bullet>
+    </contact>
+  </surface>
+</collision>
+<self_collide>0</self_collide>
+<inertial>
+  <inertia>
+    <ixx>1</ixx>
+    <ixy>0</ixy>
+    <ixz>0</ixz>
+    <iyy>1</iyy>
+    <iyz>0</iyz>
+    <izz>1</izz>
+  </inertia>
+  <mass>1</mass>
+</inertial>
+<kinematic>0</kinematic>
+<gravity>1</gravity>
+</link><link name="link_10">
+<pose frame="">2.7000 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<visual name="visual">
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      <scale>1 1 1</scale>
+    </mesh>
+  </geometry>
+  <material>
+    <lighting>1</lighting>
+    <script>
+      <uri>file://media/materials/scripts/gazebo.material</uri>
+      <name>Gazebo/Grey</name>
+    </script>
+    <ambient>0.3 0.3 0.3 1</ambient>
+    <diffuse>0.7 0.7 0.7 1</diffuse>
+    <specular>0.01 0.01 0.01 1</specular>
+    <emissive>0 0 0 1</emissive>
+    <shader type="pixel" />
+  </material>
+  <cast_shadows>1</cast_shadows>
+  <transparency>0</transparency>
+</visual>
+<collision name="collision">
+  <laser_retro>0</laser_retro>
+  <max_contacts>10</max_contacts>
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+    </mesh>
+  </geometry>
+  <surface>
+    <friction>
+      <ode>
+        <mu>1</mu>
+        <mu2>1</mu2>
+        <fdir1>0 0 0</fdir1>
+        <slip1>0</slip1>
+        <slip2>0</slip2>
+      </ode>
+    </friction>
+    <bounce>
+      <restitution_coefficient>0</restitution_coefficient>
+      <threshold>1e+06</threshold>
+    </bounce>
+    <contact>
+      <collide_without_contact>0</collide_without_contact>
+      <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+      <collide_bitmask>1</collide_bitmask>
+      <ode>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+        <max_vel>0.01</max_vel>
+        <min_depth>0</min_depth>
+      </ode>
+      <bullet>
+        <split_impulse>1</split_impulse>
+        <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+      </bullet>
+    </contact>
+  </surface>
+</collision>
+<self_collide>0</self_collide>
+<inertial>
+  <inertia>
+    <ixx>1</ixx>
+    <ixy>0</ixy>
+    <ixz>0</ixz>
+    <iyy>1</iyy>
+    <iyz>0</iyz>
+    <izz>1</izz>
+  </inertia>
+  <mass>1</mass>
+</inertial>
+<kinematic>0</kinematic>
+<gravity>1</gravity>
+</link><link name="link_11">
+<pose frame="">2.9700 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<visual name="visual">
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      <scale>1 1 1</scale>
+    </mesh>
+  </geometry>
+  <material>
+    <lighting>1</lighting>
+    <script>
+      <uri>file://media/materials/scripts/gazebo.material</uri>
+      <name>Gazebo/Grey</name>
+    </script>
+    <ambient>0.3 0.3 0.3 1</ambient>
+    <diffuse>0.7 0.7 0.7 1</diffuse>
+    <specular>0.01 0.01 0.01 1</specular>
+    <emissive>0 0 0 1</emissive>
+    <shader type="pixel" />
+  </material>
+  <cast_shadows>1</cast_shadows>
+  <transparency>0</transparency>
+</visual>
+<collision name="collision">
+  <laser_retro>0</laser_retro>
+  <max_contacts>10</max_contacts>
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+    </mesh>
+  </geometry>
+  <surface>
+    <friction>
+      <ode>
+        <mu>1</mu>
+        <mu2>1</mu2>
+        <fdir1>0 0 0</fdir1>
+        <slip1>0</slip1>
+        <slip2>0</slip2>
+      </ode>
+    </friction>
+    <bounce>
+      <restitution_coefficient>0</restitution_coefficient>
+      <threshold>1e+06</threshold>
+    </bounce>
+    <contact>
+      <collide_without_contact>0</collide_without_contact>
+      <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+      <collide_bitmask>1</collide_bitmask>
+      <ode>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+        <max_vel>0.01</max_vel>
+        <min_depth>0</min_depth>
+      </ode>
+      <bullet>
+        <split_impulse>1</split_impulse>
+        <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+      </bullet>
+    </contact>
+  </surface>
+</collision>
+<self_collide>0</self_collide>
+<inertial>
+  <inertia>
+    <ixx>1</ixx>
+    <ixy>0</ixy>
+    <ixz>0</ixz>
+    <iyy>1</iyy>
+    <iyz>0</iyz>
+    <izz>1</izz>
+  </inertia>
+  <mass>1</mass>
+</inertial>
+<kinematic>0</kinematic>
+<gravity>1</gravity>
+</link><link name="link_12">
+<pose frame="">3.2400 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<visual name="visual">
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      <scale>1 1 1</scale>
+    </mesh>
+  </geometry>
+  <material>
+    <lighting>1</lighting>
+    <script>
+      <uri>file://media/materials/scripts/gazebo.material</uri>
+      <name>Gazebo/Grey</name>
+    </script>
+    <ambient>0.3 0.3 0.3 1</ambient>
+    <diffuse>0.7 0.7 0.7 1</diffuse>
+    <specular>0.01 0.01 0.01 1</specular>
+    <emissive>0 0 0 1</emissive>
+    <shader type="pixel" />
+  </material>
+  <cast_shadows>1</cast_shadows>
+  <transparency>0</transparency>
+</visual>
+<collision name="collision">
+  <laser_retro>0</laser_retro>
+  <max_contacts>10</max_contacts>
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+    </mesh>
+  </geometry>
+  <surface>
+    <friction>
+      <ode>
+        <mu>1</mu>
+        <mu2>1</mu2>
+        <fdir1>0 0 0</fdir1>
+        <slip1>0</slip1>
+        <slip2>0</slip2>
+      </ode>
+    </friction>
+    <bounce>
+      <restitution_coefficient>0</restitution_coefficient>
+      <threshold>1e+06</threshold>
+    </bounce>
+    <contact>
+      <collide_without_contact>0</collide_without_contact>
+      <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+      <collide_bitmask>1</collide_bitmask>
+      <ode>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+        <max_vel>0.01</max_vel>
+        <min_depth>0</min_depth>
+      </ode>
+      <bullet>
+        <split_impulse>1</split_impulse>
+        <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+      </bullet>
+    </contact>
+  </surface>
+</collision>
+<self_collide>0</self_collide>
+<inertial>
+  <inertia>
+    <ixx>1</ixx>
+    <ixy>0</ixy>
+    <ixz>0</ixz>
+    <iyy>1</iyy>
+    <iyz>0</iyz>
+    <izz>1</izz>
+  </inertia>
+  <mass>1</mass>
+</inertial>
+<kinematic>0</kinematic>
+<gravity>1</gravity>
+</link><link name="link_13">
+<pose frame="">3.5100 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<visual name="visual">
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      <scale>1 1 1</scale>
+    </mesh>
+  </geometry>
+  <material>
+    <lighting>1</lighting>
+    <script>
+      <uri>file://media/materials/scripts/gazebo.material</uri>
+      <name>Gazebo/Grey</name>
+    </script>
+    <ambient>0.3 0.3 0.3 1</ambient>
+    <diffuse>0.7 0.7 0.7 1</diffuse>
+    <specular>0.01 0.01 0.01 1</specular>
+    <emissive>0 0 0 1</emissive>
+    <shader type="pixel" />
+  </material>
+  <cast_shadows>1</cast_shadows>
+  <transparency>0</transparency>
+</visual>
+<collision name="collision">
+  <laser_retro>0</laser_retro>
+  <max_contacts>10</max_contacts>
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+    </mesh>
+  </geometry>
+  <surface>
+    <friction>
+      <ode>
+        <mu>1</mu>
+        <mu2>1</mu2>
+        <fdir1>0 0 0</fdir1>
+        <slip1>0</slip1>
+        <slip2>0</slip2>
+      </ode>
+    </friction>
+    <bounce>
+      <restitution_coefficient>0</restitution_coefficient>
+      <threshold>1e+06</threshold>
+    </bounce>
+    <contact>
+      <collide_without_contact>0</collide_without_contact>
+      <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+      <collide_bitmask>1</collide_bitmask>
+      <ode>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+        <max_vel>0.01</max_vel>
+        <min_depth>0</min_depth>
+      </ode>
+      <bullet>
+        <split_impulse>1</split_impulse>
+        <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+      </bullet>
+    </contact>
+  </surface>
+</collision>
+<self_collide>0</self_collide>
+<inertial>
+  <inertia>
+    <ixx>1</ixx>
+    <ixy>0</ixy>
+    <ixz>0</ixz>
+    <iyy>1</iyy>
+    <iyz>0</iyz>
+    <izz>1</izz>
+  </inertia>
+  <mass>1</mass>
+</inertial>
+<kinematic>0</kinematic>
+<gravity>1</gravity>
+</link><link name="link_14">
+<pose frame="">3.7800 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<visual name="visual">
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      <scale>1 1 1</scale>
+    </mesh>
+  </geometry>
+  <material>
+    <lighting>1</lighting>
+    <script>
+      <uri>file://media/materials/scripts/gazebo.material</uri>
+      <name>Gazebo/Grey</name>
+    </script>
+    <ambient>0.3 0.3 0.3 1</ambient>
+    <diffuse>0.7 0.7 0.7 1</diffuse>
+    <specular>0.01 0.01 0.01 1</specular>
+    <emissive>0 0 0 1</emissive>
+    <shader type="pixel" />
+  </material>
+  <cast_shadows>1</cast_shadows>
+  <transparency>0</transparency>
+</visual>
+<collision name="collision">
+  <laser_retro>0</laser_retro>
+  <max_contacts>10</max_contacts>
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+    </mesh>
+  </geometry>
+  <surface>
+    <friction>
+      <ode>
+        <mu>1</mu>
+        <mu2>1</mu2>
+        <fdir1>0 0 0</fdir1>
+        <slip1>0</slip1>
+        <slip2>0</slip2>
+      </ode>
+    </friction>
+    <bounce>
+      <restitution_coefficient>0</restitution_coefficient>
+      <threshold>1e+06</threshold>
+    </bounce>
+    <contact>
+      <collide_without_contact>0</collide_without_contact>
+      <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+      <collide_bitmask>1</collide_bitmask>
+      <ode>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+        <max_vel>0.01</max_vel>
+        <min_depth>0</min_depth>
+      </ode>
+      <bullet>
+        <split_impulse>1</split_impulse>
+        <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+      </bullet>
+    </contact>
+  </surface>
+</collision>
+<self_collide>0</self_collide>
+<inertial>
+  <inertia>
+    <ixx>1</ixx>
+    <ixy>0</ixy>
+    <ixz>0</ixz>
+    <iyy>1</iyy>
+    <iyz>0</iyz>
+    <izz>1</izz>
+  </inertia>
+  <mass>1</mass>
+</inertial>
+<kinematic>0</kinematic>
+<gravity>1</gravity>
+</link><link name="link_15">
+<pose frame="">4.0500 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<visual name="visual">
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      <scale>1 1 1</scale>
+    </mesh>
+  </geometry>
+  <material>
+    <lighting>1</lighting>
+    <script>
+      <uri>file://media/materials/scripts/gazebo.material</uri>
+      <name>Gazebo/Grey</name>
+    </script>
+    <ambient>0.3 0.3 0.3 1</ambient>
+    <diffuse>0.7 0.7 0.7 1</diffuse>
+    <specular>0.01 0.01 0.01 1</specular>
+    <emissive>0 0 0 1</emissive>
+    <shader type="pixel" />
+  </material>
+  <cast_shadows>1</cast_shadows>
+  <transparency>0</transparency>
+</visual>
+<collision name="collision">
+  <laser_retro>0</laser_retro>
+  <max_contacts>10</max_contacts>
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+    </mesh>
+  </geometry>
+  <surface>
+    <friction>
+      <ode>
+        <mu>1</mu>
+        <mu2>1</mu2>
+        <fdir1>0 0 0</fdir1>
+        <slip1>0</slip1>
+        <slip2>0</slip2>
+      </ode>
+    </friction>
+    <bounce>
+      <restitution_coefficient>0</restitution_coefficient>
+      <threshold>1e+06</threshold>
+    </bounce>
+    <contact>
+      <collide_without_contact>0</collide_without_contact>
+      <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+      <collide_bitmask>1</collide_bitmask>
+      <ode>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+        <max_vel>0.01</max_vel>
+        <min_depth>0</min_depth>
+      </ode>
+      <bullet>
+        <split_impulse>1</split_impulse>
+        <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+      </bullet>
+    </contact>
+  </surface>
+</collision>
+<self_collide>0</self_collide>
+<inertial>
+  <inertia>
+    <ixx>1</ixx>
+    <ixy>0</ixy>
+    <ixz>0</ixz>
+    <iyy>1</iyy>
+    <iyz>0</iyz>
+    <izz>1</izz>
+  </inertia>
+  <mass>1</mass>
+</inertial>
+<kinematic>0</kinematic>
+<gravity>1</gravity>
+</link><link name="link_16">
+<pose frame="">4.3200 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<visual name="visual">
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      <scale>1 1 1</scale>
+    </mesh>
+  </geometry>
+  <material>
+    <lighting>1</lighting>
+    <script>
+      <uri>file://media/materials/scripts/gazebo.material</uri>
+      <name>Gazebo/Grey</name>
+    </script>
+    <ambient>0.3 0.3 0.3 1</ambient>
+    <diffuse>0.7 0.7 0.7 1</diffuse>
+    <specular>0.01 0.01 0.01 1</specular>
+    <emissive>0 0 0 1</emissive>
+    <shader type="pixel" />
+  </material>
+  <cast_shadows>1</cast_shadows>
+  <transparency>0</transparency>
+</visual>
+<collision name="collision">
+  <laser_retro>0</laser_retro>
+  <max_contacts>10</max_contacts>
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+    </mesh>
+  </geometry>
+  <surface>
+    <friction>
+      <ode>
+        <mu>1</mu>
+        <mu2>1</mu2>
+        <fdir1>0 0 0</fdir1>
+        <slip1>0</slip1>
+        <slip2>0</slip2>
+      </ode>
+    </friction>
+    <bounce>
+      <restitution_coefficient>0</restitution_coefficient>
+      <threshold>1e+06</threshold>
+    </bounce>
+    <contact>
+      <collide_without_contact>0</collide_without_contact>
+      <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+      <collide_bitmask>1</collide_bitmask>
+      <ode>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+        <max_vel>0.01</max_vel>
+        <min_depth>0</min_depth>
+      </ode>
+      <bullet>
+        <split_impulse>1</split_impulse>
+        <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+      </bullet>
+    </contact>
+  </surface>
+</collision>
+<self_collide>0</self_collide>
+<inertial>
+  <inertia>
+    <ixx>1</ixx>
+    <ixy>0</ixy>
+    <ixz>0</ixz>
+    <iyy>1</iyy>
+    <iyz>0</iyz>
+    <izz>1</izz>
+  </inertia>
+  <mass>1</mass>
+</inertial>
+<kinematic>0</kinematic>
+<gravity>1</gravity>
+</link><link name="link_17">
+<pose frame="">4.5900 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<visual name="visual">
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      <scale>1 1 1</scale>
+    </mesh>
+  </geometry>
+  <material>
+    <lighting>1</lighting>
+    <script>
+      <uri>file://media/materials/scripts/gazebo.material</uri>
+      <name>Gazebo/Grey</name>
+    </script>
+    <ambient>0.3 0.3 0.3 1</ambient>
+    <diffuse>0.7 0.7 0.7 1</diffuse>
+    <specular>0.01 0.01 0.01 1</specular>
+    <emissive>0 0 0 1</emissive>
+    <shader type="pixel" />
+  </material>
+  <cast_shadows>1</cast_shadows>
+  <transparency>0</transparency>
+</visual>
+<collision name="collision">
+  <laser_retro>0</laser_retro>
+  <max_contacts>10</max_contacts>
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+    </mesh>
+  </geometry>
+  <surface>
+    <friction>
+      <ode>
+        <mu>1</mu>
+        <mu2>1</mu2>
+        <fdir1>0 0 0</fdir1>
+        <slip1>0</slip1>
+        <slip2>0</slip2>
+      </ode>
+    </friction>
+    <bounce>
+      <restitution_coefficient>0</restitution_coefficient>
+      <threshold>1e+06</threshold>
+    </bounce>
+    <contact>
+      <collide_without_contact>0</collide_without_contact>
+      <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+      <collide_bitmask>1</collide_bitmask>
+      <ode>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+        <max_vel>0.01</max_vel>
+        <min_depth>0</min_depth>
+      </ode>
+      <bullet>
+        <split_impulse>1</split_impulse>
+        <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+      </bullet>
+    </contact>
+  </surface>
+</collision>
+<self_collide>0</self_collide>
+<inertial>
+  <inertia>
+    <ixx>1</ixx>
+    <ixy>0</ixy>
+    <ixz>0</ixz>
+    <iyy>1</iyy>
+    <iyz>0</iyz>
+    <izz>1</izz>
+  </inertia>
+  <mass>1</mass>
+</inertial>
+<kinematic>0</kinematic>
+<gravity>1</gravity>
+</link><link name="link_18">
+<pose frame="">4.8600 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<visual name="visual">
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      <scale>1 1 1</scale>
+    </mesh>
+  </geometry>
+  <material>
+    <lighting>1</lighting>
+    <script>
+      <uri>file://media/materials/scripts/gazebo.material</uri>
+      <name>Gazebo/Grey</name>
+    </script>
+    <ambient>0.3 0.3 0.3 1</ambient>
+    <diffuse>0.7 0.7 0.7 1</diffuse>
+    <specular>0.01 0.01 0.01 1</specular>
+    <emissive>0 0 0 1</emissive>
+    <shader type="pixel" />
+  </material>
+  <cast_shadows>1</cast_shadows>
+  <transparency>0</transparency>
+</visual>
+<collision name="collision">
+  <laser_retro>0</laser_retro>
+  <max_contacts>10</max_contacts>
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+    </mesh>
+  </geometry>
+  <surface>
+    <friction>
+      <ode>
+        <mu>1</mu>
+        <mu2>1</mu2>
+        <fdir1>0 0 0</fdir1>
+        <slip1>0</slip1>
+        <slip2>0</slip2>
+      </ode>
+    </friction>
+    <bounce>
+      <restitution_coefficient>0</restitution_coefficient>
+      <threshold>1e+06</threshold>
+    </bounce>
+    <contact>
+      <collide_without_contact>0</collide_without_contact>
+      <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+      <collide_bitmask>1</collide_bitmask>
+      <ode>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+        <max_vel>0.01</max_vel>
+        <min_depth>0</min_depth>
+      </ode>
+      <bullet>
+        <split_impulse>1</split_impulse>
+        <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+      </bullet>
+    </contact>
+  </surface>
+</collision>
+<self_collide>0</self_collide>
+<inertial>
+  <inertia>
+    <ixx>1</ixx>
+    <ixy>0</ixy>
+    <ixz>0</ixz>
+    <iyy>1</iyy>
+    <iyz>0</iyz>
+    <izz>1</izz>
+  </inertia>
+  <mass>1</mass>
+</inertial>
+<kinematic>0</kinematic>
+<gravity>1</gravity>
+</link><link name="link_19">
+<pose frame="">5.1300 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<visual name="visual">
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      <scale>1 1 1</scale>
+    </mesh>
+  </geometry>
+  <material>
+    <lighting>1</lighting>
+    <script>
+      <uri>file://media/materials/scripts/gazebo.material</uri>
+      <name>Gazebo/Grey</name>
+    </script>
+    <ambient>0.3 0.3 0.3 1</ambient>
+    <diffuse>0.7 0.7 0.7 1</diffuse>
+    <specular>0.01 0.01 0.01 1</specular>
+    <emissive>0 0 0 1</emissive>
+    <shader type="pixel" />
+  </material>
+  <cast_shadows>1</cast_shadows>
+  <transparency>0</transparency>
+</visual>
+<collision name="collision">
+  <laser_retro>0</laser_retro>
+  <max_contacts>10</max_contacts>
+  <pose frame="">0 0 0 0 -0 0</pose>
+  <geometry>
+    <mesh>
+      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+    </mesh>
+  </geometry>
+  <surface>
+    <friction>
+      <ode>
+        <mu>1</mu>
+        <mu2>1</mu2>
+        <fdir1>0 0 0</fdir1>
+        <slip1>0</slip1>
+        <slip2>0</slip2>
+      </ode>
+    </friction>
+    <bounce>
+      <restitution_coefficient>0</restitution_coefficient>
+      <threshold>1e+06</threshold>
+    </bounce>
+    <contact>
+      <collide_without_contact>0</collide_without_contact>
+      <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+      <collide_bitmask>1</collide_bitmask>
+      <ode>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+        <max_vel>0.01</max_vel>
+        <min_depth>0</min_depth>
+      </ode>
+      <bullet>
+        <split_impulse>1</split_impulse>
+        <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.2</soft_erp>
+        <kp>1e+13</kp>
+        <kd>1</kd>
+      </bullet>
+    </contact>
+  </surface>
+</collision>
+<self_collide>0</self_collide>
+<inertial>
+  <inertia>
+    <ixx>1</ixx>
+    <ixy>0</ixy>
+    <ixz>0</ixz>
+    <iyy>1</iyy>
+    <iyz>0</iyz>
+    <izz>1</izz>
+  </inertia>
+  <mass>1</mass>
+</inertial>
+<kinematic>0</kinematic>
+<gravity>1</gravity>
+</link><joint name="joint_0_1" type="revolute">
+<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<child>link_0</child>
+<parent>link_1</parent>
+<axis>
+    <limit>
+        <lower>-0.4</lower>
+        <upper>0.4</upper>
+    </limit>
+    <xyz>0 1 0</xyz>
+</axis>
+</joint><joint name="joint_1_2" type="revolute">
+<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<child>link_1</child>
+<parent>link_2</parent>
+<axis>
+    <limit>
+        <lower>-0.4</lower>
+        <upper>0.4</upper>
+    </limit>
+    <xyz>0 1 0</xyz>
+</axis>
+</joint><joint name="joint_2_3" type="revolute">
+<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<child>link_2</child>
+<parent>link_3</parent>
+<axis>
+    <limit>
+        <lower>-0.4</lower>
+        <upper>0.4</upper>
+    </limit>
+    <xyz>0 1 0</xyz>
+</axis>
+</joint><joint name="joint_3_4" type="revolute">
+<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<child>link_3</child>
+<parent>link_4</parent>
+<axis>
+    <limit>
+        <lower>-0.4</lower>
+        <upper>0.4</upper>
+    </limit>
+    <xyz>0 1 0</xyz>
+</axis>
+</joint><joint name="joint_4_5" type="revolute">
+<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<child>link_4</child>
+<parent>link_5</parent>
+<axis>
+    <limit>
+        <lower>-0.4</lower>
+        <upper>0.4</upper>
+    </limit>
+    <xyz>0 1 0</xyz>
+</axis>
+</joint><joint name="joint_5_6" type="revolute">
+<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<child>link_5</child>
+<parent>link_6</parent>
+<axis>
+    <limit>
+        <lower>-0.4</lower>
+        <upper>0.4</upper>
+    </limit>
+    <xyz>0 1 0</xyz>
+</axis>
+</joint><joint name="joint_6_7" type="revolute">
+<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<child>link_6</child>
+<parent>link_7</parent>
+<axis>
+    <limit>
+        <lower>-0.4</lower>
+        <upper>0.4</upper>
+    </limit>
+    <xyz>0 1 0</xyz>
+</axis>
+</joint><joint name="joint_7_8" type="revolute">
+<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<child>link_7</child>
+<parent>link_8</parent>
+<axis>
+    <limit>
+        <lower>-0.4</lower>
+        <upper>0.4</upper>
+    </limit>
+    <xyz>0 1 0</xyz>
+</axis>
+</joint><joint name="joint_8_9" type="revolute">
+<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<child>link_8</child>
+<parent>link_9</parent>
+<axis>
+    <limit>
+        <lower>-0.4</lower>
+        <upper>0.4</upper>
+    </limit>
+    <xyz>0 1 0</xyz>
+</axis>
+</joint><joint name="joint_9_10" type="revolute">
+<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<child>link_9</child>
+<parent>link_10</parent>
+<axis>
+    <limit>
+        <lower>-0.4</lower>
+        <upper>0.4</upper>
+    </limit>
+    <xyz>0 1 0</xyz>
+</axis>
+</joint><joint name="joint_10_11" type="revolute">
+<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<child>link_10</child>
+<parent>link_11</parent>
+<axis>
+    <limit>
+        <lower>-0.4</lower>
+        <upper>0.4</upper>
+    </limit>
+    <xyz>0 1 0</xyz>
+</axis>
+</joint><joint name="joint_11_12" type="revolute">
+<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<child>link_11</child>
+<parent>link_12</parent>
+<axis>
+    <limit>
+        <lower>-0.4</lower>
+        <upper>0.4</upper>
+    </limit>
+    <xyz>0 1 0</xyz>
+</axis>
+</joint><joint name="joint_12_13" type="revolute">
+<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<child>link_12</child>
+<parent>link_13</parent>
+<axis>
+    <limit>
+        <lower>-0.4</lower>
+        <upper>0.4</upper>
+    </limit>
+    <xyz>0 1 0</xyz>
+</axis>
+</joint><joint name="joint_13_14" type="revolute">
+<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<child>link_13</child>
+<parent>link_14</parent>
+<axis>
+    <limit>
+        <lower>-0.4</lower>
+        <upper>0.4</upper>
+    </limit>
+    <xyz>0 1 0</xyz>
+</axis>
+</joint><joint name="joint_14_15" type="revolute">
+<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<child>link_14</child>
+<parent>link_15</parent>
+<axis>
+    <limit>
+        <lower>-0.4</lower>
+        <upper>0.4</upper>
+    </limit>
+    <xyz>0 1 0</xyz>
+</axis>
+</joint><joint name="joint_15_16" type="revolute">
+<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<child>link_15</child>
+<parent>link_16</parent>
+<axis>
+    <limit>
+        <lower>-0.4</lower>
+        <upper>0.4</upper>
+    </limit>
+    <xyz>0 1 0</xyz>
+</axis>
+</joint><joint name="joint_16_17" type="revolute">
+<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<child>link_16</child>
+<parent>link_17</parent>
+<axis>
+    <limit>
+        <lower>-0.4</lower>
+        <upper>0.4</upper>
+    </limit>
+    <xyz>0 1 0</xyz>
+</axis>
+</joint><joint name="joint_17_18" type="revolute">
+<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<child>link_17</child>
+<parent>link_18</parent>
+<axis>
+    <limit>
+        <lower>-0.4</lower>
+        <upper>0.4</upper>
+    </limit>
+    <xyz>0 1 0</xyz>
+</axis>
+</joint><joint name="joint_18_19" type="revolute">
+<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<child>link_18</child>
+<parent>link_19</parent>
+<axis>
+    <limit>
+        <lower>-0.4</lower>
+        <upper>0.4</upper>
+    </limit>
+    <xyz>0 1 0</xyz>
+</axis>
+</joint><joint name="joint_19_0" type="revolute">
+<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<child>link_19</child>
+<parent>link_0</parent>
+<axis>
+    <limit>
+        <lower>-0.4</lower>
+        <upper>0.4</upper>
+    </limit>
+    <xyz>0 1 0</xyz>
+</axis>
+</joint></model>
+</sdf>
