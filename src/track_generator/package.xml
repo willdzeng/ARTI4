@@ -1,5 +1,5 @@
 <package>
-    <name>arti_control</name>
+    <name>track_generator</name>
     <version>0.0.1</version>
     <description>
       TODO
@@ -20,6 +20,7 @@
     <run_depend>eigen</run_depend>
 
     <export>
+        <gazebo_ros gazebo_plugin_path="${prefix}/lib" gazebo_model_path="${prefix}/model" gazebo_resource_path="${prefix}/model"/>                    
     </export>
 
 </package>

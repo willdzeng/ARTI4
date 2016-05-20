@@ -20,7 +20,7 @@ add_definitions(${EIGEN_DEFINITIONS})
 link_directories(${catkin_LIBRARY_DIRS})
 
 catkin_package(
-    INCLUDE_DIRS include
+    # INCLUDE_DIRS include
     LIBRARIES 
     CATKIN_DEPENDS
 )
@@ -30,7 +30,7 @@ install(TARGETS
        LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
        )
 
-install(DIRECTORY include/${PROJECT_NAME}/
-  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
-  PATTERN ".svn" EXCLUDE
-)
+# install(DIRECTORY include/${PROJECT_NAME}/
+#   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+#   PATTERN ".svn" EXCLUDE
+# )

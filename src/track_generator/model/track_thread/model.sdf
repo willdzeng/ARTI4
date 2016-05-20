@@ -9,7 +9,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
+      
       <scale>1 1 1</scale>
     </mesh>
   </geometry>
@@ -34,7 +36,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
     </mesh>
   </geometry>
   <surface>
@@ -94,7 +98,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
+      
       <scale>1 1 1</scale>
     </mesh>
   </geometry>
@@ -119,7 +125,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
     </mesh>
   </geometry>
   <surface>
@@ -179,7 +187,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
+      
       <scale>1 1 1</scale>
     </mesh>
   </geometry>
@@ -204,7 +214,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
     </mesh>
   </geometry>
   <surface>
@@ -264,7 +276,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
+      
       <scale>1 1 1</scale>
     </mesh>
   </geometry>
@@ -289,7 +303,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
     </mesh>
   </geometry>
   <surface>
@@ -349,7 +365,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
+      
       <scale>1 1 1</scale>
     </mesh>
   </geometry>
@@ -374,7 +392,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
     </mesh>
   </geometry>
   <surface>
@@ -434,7 +454,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
+      
       <scale>1 1 1</scale>
     </mesh>
   </geometry>
@@ -459,7 +481,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
     </mesh>
   </geometry>
   <surface>
@@ -519,7 +543,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
+      
       <scale>1 1 1</scale>
     </mesh>
   </geometry>
@@ -544,7 +570,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
     </mesh>
   </geometry>
   <surface>
@@ -604,7 +632,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
+      
       <scale>1 1 1</scale>
     </mesh>
   </geometry>
@@ -629,7 +659,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
     </mesh>
   </geometry>
   <surface>
@@ -689,7 +721,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
+      
       <scale>1 1 1</scale>
     </mesh>
   </geometry>
@@ -714,7 +748,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
     </mesh>
   </geometry>
   <surface>
@@ -774,7 +810,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
+      
       <scale>1 1 1</scale>
     </mesh>
   </geometry>
@@ -799,7 +837,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
     </mesh>
   </geometry>
   <surface>
@@ -859,7 +899,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
+      
       <scale>1 1 1</scale>
     </mesh>
   </geometry>
@@ -884,7 +926,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
     </mesh>
   </geometry>
   <surface>
@@ -944,7 +988,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
+      
       <scale>1 1 1</scale>
     </mesh>
   </geometry>
@@ -969,7 +1015,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
     </mesh>
   </geometry>
   <surface>
@@ -1029,7 +1077,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
+      
       <scale>1 1 1</scale>
     </mesh>
   </geometry>
@@ -1054,7 +1104,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
     </mesh>
   </geometry>
   <surface>
@@ -1114,7 +1166,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
+      
       <scale>1 1 1</scale>
     </mesh>
   </geometry>
@@ -1139,7 +1193,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
     </mesh>
   </geometry>
   <surface>
@@ -1199,7 +1255,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
+      
       <scale>1 1 1</scale>
     </mesh>
   </geometry>
@@ -1224,7 +1282,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
     </mesh>
   </geometry>
   <surface>
@@ -1284,7 +1344,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
+      
       <scale>1 1 1</scale>
     </mesh>
   </geometry>
@@ -1309,7 +1371,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
     </mesh>
   </geometry>
   <surface>
@@ -1369,7 +1433,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
+      
       <scale>1 1 1</scale>
     </mesh>
   </geometry>
@@ -1394,7 +1460,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
     </mesh>
   </geometry>
   <surface>
@@ -1454,7 +1522,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
+      
       <scale>1 1 1</scale>
     </mesh>
   </geometry>
@@ -1479,7 +1549,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
     </mesh>
   </geometry>
   <surface>
@@ -1539,7 +1611,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
+      
       <scale>1 1 1</scale>
     </mesh>
   </geometry>
@@ -1564,7 +1638,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
     </mesh>
   </geometry>
   <surface>
@@ -1624,7 +1700,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
+      
       <scale>1 1 1</scale>
     </mesh>
   </geometry>
@@ -1649,7 +1727,9 @@
   <pose frame="">0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri>
+      
+      
+      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
     </mesh>
   </geometry>
   <surface>
@@ -1704,7 +1784,7 @@
 <kinematic>0</kinematic>
 <gravity>1</gravity>
 </link><joint name="joint_0_1" type="revolute">
-<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<pose>0.1350 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
 <child>link_0</child>
 <parent>link_1</parent>
 <axis>
@@ -1715,7 +1795,7 @@
     <xyz>0 1 0</xyz>
 </axis>
 </joint><joint name="joint_1_2" type="revolute">
-<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<pose>0.1350 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
 <child>link_1</child>
 <parent>link_2</parent>
 <axis>
@@ -1726,7 +1806,7 @@
     <xyz>0 1 0</xyz>
 </axis>
 </joint><joint name="joint_2_3" type="revolute">
-<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<pose>0.1350 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
 <child>link_2</child>
 <parent>link_3</parent>
 <axis>
@@ -1737,7 +1817,7 @@
     <xyz>0 1 0</xyz>
 </axis>
 </joint><joint name="joint_3_4" type="revolute">
-<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<pose>0.1350 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
 <child>link_3</child>
 <parent>link_4</parent>
 <axis>
@@ -1748,7 +1828,7 @@
     <xyz>0 1 0</xyz>
 </axis>
 </joint><joint name="joint_4_5" type="revolute">
-<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<pose>0.1350 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
 <child>link_4</child>
 <parent>link_5</parent>
 <axis>
@@ -1759,7 +1839,7 @@
     <xyz>0 1 0</xyz>
 </axis>
 </joint><joint name="joint_5_6" type="revolute">
-<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<pose>0.1350 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
 <child>link_5</child>
 <parent>link_6</parent>
 <axis>
@@ -1770,7 +1850,7 @@
     <xyz>0 1 0</xyz>
 </axis>
 </joint><joint name="joint_6_7" type="revolute">
-<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<pose>0.1350 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
 <child>link_6</child>
 <parent>link_7</parent>
 <axis>
@@ -1781,7 +1861,7 @@
     <xyz>0 1 0</xyz>
 </axis>
 </joint><joint name="joint_7_8" type="revolute">
-<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<pose>0.1350 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
 <child>link_7</child>
 <parent>link_8</parent>
 <axis>
@@ -1792,7 +1872,7 @@
     <xyz>0 1 0</xyz>
 </axis>
 </joint><joint name="joint_8_9" type="revolute">
-<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<pose>0.1350 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
 <child>link_8</child>
 <parent>link_9</parent>
 <axis>
@@ -1803,7 +1883,7 @@
     <xyz>0 1 0</xyz>
 </axis>
 </joint><joint name="joint_9_10" type="revolute">
-<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<pose>0.1350 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
 <child>link_9</child>
 <parent>link_10</parent>
 <axis>
@@ -1814,7 +1894,7 @@
     <xyz>0 1 0</xyz>
 </axis>
 </joint><joint name="joint_10_11" type="revolute">
-<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<pose>0.1350 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
 <child>link_10</child>
 <parent>link_11</parent>
 <axis>
@@ -1825,7 +1905,7 @@
     <xyz>0 1 0</xyz>
 </axis>
 </joint><joint name="joint_11_12" type="revolute">
-<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<pose>0.1350 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
 <child>link_11</child>
 <parent>link_12</parent>
 <axis>
@@ -1836,7 +1916,7 @@
     <xyz>0 1 0</xyz>
 </axis>
 </joint><joint name="joint_12_13" type="revolute">
-<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<pose>0.1350 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
 <child>link_12</child>
 <parent>link_13</parent>
 <axis>
@@ -1847,7 +1927,7 @@
     <xyz>0 1 0</xyz>
 </axis>
 </joint><joint name="joint_13_14" type="revolute">
-<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<pose>0.1350 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
 <child>link_13</child>
 <parent>link_14</parent>
 <axis>
@@ -1858,7 +1938,7 @@
     <xyz>0 1 0</xyz>
 </axis>
 </joint><joint name="joint_14_15" type="revolute">
-<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<pose>0.1350 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
 <child>link_14</child>
 <parent>link_15</parent>
 <axis>
@@ -1869,7 +1949,7 @@
     <xyz>0 1 0</xyz>
 </axis>
 </joint><joint name="joint_15_16" type="revolute">
-<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<pose>0.1350 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
 <child>link_15</child>
 <parent>link_16</parent>
 <axis>
@@ -1880,7 +1960,7 @@
     <xyz>0 1 0</xyz>
 </axis>
 </joint><joint name="joint_16_17" type="revolute">
-<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<pose>0.1350 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
 <child>link_16</child>
 <parent>link_17</parent>
 <axis>
@@ -1891,7 +1971,7 @@
     <xyz>0 1 0</xyz>
 </axis>
 </joint><joint name="joint_17_18" type="revolute">
-<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<pose>0.1350 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
 <child>link_17</child>
 <parent>link_18</parent>
 <axis>
@@ -1902,20 +1982,9 @@
     <xyz>0 1 0</xyz>
 </axis>
 </joint><joint name="joint_18_19" type="revolute">
-<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<pose>0.1350 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
 <child>link_18</child>
 <parent>link_19</parent>
-<axis>
-    <limit>
-        <lower>-0.4</lower>
-        <upper>0.4</upper>
-    </limit>
-    <xyz>0 1 0</xyz>
-</axis>
-</joint><joint name="joint_19_0" type="revolute">
-<pose>0.1450 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
-<child>link_19</child>
-<parent>link_0</parent>
 <axis>
     <limit>
         <lower>-0.4</lower>
