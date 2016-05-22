@@ -5,7 +5,7 @@
   <geometry>
     <mesh>
       <!--<uri>model://test_thread/meshes/CP4.dae</uri>-->
-      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
+      <uri>/home/zeng/arti4/src/track_generator/model/track_thread/meshes/CP4.dae</uri>
       <!-- <uri filename="package://husky_description/meshes/wheel.dae" /> -->
       <scale>1 1 1</scale>
     </mesh>
@@ -33,7 +33,7 @@
     <mesh>
       <!-- <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri> -->
       <!--<uri>model://test_thread/meshes/CP4.dae</uri>-->
-      <uri>/home/zeng/model_editor_models/test_thread/meshes/CP4.dae</uri>
+      <uri>/home/zeng/arti4/src/track_generator/model/track_thread/meshes/CP4.dae</uri>
     </mesh>
   </geometry>
   <surface>

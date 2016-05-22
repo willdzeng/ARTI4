@@ -4,8 +4,8 @@ import numpy
 
 # every thing with an _ is a xml object
 def main():
-    global tile_interval
-    tile_interval = 0.27
+    global joint_interval
+    joint_interval = 0.27
     tree_ = ET.parse('model_template.sdf')
     joint_tmp_ = ET.parse('joint_template.sdf').getroot()
     link_tmp_ = ET.parse('link_template.sdf').getroot()
@@ -17,7 +17,7 @@ def main():
 
     for i in range(tile_number):
         link = Link(link_tmp_, i)
-        link.change_pose([tile_interval*i,0,0,0,0,0])
+        link.change_pose([joint_interval * i, 0, 0, 0, 0, 0])
         links.append(link)
     for i in range(0,len(links)-1):
         joint = Joint(joint_tmp_,links[i],links[i+1])
@@ -50,7 +50,7 @@ def get_all_link(model):
 
 
 class Joint:
-    global tile_interval
+    global joint_interval
     def __init__(self, joint_tmp, child_link, parent_link):
         self.child_link = child_link
         self.parent_link = parent_link
@@ -65,7 +65,7 @@ class Joint:
         self.joint_.attrib['name'] = self.name
         # calculate the pose of the joint by interpolate the child pose and parent pose
         self.pose_ = self.joint_.find('pose')
-        self.pose = [tile_interval/2 ,0,0,0,0,0] #(child_link.pose + parent_link.pose)/2
+        self.pose = [joint_interval/2 ,0,0,0,0,0] #(child_link.pose + parent_link.pose)/2
         self.pose_.text = ''.join('%1.4f '%x for x in self.pose)
 
     def __str__(self):
