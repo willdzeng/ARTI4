@@ -2,10 +2,10 @@ cmake_minimum_required(VERSION 2.8.3)
 project(arti_description)
 
 find_package(catkin REQUIRED
-        COMPONENTS
-            cmake_modules
-            roscpp
-        )
+              COMPONENTS
+                  cmake_modules
+                  roscpp
+              )
 
 find_package(Eigen REQUIRED)
 find_package(Boost REQUIRED)
@@ -24,6 +24,8 @@ catkin_package(
     LIBRARIES 
     CATKIN_DEPENDS
 )
+catkin_add_env_hooks(description_env_hook
+  SHELLS sh DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/env-hooks)
 
 install(TARGETS 
        ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}

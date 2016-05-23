@@ -1,6 +1,6 @@
 <?xml version='1.0'?>
 <sdf version='1.5'>
-  <model name='wheel'>
+  <model name='track_drum'>
     <link name='link_0'>
       <pose frame=''>0 0 0 0 -0 0</pose>
       <gravity>1</gravity>
@@ -22,7 +22,7 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <uri>/home/zeng/Downloads/STL/Wheel.STL</uri>
+            <uri>model://track_drum/meshes/drum.STL</uri>
             <scale>0.001 0.001 0.001</scale>
           </mesh>
         </geometry>
@@ -49,7 +49,7 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <uri>/home/zeng/Downloads/STL/Wheel.STL</uri>
+            <uri>model://track_drum/meshes/drum.STL</uri>
             <scale>0.001 0.001 0.001</scale>
           </mesh>
         </geometry>

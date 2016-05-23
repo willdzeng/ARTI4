@@ -4,9 +4,8 @@
   <pose frame=''>0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <!--<uri>model://test_thread/meshes/CP4.dae</uri>-->
-      <uri>/home/zeng/arti4/src/track_generator/model/track_thread/meshes/CP4.dae</uri>
-      <!-- <uri filename="package://husky_description/meshes/wheel.dae" /> -->
+      <!--<uri>/home/zeng/arti4/src/track_generator/model/track_thread/meshes/CP4.dae</uri>-->
+      <uri>model://track_thread/meshes/CP4.dae</uri>
       <scale>1 1 1</scale>
     </mesh>
   </geometry>
@@ -31,9 +30,9 @@
   <pose frame=''>0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <!-- <uri>/home/zeng/Dropbox/ARTI4/Collection/Tracks/CP4.dae</uri> -->
-      <!--<uri>model://test_thread/meshes/CP4.dae</uri>-->
-      <uri>/home/zeng/arti4/src/track_generator/model/track_thread/meshes/CP4.dae</uri>
+      <!--<uri>/home/zeng/arti4/src/track_generator/model/track_thread/meshes/CP4.dae</uri>-->
+      <uri>model://track_thread/meshes/CP4.dae</uri>
+      <scale>1 1 1</scale>
     </mesh>
   </geometry>
   <surface>

@@ -2,10 +2,12 @@ import xml.etree.ElementTree as ET
 import copy
 import numpy
 
+
 # every thing with an _ is a xml object
 def main():
+    overall_scale = 0.1
     global joint_interval
-    joint_interval = 0.27
+    joint_interval = 0.27 * overall_scale
     tree_ = ET.parse('model_template.sdf')
     joint_tmp_ = ET.parse('joint_template.sdf').getroot()
     link_tmp_ = ET.parse('link_template.sdf').getroot()
@@ -15,14 +17,25 @@ def main():
     links = []
     joints = []
 
+    PI = numpy.pi
+    theta = 2 * PI / tile_number
+    radius = joint_interval / 2 / numpy.tan(theta/2)
+
     for i in range(tile_number):
         link = Link(link_tmp_, i)
-        link.change_pose([joint_interval * i, 0, 0, 0, 0, 0])
+        link.change_pose([radius * numpy.cos(theta * i), radius * numpy.sin(theta * i), 0, -PI/2, 0, PI/2 + theta * i])
+        link.change_scale(overall_scale)
         links.append(link)
-    for i in range(0,len(links)-1):
-        joint = Joint(joint_tmp_,links[i],links[i+1])
+        print link.pose
+
+    for i in range(0, len(links) - 1):
+        joint = Joint(joint_tmp_, links[i], links[i + 1])
         joints.append(joint)
 
+    joint = Joint(joint_tmp_,links[-1],links[0])
+    joints.append(joint)
+
+    # add the links and joint into model
     for link in links:
         print link
         model_.append(link.link_)
@@ -41,6 +54,7 @@ def get_temp_link(model):
             break
     return tmp_link
 
+
 def get_all_link(model):
     links = []
     for child in model:
@@ -51,6 +65,7 @@ def get_all_link(model):
 
 class Joint:
     global joint_interval
+
     def __init__(self, joint_tmp, child_link, parent_link):
         self.child_link = child_link
         self.parent_link = parent_link
@@ -65,16 +80,17 @@ class Joint:
         self.joint_.attrib['name'] = self.name
         # calculate the pose of the joint by interpolate the child pose and parent pose
         self.pose_ = self.joint_.find('pose')
-        self.pose = [joint_interval/2 ,0,0,0,0,0] #(child_link.pose + parent_link.pose)/2
-        self.pose_.text = ''.join('%1.4f '%x for x in self.pose)
+        self.pose = [joint_interval / 2, 0, 0, 0, 0, 0]  # (child_link.pose + parent_link.pose)/2
+        self.pose_.text = ''.join('%1.4f ' % x for x in self.pose)
 
     def __str__(self):
-        return 'Joint:%s Pose: %s '%(self.name,self.pose_.text)
+        return 'Joint:%s Pose: %s ' % (self.name, self.pose_.text)
+
 
 class Link:
     def __init__(self, link, id):
         self.id = id
-        self.pose = numpy.float32([0,0,0,0,0,0])
+        self.pose = numpy.float32([0, 0, 0, 0, 0, 0])
         self.link_ = copy.deepcopy(link)
         self.pose_ = self.link_.find('pose')
         self.pose_.text = ''.join('%1.4f ' % x for x in self.pose)
@@ -82,13 +98,20 @@ class Link:
         self.link_.attrib['name'] = self.name
 
     def __str__(self):
-        return 'Link:%s Pose: %s '%(self.name,self.pose_.text)
+        return 'Link:%s Pose: %s ' % (self.name, self.pose_.text)
 
-    def change_pose(self,pose):
-        if not isinstance(pose,numpy.ndarray):
+    def change_pose(self, pose):
+        if not isinstance(pose, numpy.ndarray):
             pose = numpy.float32(pose)
         self.pose = pose
-        self.pose_.text = ''.join('%1.4f '%x for x in self.pose)
+        self.pose_.text = ''.join('%1.4f ' % x for x in self.pose)
+
+    def change_scale(self,scale):
+        self.scale = scale
+        if not isinstance(scale,list):
+            self.scale = [scale for x in range(3)]
+        for x in self.link_.iter(tag='scale'):
+            x.text = ''.join('%1.3f ' % num for num in self.scale)
 
 if __name__ == '__main__':
     main()

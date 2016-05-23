@@ -22,7 +22,7 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <uri>/home/zeng/Downloads/STL/Section B Tread.STL</uri>
+            <uri>model://section_B_thread/meshes/section_B_thread.STL</uri>
             <scale> 0.001 0.001 0.001 </scale>
           </mesh>
         </geometry>
@@ -47,7 +47,7 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <uri>/home/zeng/Downloads/STL/Section B Tread.STL</uri>
+            <uri>model://section_B_thread/meshes/section_B_thread.STL</uri>
             <scale> 0.001 0.001 0.001 </scale>
           </mesh>
         </geometry>
