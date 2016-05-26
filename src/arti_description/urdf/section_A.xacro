@@ -23,7 +23,6 @@
   <visual name='visual'>
     <geometry>
       <box>
-        <!-- <size>0.3 0.2 0.1</size> -->
         <xacro:insert_block name="body_size"/>
       </box>
     </geometry>

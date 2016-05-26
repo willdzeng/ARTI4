@@ -4,9 +4,9 @@
 <allow_auto_disable>1</allow_auto_disable>
 <pose frame="">0 0 0.1 1.57 0 0</pose>
 <link name="link_0">
-  <pose frame="">0.1266 0.0000 0.0000 -1.5708 0.0000 1.5708 </pose>
+  <pose frame="">0.1536 0.0000 0.0000 -1.5708 0.0000 1.5708 </pose>
   <inertial>
-    <mass>1</mass>
+    <mass>0.1</mass>
     <inertia>
       <ixx>0.166667</ixx>
       <ixy>0</ixy>
@@ -23,10 +23,9 @@
   <visual name="visual">
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
     </geometry>
     <material>
       <lighting>1</lighting>
@@ -50,16 +49,51 @@
     <max_contacts>10</max_contacts>
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
     </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
   </collision>
 </link><link name="link_1">
-  <pose frame="">0.1243 0.0240 0.0000 -1.5708 0.0000 1.7612 </pose>
+  <pose frame="">0.1517 0.0240 0.0000 -1.5708 0.0000 1.7279 </pose>
   <inertial>
-    <mass>1</mass>
+    <mass>0.1</mass>
     <inertia>
       <ixx>0.166667</ixx>
       <ixy>0</ixy>
@@ -76,10 +110,9 @@
   <visual name="visual">
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
     </geometry>
     <material>
       <lighting>1</lighting>
@@ -103,16 +136,51 @@
     <max_contacts>10</max_contacts>
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
     </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
   </collision>
 </link><link name="link_2">
-  <pose frame="">0.1175 0.0471 0.0000 -1.5708 0.0000 1.9516 </pose>
+  <pose frame="">0.1461 0.0475 0.0000 -1.5708 0.0000 1.8850 </pose>
   <inertial>
-    <mass>1</mass>
+    <mass>0.1</mass>
     <inertia>
       <ixx>0.166667</ixx>
       <ixy>0</ixy>
@@ -129,10 +197,9 @@
   <visual name="visual">
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
     </geometry>
     <material>
       <lighting>1</lighting>
@@ -156,16 +223,51 @@
     <max_contacts>10</max_contacts>
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
     </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
   </collision>
 </link><link name="link_3">
-  <pose frame="">0.1065 0.0684 0.0000 -1.5708 0.0000 2.1420 </pose>
+  <pose frame="">0.1369 0.0697 0.0000 -1.5708 0.0000 2.0420 </pose>
   <inertial>
-    <mass>1</mass>
+    <mass>0.1</mass>
     <inertia>
       <ixx>0.166667</ixx>
       <ixy>0</ixy>
@@ -182,10 +284,9 @@
   <visual name="visual">
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
     </geometry>
     <material>
       <lighting>1</lighting>
@@ -209,16 +310,51 @@
     <max_contacts>10</max_contacts>
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
     </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
   </collision>
 </link><link name="link_4">
-  <pose frame="">0.0916 0.0874 0.0000 -1.5708 0.0000 2.3324 </pose>
+  <pose frame="">0.1243 0.0903 0.0000 -1.5708 0.0000 2.1991 </pose>
   <inertial>
-    <mass>1</mass>
+    <mass>0.1</mass>
     <inertia>
       <ixx>0.166667</ixx>
       <ixy>0</ixy>
@@ -235,10 +371,9 @@
   <visual name="visual">
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
     </geometry>
     <material>
       <lighting>1</lighting>
@@ -262,16 +397,51 @@
     <max_contacts>10</max_contacts>
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
     </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
   </collision>
 </link><link name="link_5">
-  <pose frame="">0.0734 0.1031 0.0000 -1.5708 0.0000 2.5228 </pose>
+  <pose frame="">0.1086 0.1086 0.0000 -1.5708 0.0000 2.3562 </pose>
   <inertial>
-    <mass>1</mass>
+    <mass>0.1</mass>
     <inertia>
       <ixx>0.166667</ixx>
       <ixy>0</ixy>
@@ -288,10 +458,9 @@
   <visual name="visual">
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
     </geometry>
     <material>
       <lighting>1</lighting>
@@ -315,16 +484,51 @@
     <max_contacts>10</max_contacts>
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
     </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
   </collision>
 </link><link name="link_6">
-  <pose frame="">0.0526 0.1152 0.0000 -1.5708 0.0000 2.7132 </pose>
+  <pose frame="">0.0903 0.1243 0.0000 -1.5708 0.0000 2.5133 </pose>
   <inertial>
-    <mass>1</mass>
+    <mass>0.1</mass>
     <inertia>
       <ixx>0.166667</ixx>
       <ixy>0</ixy>
@@ -341,10 +545,9 @@
   <visual name="visual">
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
     </geometry>
     <material>
       <lighting>1</lighting>
@@ -368,16 +571,51 @@
     <max_contacts>10</max_contacts>
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
     </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
   </collision>
 </link><link name="link_7">
-  <pose frame="">0.0298 0.1230 0.0000 -1.5708 0.0000 2.9036 </pose>
+  <pose frame="">0.0697 0.1369 0.0000 -1.5708 0.0000 2.6704 </pose>
   <inertial>
-    <mass>1</mass>
+    <mass>0.1</mass>
     <inertia>
       <ixx>0.166667</ixx>
       <ixy>0</ixy>
@@ -394,10 +632,9 @@
   <visual name="visual">
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
     </geometry>
     <material>
       <lighting>1</lighting>
@@ -421,16 +658,51 @@
     <max_contacts>10</max_contacts>
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
     </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
   </collision>
 </link><link name="link_8">
-  <pose frame="">0.0060 0.1265 0.0000 -1.5708 0.0000 3.0940 </pose>
+  <pose frame="">0.0475 0.1461 0.0000 -1.5708 0.0000 2.8274 </pose>
   <inertial>
-    <mass>1</mass>
+    <mass>0.1</mass>
     <inertia>
       <ixx>0.166667</ixx>
       <ixy>0</ixy>
@@ -447,10 +719,9 @@
   <visual name="visual">
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
     </geometry>
     <material>
       <lighting>1</lighting>
@@ -474,16 +745,51 @@
     <max_contacts>10</max_contacts>
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
     </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
   </collision>
 </link><link name="link_9">
-  <pose frame="">-0.0180 0.1253 0.0000 -1.5708 0.0000 3.2844 </pose>
+  <pose frame="">0.0240 0.1517 0.0000 -1.5708 0.0000 2.9845 </pose>
   <inertial>
-    <mass>1</mass>
+    <mass>0.1</mass>
     <inertia>
       <ixx>0.166667</ixx>
       <ixy>0</ixy>
@@ -500,10 +806,9 @@
   <visual name="visual">
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
     </geometry>
     <material>
       <lighting>1</lighting>
@@ -527,16 +832,51 @@
     <max_contacts>10</max_contacts>
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
     </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
   </collision>
 </link><link name="link_10">
-  <pose frame="">-0.0414 0.1196 0.0000 -1.5708 0.0000 3.4748 </pose>
+  <pose frame="">0.0000 0.1536 0.0000 -1.5708 0.0000 3.1416 </pose>
   <inertial>
-    <mass>1</mass>
+    <mass>0.1</mass>
     <inertia>
       <ixx>0.166667</ixx>
       <ixy>0</ixy>
@@ -553,10 +893,9 @@
   <visual name="visual">
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
     </geometry>
     <material>
       <lighting>1</lighting>
@@ -580,16 +919,51 @@
     <max_contacts>10</max_contacts>
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
     </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
   </collision>
 </link><link name="link_11">
-  <pose frame="">-0.0633 0.1096 0.0000 -1.5708 0.0000 3.6652 </pose>
+  <pose frame="">-0.0240 0.1517 0.0000 -1.5708 0.0000 3.2987 </pose>
   <inertial>
-    <mass>1</mass>
+    <mass>0.1</mass>
     <inertia>
       <ixx>0.166667</ixx>
       <ixy>0</ixy>
@@ -606,10 +980,9 @@
   <visual name="visual">
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
     </geometry>
     <material>
       <lighting>1</lighting>
@@ -633,16 +1006,51 @@
     <max_contacts>10</max_contacts>
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
     </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
   </collision>
 </link><link name="link_12">
-  <pose frame="">-0.0829 0.0957 0.0000 -1.5708 0.0000 3.8556 </pose>
+  <pose frame="">-0.0475 0.1461 0.0000 -1.5708 0.0000 3.4558 </pose>
   <inertial>
-    <mass>1</mass>
+    <mass>0.1</mass>
     <inertia>
       <ixx>0.166667</ixx>
       <ixy>0</ixy>
@@ -659,10 +1067,9 @@
   <visual name="visual">
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
     </geometry>
     <material>
       <lighting>1</lighting>
@@ -686,16 +1093,51 @@
     <max_contacts>10</max_contacts>
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
     </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
   </collision>
 </link><link name="link_13">
-  <pose frame="">-0.0995 0.0783 0.0000 -1.5708 0.0000 4.0460 </pose>
+  <pose frame="">-0.0697 0.1369 0.0000 -1.5708 0.0000 3.6128 </pose>
   <inertial>
-    <mass>1</mass>
+    <mass>0.1</mass>
     <inertia>
       <ixx>0.166667</ixx>
       <ixy>0</ixy>
@@ -712,10 +1154,9 @@
   <visual name="visual">
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
     </geometry>
     <material>
       <lighting>1</lighting>
@@ -739,16 +1180,51 @@
     <max_contacts>10</max_contacts>
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
     </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
   </collision>
 </link><link name="link_14">
-  <pose frame="">-0.1125 0.0580 0.0000 -1.5708 0.0000 4.2364 </pose>
+  <pose frame="">-0.0903 0.1243 0.0000 -1.5708 0.0000 3.7699 </pose>
   <inertial>
-    <mass>1</mass>
+    <mass>0.1</mass>
     <inertia>
       <ixx>0.166667</ixx>
       <ixy>0</ixy>
@@ -765,10 +1241,9 @@
   <visual name="visual">
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
     </geometry>
     <material>
       <lighting>1</lighting>
@@ -792,16 +1267,51 @@
     <max_contacts>10</max_contacts>
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
     </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
   </collision>
 </link><link name="link_15">
-  <pose frame="">-0.1215 0.0357 0.0000 -1.5708 0.0000 4.4268 </pose>
+  <pose frame="">-0.1086 0.1086 0.0000 -1.5708 0.0000 3.9270 </pose>
   <inertial>
-    <mass>1</mass>
+    <mass>0.1</mass>
     <inertia>
       <ixx>0.166667</ixx>
       <ixy>0</ixy>
@@ -818,10 +1328,9 @@
   <visual name="visual">
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
     </geometry>
     <material>
       <lighting>1</lighting>
@@ -845,16 +1354,51 @@
     <max_contacts>10</max_contacts>
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
     </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
   </collision>
 </link><link name="link_16">
-  <pose frame="">-0.1260 0.0120 0.0000 -1.5708 0.0000 4.6172 </pose>
+  <pose frame="">-0.1243 0.0903 0.0000 -1.5708 0.0000 4.0841 </pose>
   <inertial>
-    <mass>1</mass>
+    <mass>0.1</mass>
     <inertia>
       <ixx>0.166667</ixx>
       <ixy>0</ixy>
@@ -871,10 +1415,9 @@
   <visual name="visual">
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
     </geometry>
     <material>
       <lighting>1</lighting>
@@ -898,16 +1441,51 @@
     <max_contacts>10</max_contacts>
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
     </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
   </collision>
 </link><link name="link_17">
-  <pose frame="">-0.1260 -0.0120 0.0000 -1.5708 0.0000 4.8076 </pose>
+  <pose frame="">-0.1369 0.0697 0.0000 -1.5708 0.0000 4.2411 </pose>
   <inertial>
-    <mass>1</mass>
+    <mass>0.1</mass>
     <inertia>
       <ixx>0.166667</ixx>
       <ixy>0</ixy>
@@ -924,10 +1502,9 @@
   <visual name="visual">
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
     </geometry>
     <material>
       <lighting>1</lighting>
@@ -951,16 +1528,51 @@
     <max_contacts>10</max_contacts>
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
     </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
   </collision>
 </link><link name="link_18">
-  <pose frame="">-0.1215 -0.0357 0.0000 -1.5708 0.0000 4.9980 </pose>
+  <pose frame="">-0.1461 0.0475 0.0000 -1.5708 0.0000 4.3982 </pose>
   <inertial>
-    <mass>1</mass>
+    <mass>0.1</mass>
     <inertia>
       <ixx>0.166667</ixx>
       <ixy>0</ixy>
@@ -977,10 +1589,9 @@
   <visual name="visual">
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
     </geometry>
     <material>
       <lighting>1</lighting>
@@ -1004,16 +1615,51 @@
     <max_contacts>10</max_contacts>
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
     </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
   </collision>
 </link><link name="link_19">
-  <pose frame="">-0.1125 -0.0580 0.0000 -1.5708 0.0000 5.1884 </pose>
+  <pose frame="">-0.1517 0.0240 0.0000 -1.5708 0.0000 4.5553 </pose>
   <inertial>
-    <mass>1</mass>
+    <mass>0.1</mass>
     <inertia>
       <ixx>0.166667</ixx>
       <ixy>0</ixy>
@@ -1030,10 +1676,9 @@
   <visual name="visual">
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
     </geometry>
     <material>
       <lighting>1</lighting>
@@ -1057,16 +1702,51 @@
     <max_contacts>10</max_contacts>
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
     </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
   </collision>
 </link><link name="link_20">
-  <pose frame="">-0.0995 -0.0783 0.0000 -1.5708 0.0000 5.3788 </pose>
+  <pose frame="">-0.1536 0.0000 0.0000 -1.5708 0.0000 4.7124 </pose>
   <inertial>
-    <mass>1</mass>
+    <mass>0.1</mass>
     <inertia>
       <ixx>0.166667</ixx>
       <ixy>0</ixy>
@@ -1083,10 +1763,9 @@
   <visual name="visual">
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
     </geometry>
     <material>
       <lighting>1</lighting>
@@ -1110,16 +1789,51 @@
     <max_contacts>10</max_contacts>
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
     </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
   </collision>
 </link><link name="link_21">
-  <pose frame="">-0.0829 -0.0957 0.0000 -1.5708 0.0000 5.5692 </pose>
+  <pose frame="">-0.1517 -0.0240 0.0000 -1.5708 0.0000 4.8695 </pose>
   <inertial>
-    <mass>1</mass>
+    <mass>0.1</mass>
     <inertia>
       <ixx>0.166667</ixx>
       <ixy>0</ixy>
@@ -1136,10 +1850,9 @@
   <visual name="visual">
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
     </geometry>
     <material>
       <lighting>1</lighting>
@@ -1163,16 +1876,51 @@
     <max_contacts>10</max_contacts>
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
     </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
   </collision>
 </link><link name="link_22">
-  <pose frame="">-0.0633 -0.1096 0.0000 -1.5708 0.0000 5.7596 </pose>
+  <pose frame="">-0.1461 -0.0475 0.0000 -1.5708 0.0000 5.0265 </pose>
   <inertial>
-    <mass>1</mass>
+    <mass>0.1</mass>
     <inertia>
       <ixx>0.166667</ixx>
       <ixy>0</ixy>
@@ -1189,10 +1937,9 @@
   <visual name="visual">
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
     </geometry>
     <material>
       <lighting>1</lighting>
@@ -1216,16 +1963,51 @@
     <max_contacts>10</max_contacts>
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
     </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
   </collision>
 </link><link name="link_23">
-  <pose frame="">-0.0414 -0.1196 0.0000 -1.5708 0.0000 5.9500 </pose>
+  <pose frame="">-0.1369 -0.0697 0.0000 -1.5708 0.0000 5.1836 </pose>
   <inertial>
-    <mass>1</mass>
+    <mass>0.1</mass>
     <inertia>
       <ixx>0.166667</ixx>
       <ixy>0</ixy>
@@ -1242,10 +2024,9 @@
   <visual name="visual">
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
     </geometry>
     <material>
       <lighting>1</lighting>
@@ -1269,16 +2050,51 @@
     <max_contacts>10</max_contacts>
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
     </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
   </collision>
 </link><link name="link_24">
-  <pose frame="">-0.0180 -0.1253 0.0000 -1.5708 0.0000 6.1404 </pose>
+  <pose frame="">-0.1243 -0.0903 0.0000 -1.5708 0.0000 5.3407 </pose>
   <inertial>
-    <mass>1</mass>
+    <mass>0.1</mass>
     <inertia>
       <ixx>0.166667</ixx>
       <ixy>0</ixy>
@@ -1295,10 +2111,9 @@
   <visual name="visual">
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
     </geometry>
     <material>
       <lighting>1</lighting>
@@ -1322,16 +2137,51 @@
     <max_contacts>10</max_contacts>
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
     </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
   </collision>
 </link><link name="link_25">
-  <pose frame="">0.0060 -0.1265 0.0000 -1.5708 0.0000 6.3308 </pose>
+  <pose frame="">-0.1086 -0.1086 0.0000 -1.5708 0.0000 5.4978 </pose>
   <inertial>
-    <mass>1</mass>
+    <mass>0.1</mass>
     <inertia>
       <ixx>0.166667</ixx>
       <ixy>0</ixy>
@@ -1348,10 +2198,9 @@
   <visual name="visual">
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
     </geometry>
     <material>
       <lighting>1</lighting>
@@ -1375,16 +2224,51 @@
     <max_contacts>10</max_contacts>
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
     </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
   </collision>
 </link><link name="link_26">
-  <pose frame="">0.0298 -0.1230 0.0000 -1.5708 0.0000 6.5212 </pose>
+  <pose frame="">-0.0903 -0.1243 0.0000 -1.5708 0.0000 5.6549 </pose>
   <inertial>
-    <mass>1</mass>
+    <mass>0.1</mass>
     <inertia>
       <ixx>0.166667</ixx>
       <ixy>0</ixy>
@@ -1401,10 +2285,9 @@
   <visual name="visual">
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
     </geometry>
     <material>
       <lighting>1</lighting>
@@ -1428,16 +2311,51 @@
     <max_contacts>10</max_contacts>
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
     </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
   </collision>
 </link><link name="link_27">
-  <pose frame="">0.0526 -0.1152 0.0000 -1.5708 0.0000 6.7116 </pose>
+  <pose frame="">-0.0697 -0.1369 0.0000 -1.5708 0.0000 5.8119 </pose>
   <inertial>
-    <mass>1</mass>
+    <mass>0.1</mass>
     <inertia>
       <ixx>0.166667</ixx>
       <ixy>0</ixy>
@@ -1454,10 +2372,9 @@
   <visual name="visual">
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
     </geometry>
     <material>
       <lighting>1</lighting>
@@ -1481,16 +2398,51 @@
     <max_contacts>10</max_contacts>
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
     </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
   </collision>
 </link><link name="link_28">
-  <pose frame="">0.0734 -0.1031 0.0000 -1.5708 0.0000 6.9020 </pose>
+  <pose frame="">-0.0475 -0.1461 0.0000 -1.5708 0.0000 5.9690 </pose>
   <inertial>
-    <mass>1</mass>
+    <mass>0.1</mass>
     <inertia>
       <ixx>0.166667</ixx>
       <ixy>0</ixy>
@@ -1507,10 +2459,9 @@
   <visual name="visual">
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
     </geometry>
     <material>
       <lighting>1</lighting>
@@ -1534,16 +2485,51 @@
     <max_contacts>10</max_contacts>
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
     </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
   </collision>
 </link><link name="link_29">
-  <pose frame="">0.0916 -0.0874 0.0000 -1.5708 0.0000 7.0924 </pose>
+  <pose frame="">-0.0240 -0.1517 0.0000 -1.5708 0.0000 6.1261 </pose>
   <inertial>
-    <mass>1</mass>
+    <mass>0.1</mass>
     <inertia>
       <ixx>0.166667</ixx>
       <ixy>0</ixy>
@@ -1560,10 +2546,9 @@
   <visual name="visual">
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
     </geometry>
     <material>
       <lighting>1</lighting>
@@ -1587,16 +2572,51 @@
     <max_contacts>10</max_contacts>
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
     </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
   </collision>
 </link><link name="link_30">
-  <pose frame="">0.1065 -0.0684 0.0000 -1.5708 0.0000 7.2828 </pose>
+  <pose frame="">-0.0000 -0.1536 0.0000 -1.5708 0.0000 6.2832 </pose>
   <inertial>
-    <mass>1</mass>
+    <mass>0.1</mass>
     <inertia>
       <ixx>0.166667</ixx>
       <ixy>0</ixy>
@@ -1613,10 +2633,9 @@
   <visual name="visual">
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
     </geometry>
     <material>
       <lighting>1</lighting>
@@ -1640,16 +2659,51 @@
     <max_contacts>10</max_contacts>
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
     </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
   </collision>
 </link><link name="link_31">
-  <pose frame="">0.1175 -0.0471 0.0000 -1.5708 0.0000 7.4732 </pose>
+  <pose frame="">0.0240 -0.1517 0.0000 -1.5708 0.0000 6.4403 </pose>
   <inertial>
-    <mass>1</mass>
+    <mass>0.1</mass>
     <inertia>
       <ixx>0.166667</ixx>
       <ixy>0</ixy>
@@ -1666,10 +2720,9 @@
   <visual name="visual">
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
     </geometry>
     <material>
       <lighting>1</lighting>
@@ -1693,16 +2746,51 @@
     <max_contacts>10</max_contacts>
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
     </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
   </collision>
 </link><link name="link_32">
-  <pose frame="">0.1243 -0.0240 0.0000 -1.5708 0.0000 7.6636 </pose>
+  <pose frame="">0.0475 -0.1461 0.0000 -1.5708 0.0000 6.5973 </pose>
   <inertial>
-    <mass>1</mass>
+    <mass>0.1</mass>
     <inertia>
       <ixx>0.166667</ixx>
       <ixy>0</ixy>
@@ -1719,10 +2807,9 @@
   <visual name="visual">
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
     </geometry>
     <material>
       <lighting>1</lighting>
@@ -1746,11 +2833,655 @@
     <max_contacts>10</max_contacts>
     <pose frame="">0 0 0 0 -0 0</pose>
     <geometry>
-      <mesh>
-        <uri>model://track_thread/meshes/CP1.dae</uri>
-        <scale>1 1 1</scale>
-      </mesh>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
     </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
+  </collision>
+</link><link name="link_33">
+  <pose frame="">0.0697 -0.1369 0.0000 -1.5708 0.0000 6.7544 </pose>
+  <inertial>
+    <mass>0.1</mass>
+    <inertia>
+      <ixx>0.166667</ixx>
+      <ixy>0</ixy>
+      <ixz>0</ixz>
+      <iyy>0.166667</iyy>
+      <iyz>0</iyz>
+      <izz>0.166667</izz>
+    </inertia>
+    <pose frame="">0 0 0 0 -0 0</pose>
+  </inertial>
+  <self_collide>0</self_collide>
+  <kinematic>0</kinematic>
+  <gravity>1</gravity>
+  <visual name="visual">
+    <pose frame="">0 0 0 0 -0 0</pose>
+    <geometry>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
+    </geometry>
+    <material>
+      <lighting>1</lighting>
+      <script>
+        <uri>file://media/materials/scripts/gazebo.material</uri>
+        <name>Gazebo/Grey</name>
+      </script>
+      <ambient>0.3 0.3 0.3 1</ambient>
+      <diffuse>0.7 0.7 0.7 1</diffuse>
+      <specular>0.01 0.01 0.01 1</specular>
+      <emissive>0 0 0 1</emissive>
+      <shader type="vertex">
+        <normal_map>__default__</normal_map>
+      </shader>
+    </material>
+    <cast_shadows>1</cast_shadows>
+    <transparency>0</transparency>
+  </visual>
+  <collision name="collision">
+    <laser_retro>0</laser_retro>
+    <max_contacts>10</max_contacts>
+    <pose frame="">0 0 0 0 -0 0</pose>
+    <geometry>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
+    </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
+  </collision>
+</link><link name="link_34">
+  <pose frame="">0.0903 -0.1243 0.0000 -1.5708 0.0000 6.9115 </pose>
+  <inertial>
+    <mass>0.1</mass>
+    <inertia>
+      <ixx>0.166667</ixx>
+      <ixy>0</ixy>
+      <ixz>0</ixz>
+      <iyy>0.166667</iyy>
+      <iyz>0</iyz>
+      <izz>0.166667</izz>
+    </inertia>
+    <pose frame="">0 0 0 0 -0 0</pose>
+  </inertial>
+  <self_collide>0</self_collide>
+  <kinematic>0</kinematic>
+  <gravity>1</gravity>
+  <visual name="visual">
+    <pose frame="">0 0 0 0 -0 0</pose>
+    <geometry>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
+    </geometry>
+    <material>
+      <lighting>1</lighting>
+      <script>
+        <uri>file://media/materials/scripts/gazebo.material</uri>
+        <name>Gazebo/Grey</name>
+      </script>
+      <ambient>0.3 0.3 0.3 1</ambient>
+      <diffuse>0.7 0.7 0.7 1</diffuse>
+      <specular>0.01 0.01 0.01 1</specular>
+      <emissive>0 0 0 1</emissive>
+      <shader type="vertex">
+        <normal_map>__default__</normal_map>
+      </shader>
+    </material>
+    <cast_shadows>1</cast_shadows>
+    <transparency>0</transparency>
+  </visual>
+  <collision name="collision">
+    <laser_retro>0</laser_retro>
+    <max_contacts>10</max_contacts>
+    <pose frame="">0 0 0 0 -0 0</pose>
+    <geometry>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
+    </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
+  </collision>
+</link><link name="link_35">
+  <pose frame="">0.1086 -0.1086 0.0000 -1.5708 0.0000 7.0686 </pose>
+  <inertial>
+    <mass>0.1</mass>
+    <inertia>
+      <ixx>0.166667</ixx>
+      <ixy>0</ixy>
+      <ixz>0</ixz>
+      <iyy>0.166667</iyy>
+      <iyz>0</iyz>
+      <izz>0.166667</izz>
+    </inertia>
+    <pose frame="">0 0 0 0 -0 0</pose>
+  </inertial>
+  <self_collide>0</self_collide>
+  <kinematic>0</kinematic>
+  <gravity>1</gravity>
+  <visual name="visual">
+    <pose frame="">0 0 0 0 -0 0</pose>
+    <geometry>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
+    </geometry>
+    <material>
+      <lighting>1</lighting>
+      <script>
+        <uri>file://media/materials/scripts/gazebo.material</uri>
+        <name>Gazebo/Grey</name>
+      </script>
+      <ambient>0.3 0.3 0.3 1</ambient>
+      <diffuse>0.7 0.7 0.7 1</diffuse>
+      <specular>0.01 0.01 0.01 1</specular>
+      <emissive>0 0 0 1</emissive>
+      <shader type="vertex">
+        <normal_map>__default__</normal_map>
+      </shader>
+    </material>
+    <cast_shadows>1</cast_shadows>
+    <transparency>0</transparency>
+  </visual>
+  <collision name="collision">
+    <laser_retro>0</laser_retro>
+    <max_contacts>10</max_contacts>
+    <pose frame="">0 0 0 0 -0 0</pose>
+    <geometry>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
+    </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
+  </collision>
+</link><link name="link_36">
+  <pose frame="">0.1243 -0.0903 0.0000 -1.5708 0.0000 7.2257 </pose>
+  <inertial>
+    <mass>0.1</mass>
+    <inertia>
+      <ixx>0.166667</ixx>
+      <ixy>0</ixy>
+      <ixz>0</ixz>
+      <iyy>0.166667</iyy>
+      <iyz>0</iyz>
+      <izz>0.166667</izz>
+    </inertia>
+    <pose frame="">0 0 0 0 -0 0</pose>
+  </inertial>
+  <self_collide>0</self_collide>
+  <kinematic>0</kinematic>
+  <gravity>1</gravity>
+  <visual name="visual">
+    <pose frame="">0 0 0 0 -0 0</pose>
+    <geometry>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
+    </geometry>
+    <material>
+      <lighting>1</lighting>
+      <script>
+        <uri>file://media/materials/scripts/gazebo.material</uri>
+        <name>Gazebo/Grey</name>
+      </script>
+      <ambient>0.3 0.3 0.3 1</ambient>
+      <diffuse>0.7 0.7 0.7 1</diffuse>
+      <specular>0.01 0.01 0.01 1</specular>
+      <emissive>0 0 0 1</emissive>
+      <shader type="vertex">
+        <normal_map>__default__</normal_map>
+      </shader>
+    </material>
+    <cast_shadows>1</cast_shadows>
+    <transparency>0</transparency>
+  </visual>
+  <collision name="collision">
+    <laser_retro>0</laser_retro>
+    <max_contacts>10</max_contacts>
+    <pose frame="">0 0 0 0 -0 0</pose>
+    <geometry>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
+    </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
+  </collision>
+</link><link name="link_37">
+  <pose frame="">0.1369 -0.0697 0.0000 -1.5708 0.0000 7.3827 </pose>
+  <inertial>
+    <mass>0.1</mass>
+    <inertia>
+      <ixx>0.166667</ixx>
+      <ixy>0</ixy>
+      <ixz>0</ixz>
+      <iyy>0.166667</iyy>
+      <iyz>0</iyz>
+      <izz>0.166667</izz>
+    </inertia>
+    <pose frame="">0 0 0 0 -0 0</pose>
+  </inertial>
+  <self_collide>0</self_collide>
+  <kinematic>0</kinematic>
+  <gravity>1</gravity>
+  <visual name="visual">
+    <pose frame="">0 0 0 0 -0 0</pose>
+    <geometry>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
+    </geometry>
+    <material>
+      <lighting>1</lighting>
+      <script>
+        <uri>file://media/materials/scripts/gazebo.material</uri>
+        <name>Gazebo/Grey</name>
+      </script>
+      <ambient>0.3 0.3 0.3 1</ambient>
+      <diffuse>0.7 0.7 0.7 1</diffuse>
+      <specular>0.01 0.01 0.01 1</specular>
+      <emissive>0 0 0 1</emissive>
+      <shader type="vertex">
+        <normal_map>__default__</normal_map>
+      </shader>
+    </material>
+    <cast_shadows>1</cast_shadows>
+    <transparency>0</transparency>
+  </visual>
+  <collision name="collision">
+    <laser_retro>0</laser_retro>
+    <max_contacts>10</max_contacts>
+    <pose frame="">0 0 0 0 -0 0</pose>
+    <geometry>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
+    </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
+  </collision>
+</link><link name="link_38">
+  <pose frame="">0.1461 -0.0475 0.0000 -1.5708 0.0000 7.5398 </pose>
+  <inertial>
+    <mass>0.1</mass>
+    <inertia>
+      <ixx>0.166667</ixx>
+      <ixy>0</ixy>
+      <ixz>0</ixz>
+      <iyy>0.166667</iyy>
+      <iyz>0</iyz>
+      <izz>0.166667</izz>
+    </inertia>
+    <pose frame="">0 0 0 0 -0 0</pose>
+  </inertial>
+  <self_collide>0</self_collide>
+  <kinematic>0</kinematic>
+  <gravity>1</gravity>
+  <visual name="visual">
+    <pose frame="">0 0 0 0 -0 0</pose>
+    <geometry>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
+    </geometry>
+    <material>
+      <lighting>1</lighting>
+      <script>
+        <uri>file://media/materials/scripts/gazebo.material</uri>
+        <name>Gazebo/Grey</name>
+      </script>
+      <ambient>0.3 0.3 0.3 1</ambient>
+      <diffuse>0.7 0.7 0.7 1</diffuse>
+      <specular>0.01 0.01 0.01 1</specular>
+      <emissive>0 0 0 1</emissive>
+      <shader type="vertex">
+        <normal_map>__default__</normal_map>
+      </shader>
+    </material>
+    <cast_shadows>1</cast_shadows>
+    <transparency>0</transparency>
+  </visual>
+  <collision name="collision">
+    <laser_retro>0</laser_retro>
+    <max_contacts>10</max_contacts>
+    <pose frame="">0 0 0 0 -0 0</pose>
+    <geometry>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
+    </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
+  </collision>
+</link><link name="link_39">
+  <pose frame="">0.1517 -0.0240 0.0000 -1.5708 0.0000 7.6969 </pose>
+  <inertial>
+    <mass>0.1</mass>
+    <inertia>
+      <ixx>0.166667</ixx>
+      <ixy>0</ixy>
+      <ixz>0</ixz>
+      <iyy>0.166667</iyy>
+      <iyz>0</iyz>
+      <izz>0.166667</izz>
+    </inertia>
+    <pose frame="">0 0 0 0 -0 0</pose>
+  </inertial>
+  <self_collide>0</self_collide>
+  <kinematic>0</kinematic>
+  <gravity>1</gravity>
+  <visual name="visual">
+    <pose frame="">0 0 0 0 -0 0</pose>
+    <geometry>
+       <box>
+         <size>0.024178 0.03 0.001</size>
+       </box>
+    </geometry>
+    <material>
+      <lighting>1</lighting>
+      <script>
+        <uri>file://media/materials/scripts/gazebo.material</uri>
+        <name>Gazebo/Grey</name>
+      </script>
+      <ambient>0.3 0.3 0.3 1</ambient>
+      <diffuse>0.7 0.7 0.7 1</diffuse>
+      <specular>0.01 0.01 0.01 1</specular>
+      <emissive>0 0 0 1</emissive>
+      <shader type="vertex">
+        <normal_map>__default__</normal_map>
+      </shader>
+    </material>
+    <cast_shadows>1</cast_shadows>
+    <transparency>0</transparency>
+  </visual>
+  <collision name="collision">
+    <laser_retro>0</laser_retro>
+    <max_contacts>10</max_contacts>
+    <pose frame="">0 0 0 0 -0 0</pose>
+    <geometry>
+      <box>
+         <size>0.024178 0.03 0.008</size>
+       </box>
+    </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+          <slip1>0</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+      <bounce>
+        <restitution_coefficient>0</restitution_coefficient>
+        <threshold>1</threshold>
+      </bounce>
+      <contact>
+        <collide_without_contact>0</collide_without_contact>
+        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+        <collide_bitmask>1</collide_bitmask>
+        <ode>
+          <soft_cfm>0.1</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+          <max_vel>0.01</max_vel>
+          <min_depth>0</min_depth>
+        </ode>
+        <bullet>
+          <split_impulse>1</split_impulse>
+          <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+          <soft_cfm>0</soft_cfm>
+          <soft_erp>0.2</soft_erp>
+          <kp>1e+13</kp>
+          <kd>1</kd>
+        </bullet>
+      </contact>
+      </surface>
   </collision>
 </link><joint name="joint_0_1" type="revolute">
 <pose>0.0121 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
@@ -1758,8 +3489,8 @@
 <parent>link_1</parent>
 <axis>
     <limit>
-        <lower>-0.350</lower>
-        <upper>0.350</upper>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
     </limit>
     <xyz>0 1 0</xyz>
 </axis>
@@ -1769,8 +3500,8 @@
 <parent>link_2</parent>
 <axis>
     <limit>
-        <lower>-0.350</lower>
-        <upper>0.350</upper>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
     </limit>
     <xyz>0 1 0</xyz>
 </axis>
@@ -1780,8 +3511,8 @@
 <parent>link_3</parent>
 <axis>
     <limit>
-        <lower>-0.350</lower>
-        <upper>0.350</upper>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
     </limit>
     <xyz>0 1 0</xyz>
 </axis>
@@ -1791,8 +3522,8 @@
 <parent>link_4</parent>
 <axis>
     <limit>
-        <lower>-0.350</lower>
-        <upper>0.350</upper>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
     </limit>
     <xyz>0 1 0</xyz>
 </axis>
@@ -1802,8 +3533,8 @@
 <parent>link_5</parent>
 <axis>
     <limit>
-        <lower>-0.350</lower>
-        <upper>0.350</upper>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
     </limit>
     <xyz>0 1 0</xyz>
 </axis>
@@ -1813,8 +3544,8 @@
 <parent>link_6</parent>
 <axis>
     <limit>
-        <lower>-0.350</lower>
-        <upper>0.350</upper>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
     </limit>
     <xyz>0 1 0</xyz>
 </axis>
@@ -1824,8 +3555,8 @@
 <parent>link_7</parent>
 <axis>
     <limit>
-        <lower>-0.350</lower>
-        <upper>0.350</upper>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
     </limit>
     <xyz>0 1 0</xyz>
 </axis>
@@ -1835,8 +3566,8 @@
 <parent>link_8</parent>
 <axis>
     <limit>
-        <lower>-0.350</lower>
-        <upper>0.350</upper>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
     </limit>
     <xyz>0 1 0</xyz>
 </axis>
@@ -1846,8 +3577,8 @@
 <parent>link_9</parent>
 <axis>
     <limit>
-        <lower>-0.350</lower>
-        <upper>0.350</upper>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
     </limit>
     <xyz>0 1 0</xyz>
 </axis>
@@ -1857,8 +3588,8 @@
 <parent>link_10</parent>
 <axis>
     <limit>
-        <lower>-0.350</lower>
-        <upper>0.350</upper>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
     </limit>
     <xyz>0 1 0</xyz>
 </axis>
@@ -1868,8 +3599,8 @@
 <parent>link_11</parent>
 <axis>
     <limit>
-        <lower>-0.350</lower>
-        <upper>0.350</upper>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
     </limit>
     <xyz>0 1 0</xyz>
 </axis>
@@ -1879,8 +3610,8 @@
 <parent>link_12</parent>
 <axis>
     <limit>
-        <lower>-0.350</lower>
-        <upper>0.350</upper>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
     </limit>
     <xyz>0 1 0</xyz>
 </axis>
@@ -1890,8 +3621,8 @@
 <parent>link_13</parent>
 <axis>
     <limit>
-        <lower>-0.350</lower>
-        <upper>0.350</upper>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
     </limit>
     <xyz>0 1 0</xyz>
 </axis>
@@ -1901,8 +3632,8 @@
 <parent>link_14</parent>
 <axis>
     <limit>
-        <lower>-0.350</lower>
-        <upper>0.350</upper>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
     </limit>
     <xyz>0 1 0</xyz>
 </axis>
@@ -1912,8 +3643,8 @@
 <parent>link_15</parent>
 <axis>
     <limit>
-        <lower>-0.350</lower>
-        <upper>0.350</upper>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
     </limit>
     <xyz>0 1 0</xyz>
 </axis>
@@ -1923,8 +3654,8 @@
 <parent>link_16</parent>
 <axis>
     <limit>
-        <lower>-0.350</lower>
-        <upper>0.350</upper>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
     </limit>
     <xyz>0 1 0</xyz>
 </axis>
@@ -1934,8 +3665,8 @@
 <parent>link_17</parent>
 <axis>
     <limit>
-        <lower>-0.350</lower>
-        <upper>0.350</upper>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
     </limit>
     <xyz>0 1 0</xyz>
 </axis>
@@ -1945,8 +3676,8 @@
 <parent>link_18</parent>
 <axis>
     <limit>
-        <lower>-0.350</lower>
-        <upper>0.350</upper>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
     </limit>
     <xyz>0 1 0</xyz>
 </axis>
@@ -1956,8 +3687,8 @@
 <parent>link_19</parent>
 <axis>
     <limit>
-        <lower>-0.350</lower>
-        <upper>0.350</upper>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
     </limit>
     <xyz>0 1 0</xyz>
 </axis>
@@ -1967,8 +3698,8 @@
 <parent>link_20</parent>
 <axis>
     <limit>
-        <lower>-0.350</lower>
-        <upper>0.350</upper>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
     </limit>
     <xyz>0 1 0</xyz>
 </axis>
@@ -1978,8 +3709,8 @@
 <parent>link_21</parent>
 <axis>
     <limit>
-        <lower>-0.350</lower>
-        <upper>0.350</upper>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
     </limit>
     <xyz>0 1 0</xyz>
 </axis>
@@ -1989,8 +3720,8 @@
 <parent>link_22</parent>
 <axis>
     <limit>
-        <lower>-0.350</lower>
-        <upper>0.350</upper>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
     </limit>
     <xyz>0 1 0</xyz>
 </axis>
@@ -2000,8 +3731,8 @@
 <parent>link_23</parent>
 <axis>
     <limit>
-        <lower>-0.350</lower>
-        <upper>0.350</upper>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
     </limit>
     <xyz>0 1 0</xyz>
 </axis>
@@ -2011,8 +3742,8 @@
 <parent>link_24</parent>
 <axis>
     <limit>
-        <lower>-0.350</lower>
-        <upper>0.350</upper>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
     </limit>
     <xyz>0 1 0</xyz>
 </axis>
@@ -2022,8 +3753,8 @@
 <parent>link_25</parent>
 <axis>
     <limit>
-        <lower>-0.350</lower>
-        <upper>0.350</upper>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
     </limit>
     <xyz>0 1 0</xyz>
 </axis>
@@ -2033,8 +3764,8 @@
 <parent>link_26</parent>
 <axis>
     <limit>
-        <lower>-0.350</lower>
-        <upper>0.350</upper>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
     </limit>
     <xyz>0 1 0</xyz>
 </axis>
@@ -2044,8 +3775,8 @@
 <parent>link_27</parent>
 <axis>
     <limit>
-        <lower>-0.350</lower>
-        <upper>0.350</upper>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
     </limit>
     <xyz>0 1 0</xyz>
 </axis>
@@ -2055,8 +3786,8 @@
 <parent>link_28</parent>
 <axis>
     <limit>
-        <lower>-0.350</lower>
-        <upper>0.350</upper>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
     </limit>
     <xyz>0 1 0</xyz>
 </axis>
@@ -2066,8 +3797,8 @@
 <parent>link_29</parent>
 <axis>
     <limit>
-        <lower>-0.350</lower>
-        <upper>0.350</upper>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
     </limit>
     <xyz>0 1 0</xyz>
 </axis>
@@ -2077,8 +3808,8 @@
 <parent>link_30</parent>
 <axis>
     <limit>
-        <lower>-0.350</lower>
-        <upper>0.350</upper>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
     </limit>
     <xyz>0 1 0</xyz>
 </axis>
@@ -2088,8 +3819,8 @@
 <parent>link_31</parent>
 <axis>
     <limit>
-        <lower>-0.350</lower>
-        <upper>0.350</upper>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
     </limit>
     <xyz>0 1 0</xyz>
 </axis>
@@ -2099,14 +3830,91 @@
 <parent>link_32</parent>
 <axis>
     <limit>
-        <lower>-0.350</lower>
-        <upper>0.350</upper>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
     </limit>
     <xyz>0 1 0</xyz>
 </axis>
-</joint><joint name="joint_32_0" type="revolute">
+</joint><joint name="joint_32_33" type="revolute">
 <pose>0.0121 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
 <child>link_32</child>
+<parent>link_33</parent>
+<axis>
+    <limit>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
+    </limit>
+    <xyz>0 1 0</xyz>
+</axis>
+</joint><joint name="joint_33_34" type="revolute">
+<pose>0.0121 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<child>link_33</child>
+<parent>link_34</parent>
+<axis>
+    <limit>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
+    </limit>
+    <xyz>0 1 0</xyz>
+</axis>
+</joint><joint name="joint_34_35" type="revolute">
+<pose>0.0121 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<child>link_34</child>
+<parent>link_35</parent>
+<axis>
+    <limit>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
+    </limit>
+    <xyz>0 1 0</xyz>
+</axis>
+</joint><joint name="joint_35_36" type="revolute">
+<pose>0.0121 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<child>link_35</child>
+<parent>link_36</parent>
+<axis>
+    <limit>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
+    </limit>
+    <xyz>0 1 0</xyz>
+</axis>
+</joint><joint name="joint_36_37" type="revolute">
+<pose>0.0121 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<child>link_36</child>
+<parent>link_37</parent>
+<axis>
+    <limit>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
+    </limit>
+    <xyz>0 1 0</xyz>
+</axis>
+</joint><joint name="joint_37_38" type="revolute">
+<pose>0.0121 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<child>link_37</child>
+<parent>link_38</parent>
+<axis>
+    <limit>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
+    </limit>
+    <xyz>0 1 0</xyz>
+</axis>
+</joint><joint name="joint_38_39" type="revolute">
+<pose>0.0121 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<child>link_38</child>
+<parent>link_39</parent>
+<axis>
+    <limit>
+        <lower>-0.300</lower>
+        <upper>0.300</upper>
+    </limit>
+    <xyz>0 1 0</xyz>
+</axis>
+</joint><joint name="joint_39_0" type="revolute">
+<pose>0.0121 0.0000 0.0000 0.0000 0.0000 0.0000 </pose>
+<child>link_39</child>
 <parent>link_0</parent>
 <axis>
     <limit>

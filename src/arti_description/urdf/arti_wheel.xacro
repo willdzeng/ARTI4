@@ -92,13 +92,35 @@
     </collision>
   </link>
 
-  <joint name="wheel_joint_${wheel_prefix}" type="revolute">
-    <pose>0 0 ${-wheel_length/2} 0 0 0</pose>
+  <link name="${wheel_prefix}_damping_link">
+    <xacro:insert_block name="link_pose"/>
+  </link>
+
+  <joint name="${wheel_prefix}_wheel_revolute" type="revolute">
+    <pose>0 0 0 0 0 0</pose>
     <child>${wheel_prefix}_wheel_link</child>
-    <parent>${body_prefix}</parent>
+    <parent>${wheel_prefix}_damping_link</parent>
     <axis>
         <xyz>0 0 1</xyz>
     </axis>
   </joint>
+
+  <joint name="${wheel_prefix}_wheel_damping" type="prismatic">
+    <pose>0 0 ${-wheel_length/2} 0 0 0</pose>
+    <child>${wheel_prefix}_damping_link</child>
+    <parent>${body_prefix}</parent>
+    <axis>
+        <xyz>0 1 0</xyz>
+        <dynamics>
+          <damping>0.1</damping>
+          <spring_stiffness>10</spring_stiffness>
+        </dynamics>
+        <limit>
+          <upper>0.001</upper>
+          <lower>-0.001</lower>
+        </limit>
+    </axis>
+  </joint>
+
 </xacro:macro>
 </model>

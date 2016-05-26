@@ -19,7 +19,7 @@
   <self_collide>0</self_collide>
   <kinematic>0</kinematic>
   <gravity>1</gravity>
-  <visual name='visual'>
+<!--   <visual name='visual'>
     <geometry>
       <box>
         <xacro:insert_block name="body_size"/>
@@ -41,7 +41,7 @@
     <pose frame=''>0 0 0 0 -0 0</pose>
     <cast_shadows>1</cast_shadows>
     <transparency>0</transparency>
-  </visual>
+  </visual> -->
   <collision name='collision'>
     <laser_retro>0</laser_retro>
     <max_contacts>10</max_contacts>

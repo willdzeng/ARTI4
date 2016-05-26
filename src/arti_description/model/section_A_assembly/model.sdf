@@ -32,7 +32,6 @@
       <visual name="visual">
         <geometry>
           <box>
-            <!-- <size>0.3 0.2 0.1</size> -->
             <size>0.5 0.3 0.1</size>
           </box>
         </geometry>
@@ -155,12 +154,31 @@
         </surface>
       </collision>
     </link>
-    <joint name="wheel_joint_front_left" type="revolute">
-      <pose>0 0 -0.015 0 0 0</pose>
+    <link name="front_left_damping_link">
+      <pose>0.15 0.165 0.019209 1.570795 0 3.14159</pose>
+    </link>
+    <joint name="front_left_wheel_revolute" type="revolute">
+      <pose>0 0 0 0 0 0</pose>
       <child>front_left_wheel_link</child>
-      <parent>section_A</parent>
+      <parent>front_left_damping_link</parent>
       <axis>
         <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+    <joint name="front_left_wheel_damping" type="prismatic">
+      <pose>0 0 -0.015 0 0 0</pose>
+      <child>front_left_damping_link</child>
+      <parent>section_A</parent>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <dynamics>
+          <damping>0.1</damping>
+          <spring_stiffness>10</spring_stiffness>
+        </dynamics>
+        <limit>
+          <upper>0.001</upper>
+          <lower>-0.001</lower>
+        </limit>
       </axis>
     </joint>
     <link name="front_right_wheel_link">
@@ -252,12 +270,31 @@
         </surface>
       </collision>
     </link>
-    <joint name="wheel_joint_front_right" type="revolute">
-      <pose>0 0 -0.015 0 0 0</pose>
+    <link name="front_right_damping_link">
+      <pose> 0.15 -0.165 0.019209 1.570795 0 0 </pose>
+    </link>
+    <joint name="front_right_wheel_revolute" type="revolute">
+      <pose>0 0 0 0 0 0</pose>
       <child>front_right_wheel_link</child>
-      <parent>section_A</parent>
+      <parent>front_right_damping_link</parent>
       <axis>
         <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+    <joint name="front_right_wheel_damping" type="prismatic">
+      <pose>0 0 -0.015 0 0 0</pose>
+      <child>front_right_damping_link</child>
+      <parent>section_A</parent>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <dynamics>
+          <damping>0.1</damping>
+          <spring_stiffness>10</spring_stiffness>
+        </dynamics>
+        <limit>
+          <upper>0.001</upper>
+          <lower>-0.001</lower>
+        </limit>
       </axis>
     </joint>
     <link name="rear_left_wheel_link">
@@ -349,12 +386,31 @@
         </surface>
       </collision>
     </link>
-    <joint name="wheel_joint_rear_left" type="revolute">
-      <pose>0 0 -0.015 0 0 0</pose>
+    <link name="rear_left_damping_link">
+      <pose> -0.15 0.165 0.019209 1.570795 0 3.14159</pose>
+    </link>
+    <joint name="rear_left_wheel_revolute" type="revolute">
+      <pose>0 0 0 0 0 0</pose>
       <child>rear_left_wheel_link</child>
-      <parent>section_A</parent>
+      <parent>rear_left_damping_link</parent>
       <axis>
         <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+    <joint name="rear_left_wheel_damping" type="prismatic">
+      <pose>0 0 -0.015 0 0 0</pose>
+      <child>rear_left_damping_link</child>
+      <parent>section_A</parent>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <dynamics>
+          <damping>0.1</damping>
+          <spring_stiffness>10</spring_stiffness>
+        </dynamics>
+        <limit>
+          <upper>0.001</upper>
+          <lower>-0.001</lower>
+        </limit>
       </axis>
     </joint>
     <link name="rear_right_wheel_link">
@@ -446,12 +502,31 @@
         </surface>
       </collision>
     </link>
-    <joint name="wheel_joint_rear_right" type="revolute">
-      <pose>0 0 -0.015 0 0 0</pose>
+    <link name="rear_right_damping_link">
+      <pose> -0.15 -0.165 0.019209 1.570795 0 0 </pose>
+    </link>
+    <joint name="rear_right_wheel_revolute" type="revolute">
+      <pose>0 0 0 0 0 0</pose>
       <child>rear_right_wheel_link</child>
-      <parent>section_A</parent>
+      <parent>rear_right_damping_link</parent>
       <axis>
         <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+    <joint name="rear_right_wheel_damping" type="prismatic">
+      <pose>0 0 -0.015 0 0 0</pose>
+      <child>rear_right_damping_link</child>
+      <parent>section_A</parent>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <dynamics>
+          <damping>0.1</damping>
+          <spring_stiffness>10</spring_stiffness>
+        </dynamics>
+        <limit>
+          <upper>0.001</upper>
+          <lower>-0.001</lower>
+        </limit>
       </axis>
     </joint>
     <!-- Track Block Properties -->
@@ -473,29 +548,29 @@
       <self_collide>0</self_collide>
       <kinematic>0</kinematic>
       <gravity>1</gravity>
-      <visual name="visual">
-        <geometry>
-          <box>
-            <size>0.5 0.001 0.1</size>
-          </box>
-        </geometry>
-        <material>
-          <script>
-            <name>Gazebo/Grey</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
-          <ambient>0.3 0.3 0.3 1</ambient>
-          <diffuse>0.7 0.7 0.7 1</diffuse>
-          <specular>0.01 0.01 0.01 1</specular>
-          <emissive>0 0 0 1</emissive>
-          <shader type="vertex">
-            <normal_map>__default__</normal_map>
-          </shader>
-        </material>
-        <pose frame="">0 0 0 0 -0 0</pose>
-        <cast_shadows>1</cast_shadows>
-        <transparency>0</transparency>
-      </visual>
+      <!--   <visual name='visual'>
+    <geometry>
+      <box>
+        <xacro:insert_block name="body_size"/>
+      </box>
+    </geometry>
+    <material>
+      <script>
+        <name>Gazebo/Grey</name>
+        <uri>file://media/materials/scripts/gazebo.material</uri>
+      </script>
+      <ambient>0.3 0.3 0.3 1</ambient>
+      <diffuse>0.7 0.7 0.7 1</diffuse>
+      <specular>0.01 0.01 0.01 1</specular>
+      <emissive>0 0 0 1</emissive>
+      <shader type='vertex'>
+        <normal_map>__default__</normal_map>
+      </shader>
+    </material>
+    <pose frame=''>0 0 0 0 -0 0</pose>
+    <cast_shadows>1</cast_shadows>
+    <transparency>0</transparency>
+  </visual> -->
       <collision name="collision">
         <laser_retro>0</laser_retro>
         <max_contacts>10</max_contacts>
@@ -530,29 +605,29 @@
       <self_collide>0</self_collide>
       <kinematic>0</kinematic>
       <gravity>1</gravity>
-      <visual name="visual">
-        <geometry>
-          <box>
-            <size>0.5 0.001 0.1</size>
-          </box>
-        </geometry>
-        <material>
-          <script>
-            <name>Gazebo/Grey</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
-          <ambient>0.3 0.3 0.3 1</ambient>
-          <diffuse>0.7 0.7 0.7 1</diffuse>
-          <specular>0.01 0.01 0.01 1</specular>
-          <emissive>0 0 0 1</emissive>
-          <shader type="vertex">
-            <normal_map>__default__</normal_map>
-          </shader>
-        </material>
-        <pose frame="">0 0 0 0 -0 0</pose>
-        <cast_shadows>1</cast_shadows>
-        <transparency>0</transparency>
-      </visual>
+      <!--   <visual name='visual'>
+    <geometry>
+      <box>
+        <xacro:insert_block name="body_size"/>
+      </box>
+    </geometry>
+    <material>
+      <script>
+        <name>Gazebo/Grey</name>
+        <uri>file://media/materials/scripts/gazebo.material</uri>
+      </script>
+      <ambient>0.3 0.3 0.3 1</ambient>
+      <diffuse>0.7 0.7 0.7 1</diffuse>
+      <specular>0.01 0.01 0.01 1</specular>
+      <emissive>0 0 0 1</emissive>
+      <shader type='vertex'>
+        <normal_map>__default__</normal_map>
+      </shader>
+    </material>
+    <pose frame=''>0 0 0 0 -0 0</pose>
+    <cast_shadows>1</cast_shadows>
+    <transparency>0</transparency>
+  </visual> -->
       <collision name="collision">
         <laser_retro>0</laser_retro>
         <max_contacts>10</max_contacts>

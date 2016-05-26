@@ -10,13 +10,13 @@ def main():
     overall_scale = 1
     global joint_interval
     joint_interval = 0.024178 * overall_scale
-    joint_limit = 0.35
+    joint_limit = 0.3
     tree_ = ET.parse('model_template.sdf')
     joint_tmp_ = ET.parse('joint_template.sdf').getroot()
-    link_tmp_ = ET.parse('link_template_2.sdf').getroot()
+    link_tmp_ = ET.parse('link_template_3.sdf').getroot()
     root_ = tree_.getroot()
     model_ = root_[0]
-    tile_number = 33
+    tile_number = 40
     links = []
     joints = []
 
