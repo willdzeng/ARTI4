@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<launch>
+
+<node name="xacro_generator" pkg="xacro" type="xacro.py" args="$(find arti_description)/urdf/section_A_assembly.xacro -o $(find arti_description)/model/section_A_assembly/model.sdf"/>
+
+</launch>

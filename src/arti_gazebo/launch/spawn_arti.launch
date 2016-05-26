@@ -1,13 +1,21 @@
 <?xml version="1.0"?>
 
 <launch>
-
+  <!-- <arg name="world_name" default="worlds/empty.world"/> -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <!-- <arg name="world_name" value="$(arg world_name)"/> world_name is wrt GAZEBO_RESOURCE_PATH environment variable -->
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
   <!-- <param name="robot_description" command="$(find xacro)/xacro.py '$(env ARTI_DESCRIPTION)' " /> -->
-  <param name="robot_description" command="$(find xacro)/xacro.py '$(find arti_description)/urdf/arti.xacro' " />
+  <param name="robot_description" command="$(find xacro)/xacro.py '$(find arti_description)/urdf/section_A_assembly.xacro' " />
   
 
   <!-- Spawn robot in gazebo -->
   <node name="spawn_arti_model" pkg="gazebo_ros" type="spawn_model"
-    args="$(optenv ROBOT_INITIAL_POSE) -unpause -urdf -param robot_description -model mobile_base"/>
+    args="$(optenv ROBOT_INITIAL_POSE) -unpause -sdf -param robot_description -model simple_car"/>
 
 </launch>

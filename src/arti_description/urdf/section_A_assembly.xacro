@@ -1,0 +1,67 @@
+<?xml version='1.0'?>
+<!-- This is the Section A assembly file -->
+<sdf version='1.5' xmlns:xacro="http://ros.org/wiki/xacro">
+    <model name='section_A_assembly'>
+        <!-- Some Constants -->
+        <property name="PI" value="3.14159"/>
+        <!-- Wheel Properties -->
+        <xacro:property name="wheel_length" value="0.03" />
+        <xacro:property name="wheel_radius" value="0.038418" />
+
+        <!-- Section A Size -->
+        <xacro:property name="section_A_x" value="0.5" />
+        <xacro:property name="section_A_y" value="0.3" />
+        <xacro:property name="section_A_z" value="0.1" />
+        <xacro:property name="section_A_height" value="0.01" />
+
+        <!-- wheel position -->
+        <xacro:property name="wheel_x" value="${section_A_x/2 - 0.1}" />
+        <xacro:property name="wheel_y" value="${section_A_y/2 + wheel_length/2}" />
+        <xacro:property name="wheel_z" value="${wheel_radius/2}" />
+
+        <!-- Section A -->
+        <xacro:include filename="$(find arti_description)/urdf/section_A.xacro" />
+        <xacro:section_A>
+            <pose>0 0 ${section_A_z/2 + section_A_height} 0 0 0</pose>
+            <size>${section_A_x} ${section_A_y} ${section_A_z}</size>
+        </xacro:section_A>
+        <!-- All four wheels -->
+        <xacro:include filename="$(find arti_description)/urdf/arti_wheel.xacro" />
+        <xacro:arti_wheel wheel_prefix="front_left" body_prefix="section_A">
+            <pose>${wheel_x} ${wheel_y} ${wheel_z} ${PI/2} 0 ${PI}</pose>
+        </xacro:arti_wheel>
+
+        <xacro:arti_wheel wheel_prefix="front_right" body_prefix="section_A">
+            <pose> ${wheel_x} ${-wheel_y} ${wheel_z} ${PI/2} 0 0 </pose>
+        </xacro:arti_wheel>
+
+        <xacro:arti_wheel wheel_prefix="rear_left" body_prefix="section_A">
+            <pose> ${-wheel_x} ${wheel_y} ${wheel_z} ${PI/2} 0 ${PI}</pose>
+        </xacro:arti_wheel>
+
+        <xacro:arti_wheel wheel_prefix="rear_right" body_prefix="section_A">
+            <pose> ${-wheel_x} ${-wheel_y} ${wheel_z} ${PI/2} 0 0 </pose>
+        </xacro:arti_wheel>
+
+        <!-- Track Block Properties -->
+        <xacro:property name="track_block_x" value="${section_A_x}" />
+        <xacro:property name="track_block_y" value="0.001" />
+        <xacro:property name="track_block_z" value="${section_A_z}" />
+        <xacro:property name="track_block_offset_y" value="0.01" />
+        <xacro:property name="track_block_offset_z" value="${track_block_z/2+0.01}" />
+        <!-- Left Track Block -->
+        <xacro:include filename="$(find arti_description)/urdf/track_block.xacro" />
+        <xacro:track_block body_prefix="section_A" name_prefix="left">
+            <pose>0 ${section_A_y/2 + wheel_length + track_block_offset_y} ${track_block_offset_z} 0 0 0</pose>
+            <size>${track_block_x} ${track_block_y} ${track_block_z}</size>
+        </xacro:track_block>
+        <!-- Right Track Block-->
+        <xacro:track_block body_prefix="section_A" name_prefix="right">
+            <pose>0 -${section_A_y/2 + wheel_length + track_block_offset_y} ${track_block_offset_z} 0 0 0</pose>
+            <size>${track_block_x} ${track_block_y} ${track_block_z}</size>
+        </xacro:track_block>
+
+        <static>0</static>
+        <allow_auto_disable>1</allow_auto_disable>
+    </model>
+</sdf>

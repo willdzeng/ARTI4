@@ -1,51 +1,104 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://ros.org/wiki/xacro" name="arti_wheel">
+<!-- This is the drum link file -->
+<model xmlns:xacro="http://ros.org/wiki/xacro" name="arti_wheel">
+<xacro:macro name="arti_wheel" params="wheel_prefix body_prefix *link_pose">
+  <link name="${wheel_prefix}_wheel_link">
+    <xacro:insert_block name="link_pose"/>
+    <gravity>1</gravity>
+    <self_collide>1</self_collide>
+    <kinematic>0</kinematic>
+    <inertial>
+      <mass>1</mass>
+      <inertia>
+        <ixx>1</ixx>
+        <ixy>0</ixy>
+        <ixz>0</ixz>
+        <iyy>1</iyy>
+        <iyz>0</iyz>
+        <izz>1</izz>
+      </inertia>
+    </inertial>
+    <visual name='visual'>
+      <pose frame=''>-0.0375 -0.0375 -0.034 0 0 0</pose>
+      <geometry>
+        <mesh>
+          <uri>model://track_drum/meshes/drum.STL</uri>
+          <scale>0.001 0.001 0.001</scale>
+        </mesh>
+      </geometry>
+      <material>
+        <lighting>1</lighting>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Grey</name>
+        </script>
+        <ambient>0.3 0.3 0.3 1</ambient>
+        <diffuse>0.7 0.7 0.7 1</diffuse>
+        <specular>0.01 0.01 0.01 1</specular>
+        <emissive>0 0 0 1</emissive>
+        <shader type='vertex'>
+          <normal_map>__default__</normal_map>
+        </shader>
+      </material>
+      <cast_shadows>1</cast_shadows>
+      <transparency>0</transparency>
+    </visual>
+    <collision name='collision'>
+      <laser_retro>0</laser_retro>
+      <max_contacts>20</max_contacts>
+      <!-- <pose frame=''>-0.0375 -0.0375 -0.034 0 -0 0</pose> -->
+      <geometry>
+          <cylinder>
+            <radius>${wheel_radius}</radius>
+            <length>${wheel_length}</length>
+          </cylinder>
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1</mu>
+            <mu2>1</mu2>
+            <fdir1>0 0 0</fdir1>
+            <slip1>0</slip1>
+            <slip2>0</slip2>
+          </ode>
+        </friction>
+        <bounce>
+          <restitution_coefficient>0</restitution_coefficient>
+          <threshold>1</threshold>
+        </bounce>
+        <contact>
+          <collide_without_contact>0</collide_without_contact>
+          <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+          <collide_bitmask>1</collide_bitmask>
+          <ode>
+            <soft_cfm>0.1</soft_cfm>
+            <soft_erp>0.2</soft_erp>
+            <kp>1e+13</kp>
+            <kd>1</kd>
+            <max_vel>0.01</max_vel>
+            <min_depth>0</min_depth>
+          </ode>
+          <bullet>
+            <split_impulse>1</split_impulse>
+            <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+            <soft_cfm>0</soft_cfm>
+            <soft_erp>0.2</soft_erp>
+            <kp>1e+13</kp>
+            <kd>1</kd>
+          </bullet>
+        </contact>
+      </surface>
+    </collision>
+  </link>
 
-	<xacro:macro name="arti_wheel" params="wheel_prefix *joint_pose">
-		<link name="${wheel_prefix}_wheel_link">
-			<inertial>
-				<mass value="2.637" />
-				<origin xyz="0 0 0" />
-				<inertia  ixx="0.02467" ixy="0" ixz="0" iyy="0.02467" iyz="0" izz="0.04411" />
-			</inertial>
-			<visual>
-				<origin xyz="0 0 0" rpy="0 0 0" />
-				<geometry>
-					<mesh filename="package://arti_description/meshes/arti_wheel.stl" />
-				</geometry>
-			</visual>
-			<collision>
-				<origin xyz="0 0 0" rpy="${M_PI/2} 0 0" />
-				<geometry>
-					<cylinder length="${wheel_length}" radius="${wheel_radius}" />
-				</geometry>
-			</collision>
-		</link>
-
-		<gazebo reference="${wheel_prefix}_wheel_link">
-			<mu1 value="1.0"/>
-			<mu2 value="1.0"/>
-			<kp value="10000000.0" />
-			<kd value="1.0" />
-			<fdir1 value="1 0 0"/>
-		</gazebo>
-
-		<joint name="${wheel_prefix}_wheel" type="continuous">
-			<parent link="base_link"/>
-			<child link="${wheel_prefix}_wheel_link"/>
-			<xacro:insert_block name="joint_pose"/>
-			<axis xyz="0 1 0" rpy="0 0 0" />
-		</joint>
-
-<!-- 		<transmission name="${wheel_prefix}_wheel_trans" type="SimpleTransmission">
-			<type>transmission_interface/SimpleTransmission</type>
-			<actuator name="${wheel_prefix}_wheel_motor">
-				<mechanicalReduction>1</mechanicalReduction>
-			</actuator>
-			<joint name="${wheel_prefix}_wheel">
-				<hardwareInterface>VelocityJointInterface</hardwareInterface>
-			</joint>
-		</transmission>
- -->
-	</xacro:macro>
-</robot>
+  <joint name="wheel_joint_${wheel_prefix}" type="revolute">
+    <pose>0 0 ${-wheel_length/2} 0 0 0</pose>
+    <child>${wheel_prefix}_wheel_link</child>
+    <parent>${body_prefix}</parent>
+    <axis>
+        <xyz>0 0 1</xyz>
+    </axis>
+  </joint>
+</xacro:macro>
+</model>

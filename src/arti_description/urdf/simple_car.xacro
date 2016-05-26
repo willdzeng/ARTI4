@@ -3,7 +3,7 @@
 <robot name="simple_car" xmlns:xacro="http://ros.org/wiki/xacro">
 
   <!-- Included URDF/XACRO Files -->
-  <xacro:include filename="$(find arti_description)/urdf/arti_wheel.xacro" />
+  <xacro:include filename="$(find arti_description)/urdf/arti_wheel_test.xacro" />
 
   <property name="M_PI" value="3.14159"/>
 
