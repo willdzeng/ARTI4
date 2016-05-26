@@ -24,7 +24,7 @@ catkin_package(
     LIBRARIES 
     CATKIN_DEPENDS
 )
-catkin_add_env_hooks(description_env_hook
+catkin_add_env_hooks(arti_description_env_hook
   SHELLS sh DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/env-hooks)
 
 install(TARGETS 

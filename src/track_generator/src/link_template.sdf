@@ -4,7 +4,6 @@
   <pose frame=''>0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <!--<uri>/home/zeng/arti4/src/track_generator/model/track_thread/meshes/CP4.dae</uri>-->
       <uri>model://track_thread/meshes/CP4.dae</uri>
       <scale>1 1 1</scale>
     </mesh>
@@ -30,7 +29,6 @@
   <pose frame=''>0 0 0 0 -0 0</pose>
   <geometry>
     <mesh>
-      <!--<uri>/home/zeng/arti4/src/track_generator/model/track_thread/meshes/CP4.dae</uri>-->
       <uri>model://track_thread/meshes/CP4.dae</uri>
       <scale>1 1 1</scale>
     </mesh>
@@ -57,7 +55,7 @@
         <soft_cfm>0</soft_cfm>
         <soft_erp>0.2</soft_erp>
         <kp>1e+13</kp>
-        <kd>1</kd>
+        <kd>1e+3</kd>
         <max_vel>0.01</max_vel>
         <min_depth>0</min_depth>
       </ode>
@@ -82,7 +80,7 @@
     <iyz>0</iyz>
     <izz>1</izz>
   </inertia>
-  <mass>1</mass>
+  <mass>0.1</mass>
 </inertial>
 <kinematic>0</kinematic>
 <gravity>1</gravity>

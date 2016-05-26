@@ -4,8 +4,8 @@
 <parent>link_1</parent>
 <axis>
     <limit>
-        <lower>-0.4</lower>
-        <upper>0.4</upper>
+        <lower>-0.3</lower>
+        <upper>0.3</upper>
     </limit>
     <xyz>0 1 0</xyz>
 </axis>

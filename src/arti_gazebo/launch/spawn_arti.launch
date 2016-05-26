@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <!-- <param name="robot_description" command="$(find xacro)/xacro.py '$(env ARTI_DESCRIPTION)' " /> -->
+  <param name="robot_description" command="$(find xacro)/xacro.py '$(find arti_description)/urdf/arti.xacro' " />
+  
+
+  <!-- Spawn robot in gazebo -->
+  <node name="spawn_arti_model" pkg="gazebo_ros" type="spawn_model"
+    args="$(optenv ROBOT_INITIAL_POSE) -unpause -urdf -param robot_description -model mobile_base"/>
+
+</launch>

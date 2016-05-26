@@ -5,17 +5,18 @@ import numpy
 
 # every thing with an _ is a xml object
 def main():
-    overall_scale = 0.1
-    link_scale = [0.1,0.05,0.1]
+    # overall_scale = 0.1
+    # link_scale = [0.1,0.05,0.1]
+    overall_scale = 1
     global joint_interval
-    joint_interval = 0.27 * overall_scale
-    joint_limit = 0.3
+    joint_interval = 0.024178 * overall_scale
+    joint_limit = 0.35
     tree_ = ET.parse('model_template.sdf')
     joint_tmp_ = ET.parse('joint_template.sdf').getroot()
-    link_tmp_ = ET.parse('link_template.sdf').getroot()
+    link_tmp_ = ET.parse('link_template_2.sdf').getroot()
     root_ = tree_.getroot()
     model_ = root_[0]
-    tile_number = 31
+    tile_number = 33
     links = []
     joints = []
 
@@ -23,22 +24,24 @@ def main():
     theta = 2 * PI / tile_number
     radius = joint_interval / 2 / numpy.tan(theta / 2)
 
-
     # generate links
     for i in range(tile_number):
         link = Link(link_tmp_, i)
         link.change_pose([radius * numpy.cos(theta * i), radius * numpy.sin(theta * i), 0, -PI/2, 0, PI/2 + theta * i])
-        link.change_scale(link_scale)
+        # link.change_scale(link_scale)
         links.append(link)
         print link.pose
+
     # generate joints
     for i in range(0, len(links) - 1):
         joint = Joint(joint_tmp_, links[i], links[i + 1])
         joint.change_limits(joint_limit)
         joints.append(joint)
+
     # connect the last two joints
     joint = Joint(joint_tmp_,links[-1],links[0])
     joints.append(joint)
+
     # add the links and joint into model
     for link in links:
         print link
@@ -46,6 +49,7 @@ def main():
     for joint in joints:
         print joint
         model_.append(joint.joint_)
+
     # write files
     tree_.write('../model/track_thread/model.sdf')
 

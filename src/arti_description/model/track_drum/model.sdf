@@ -8,7 +8,6 @@
       <kinematic>0</kinematic>
       <inertial>
         <mass>1</mass>
-        <pose frame=''>0.0375 0.0375 0.034 0 -0 0</pose>
         <inertia>
           <ixx>1</ixx>
           <ixy>0</ixy>
@@ -19,7 +18,7 @@
         </inertia>
       </inertial>
       <visual name='visual'>
-        <pose frame=''>0 0 0 0 -0 0</pose>
+        <pose frame=''>-0.0375 -0.0375 -0.034 0 -0 0</pose>
         <geometry>
           <mesh>
             <uri>model://track_drum/meshes/drum.STL</uri>
@@ -46,7 +45,7 @@
       <collision name='collision'>
         <laser_retro>0</laser_retro>
         <max_contacts>20</max_contacts>
-        <pose frame=''>0 0 0 0 -0 0</pose>
+        <pose frame=''>-0.0375 -0.0375 -0.034 0 -0 0</pose>
         <geometry>
           <mesh>
             <uri>model://track_drum/meshes/drum.STL</uri>

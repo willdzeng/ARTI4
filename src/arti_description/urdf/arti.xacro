@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<robot name="arti" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find arti_description)/urdf/simple_car.xacro" />
+  <xacro:simple_car/>
+</robot>
