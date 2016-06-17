@@ -3,7 +3,7 @@
 <sdf version='1.5' xmlns:xacro="http://ros.org/wiki/xacro">
     <model name='section_A_assembly'>
         <!-- Some Constants -->
-        <property name="PI" value="3.14159"/>
+        <xacro:property name="PI" value="3.14159"/>
         <!-- Wheel Properties -->
         <xacro:property name="wheel_length" value="0.03" />
         <xacro:property name="wheel_radius" value="0.038418" />

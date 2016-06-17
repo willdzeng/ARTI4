@@ -1,0 +1,17 @@
+<launch>
+<!--   <env name="ROSCONSOLE_CONFIG_FILE" 
+       value="$(find arti_hardware)/rosconfig.yaml"/> -->
+  <node pkg="arti_control" type="arti_control_node" name="arti_go_straight" output="screen">
+    <param name="running_time" value="25.0"/>
+    <param name="body_width" value="2.0"/>
+    <param name="target_forward_vel" value="1"/>
+    <param name="target_turning_vel" value="0"/>
+    <param name="maximum_vel" value="1.0"/>
+    <param name="kp" value="0.0"/>
+    <param name="ki" value="0.0001"/>
+    <param name="kd" value="0.0"/>
+    <param name="set_initial_odom" value="false"/>
+
+  </node>
+
+</launch>

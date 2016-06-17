@@ -7,7 +7,7 @@ find_package(catkin REQUIRED
             roscpp
         )
 
-find_package(Eigen REQUIRED)
+# find_package(Eigen REQUIRED)
 find_package(Boost REQUIRED)
 
 
