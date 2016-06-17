@@ -1,19 +1,37 @@
 <launch>
-<!--   <env name="ROSCONSOLE_CONFIG_FILE" 
-       value="$(find arti_hardware)/rosconfig.yaml"/> -->
+  <env name="ROSCONSOLE_CONFIG_FILE" 
+       value="$(find arti_hardware)/config/rosconfig.yaml"/>
   <node pkg="arti_hardware" type="arti_base" name="arti_base" output="screen">
     <param name="port" value="/dev/ttyACM0"/>
     <param name="baud_rate" value="9600"/>
-    <param name="body_width" value="0.975"/>
+    <param name="body_width" value="1.0"/>
     <param name="serial_time_out" value="50"/>
     <param name="cmd_time_out" value="0.1"/>
     <param name="control_rate" value="10"/>
     <param name="odom_rate" value="60"/>
-    <param name="odom_window" value="20"/>
-    <param name="wheel_multiplier" value="-0.0124"/>
+    <param name="odom_window" value="15"/>
+    <param name="wheel_multiplier" value="0.5"/>
     <param name="cmd_from_hardware" value="true"/>
     <param name="flip_lr" value="false"/>
     <param name="odom_bias" value="0.98"/>
+  </node>
+
+  <rosparam command="load" file="$(find arti_hardware)/config/control.yaml" />
+  <!-- <param name="robot_description" command="$(find xacro)/xacro.py $(find arti_description)/model/section_A_assembly/model.sdf"/> -->
+  <param name="robot_description" command="$(find xacro)/xacro.py '$(env HUSKY_DESCRIPTION)'
+    laser_enabled:=false
+    ur5_enabled:=false
+    kinect_enabled:=false
+    "/>
+  <node name="base_controller_spawner" pkg="controller_manager" type="spawner" args="arti_joint_publisher arti_velocity_controller --shutdown-timeout 3">
+    <remap from="arti_veloctiy_controller/cmd_vel" to="cmd_vel"/>
+  </node>
+
+  <node pkg="interactive_marker_twist_server" type="marker_server" name="twist_marker_server" output="screen"/>
+
+  <node pkg="twist_mux" type="twist_mux" name="twist_mux">
+    <rosparam command="load" file="$(find arti_hardware)/config/twist_mux.yaml" />
+    <remap from="cmd_vel_out" to="arti_velocity_controller/cmd_vel"/>
   </node>
 
 </launch>

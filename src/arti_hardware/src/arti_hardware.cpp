@@ -1,4 +1,5 @@
 #include <arti_hardware/arti_hardware.h>
+typedef boost::chrono::steady_clock time_source;
 
 namespace arti_hardware
 {
@@ -28,6 +29,10 @@ ArtiHardware::ArtiHardware(ros::NodeHandle nh, ros::NodeHandle private_nh): nh_(
 	ROS_INFO("Control Rate %f", control_rate_);
 	ROS_INFO("Command Time out is %f s", cmd_time_out_);
 
+	if (cmd_from_hardware_) {
+		cmd_sub_ = nh.subscribe<geometry_msgs::Twist>("cmd_vel", 1, boost::bind(&ArtiHardware::cmdVelCallback, this, _1));
+	}
+
 	serial::Timeout to = serial::Timeout::simpleTimeout(serial_time_out_);
 	// serial::Timeout to(serial::Timeout::max(), serial_time_out_, serial_time_out_, serial_time_out_, serial_time_out_);
 	serial_ = new serial::Serial(port_, baud_rate_, to, serial::eightbits, serial::parity_none, serial::stopbits_one, serial::flowcontrol_none);
@@ -47,20 +52,26 @@ ArtiHardware::ArtiHardware(ros::NodeHandle nh, ros::NodeHandle private_nh): nh_(
 			ROS_FATAL("Serial port open failed: %s (%s)", ex.what(), port_.c_str());
 			ros::shutdown();
 		}
-
 	}
-
-	// test();
-	// odomLoop();
+	registerControlInterfaces();
 	odom_thread_ = new boost::thread(boost::bind(&ArtiHardware::odomLoop, this));
-	controlLoop();
-
+	// control_thread_ = new boost::thread(boost::bind(&ArtiHardware::controlLoop, this));
 }
 
 ArtiHardware::~ArtiHardware()
 {
-	odom_thread_->interrupt();
-	odom_thread_->join();
+
+	if (odom_thread_ != NULL) {
+		odom_thread_->interrupt();
+		odom_thread_->join();
+		delete odom_thread_;
+	}
+	if (control_thread_ != NULL) {
+		control_thread_->interrupt();
+		control_thread_->join();
+		delete control_thread_;
+	}
+
 	try
 	{
 		sendMotorCmd(0, 0);
@@ -70,6 +81,7 @@ ArtiHardware::~ArtiHardware()
 	catch (std::exception ex) {};
 	delete serial_;
 	delete odom_thread_;
+	delete control_thread_;
 }
 
 void ArtiHardware::test()
@@ -109,17 +121,24 @@ void ArtiHardware::controlLoop()
 	while (nh_.ok()) {
 		ros::spinOnce();
 		// if it's been a long time since recelve the command, set command to zero
-		double inter_time = (ros::Time::now() - cmd_time_).toSec();
-		if ( inter_time > cmd_time_out_ ) {
-			cmd_left_ = 0;
-			cmd_right_ = 0;
-			// std::cout << "inter time: " << inter_time << std::endl;
-			cmd_time_ = ros::Time::now();
-		}
-		sendMotorCmd(cmd_left_, cmd_right_);
-
+		// double inter_time = (ros::Time::now() - cmd_time_).toSec();
+		// if ( inter_time > cmd_time_out_ ) {
+		// 	cmd_left_ = 0;
+		// 	cmd_right_ = 0;
+		// 	// std::cout << "inter time: " << inter_time << std::endl;
+		// 	cmd_time_ = ros::Time::now();
+		// }
+		// sendMotorCmd(cmd_left_, cmd_right_);
+		std::cout << "Left Joints: " << joints_[0].velocity_command << " Right Joints: " << joints_[1].velocity_command << std::endl;
+		sendMotorCmd(joints_[0].velocity_command, joints_[1].velocity_command);
 		r.sleep();
 	}
+}
+
+void ArtiHardware::commandHardware()
+{
+	// std::cout << "Left Joints: " << joints_[0].velocity_command << " Right Joints: " << joints_[1].velocity_command << std::endl;
+	sendMotorCmd(joints_[0].velocity_command, joints_[1].velocity_command);
 }
 
 void ArtiHardware::odomLoop()
@@ -133,34 +152,24 @@ void ArtiHardware::odomLoop()
 	unsigned char token[1];
 	while (nh_.ok()) {
 
-		if (serial_->available()) {
+		if (serial_->available() && serial_->isOpen()) {
 			try
 			{
 				tmpStr = serial_->readline(20, "ODOMS,");
-				if (!tmpStr.empty()) {
-					if (tmpStr.back() == ',') {
-						dataStr = serial_->readline(20, "ODOME\n");
-						if (flip_lr_) {
-							parseOdomStr(dataStr, left, right);
-						} else {
-							parseOdomStr(dataStr, right, left);
-						}
-					}
-				}
+				dataStr = serial_->readline(20, "ODOME\n");
+				parseOdomStr(dataStr, left, right);
 			}
 			catch (serial::SerialException ex) //No data received
 			{
 				ROS_WARN("Serial read exception: %s", ex.what());
-				// continue;
 			}
 			catch (std::runtime_error ex)
 			{
 				ROS_WARN("Serial read exception: %s", ex.what());
-				// continue;
 			}
 		}
 		processOdom(left, right);
-
+		// printOdom(odom_queue_.back());
 		dataStr = "";
 		tmpStr = "";
 		num = 0;
@@ -168,7 +177,7 @@ void ArtiHardware::odomLoop()
 	}
 }
 
-void ArtiHardware::printOdom(const arti_msgs::DiffOdom& odom)
+void ArtiHardware::printOdom(const DiffOdom& odom)
 {
 	std::cout << "left travel: " << odom.left_travel << " right travel: " <<
 	          odom.right_travel << " left speed: " << odom.left_speed << " right speed:" << odom.right_speed
@@ -177,50 +186,25 @@ void ArtiHardware::printOdom(const arti_msgs::DiffOdom& odom)
 
 void ArtiHardware::processOdom(const int& left, const int& right)
 {
-	arti_msgs::DiffOdom diff_odom;
-	diff_odom.left_travel = left * wheel_multiplier_ * odom_bias_;
-	diff_odom.right_travel = right * wheel_multiplier_;
-	diff_odom.header.stamp = ros::Time::now();
-	double dl, dr;
-	double dvx, dwz;
-	double dt = 0;
-	// if there is not enough data in the stack add it to the queue
-	if (diff_odom_queue_.size() == odom_window_) {
-		dt = (diff_odom.header.stamp - diff_odom_queue_.front().header.stamp).toSec();
-		if (dt < 0.00001) {
-			return;
-		}
-		// std::cout << dt << std::endl;
-		dl = diff_odom.left_travel - diff_odom_old_.left_travel;
-		dr = diff_odom.right_travel - diff_odom_old_.right_travel;
-		diff_odom.left_speed =  (diff_odom.left_travel - diff_odom_queue_.front().left_travel) / dt;
-		diff_odom.right_speed = (diff_odom.right_travel - diff_odom_queue_.front().right_travel) / dt;
-		diff_odom_queue_.pop();
-	}
-	vl_ = diff_odom.left_speed;
-	vr_ = diff_odom.right_speed;
-	diff_odom_old_ = diff_odom;
-	diff_odom_queue_.push(diff_odom);
-	// std::cout << diff_odom_queue_.size() << std::endl;
-	diff_odom_pub_.publish(diff_odom);
-	// pose estiamtion and publish the odometry
-	LRtoDiff(dl, dr, dvx, dwz);
-	// std::cout << dl << " " << dr << std::endl;
-	LRtoDiff(vl_, vr_, vx_, wz_);
-	integrateExact(dvx, dwz);
-	nav_msgs::Odometry odom;
+	DiffOdom odom;
+	odom.left_travel = left * wheel_multiplier_;
+	odom.right_travel = right * wheel_multiplier_;
 	odom.header.stamp = ros::Time::now();
-	odom.header.frame_id = "odom";
-	odom.pose.pose.position.x = px_;
-	odom.pose.pose.position.y = py_;
-	odom.pose.pose.orientation.z = theta_;
-	odom.pose.pose.orientation.w = 1;
-	odom.twist.twist.linear.x = vx_;
-	odom.twist.twist.angular.z = wz_;
-	odom_pub_.publish(odom);
-
+	// if there is not enough data in the stack add it to the queue
+	if (odom_queue_.size() == odom_window_) {
+		double time_inter = (odom.header.stamp - odom_queue_.front().header.stamp).toSec();
+		// std::cout << time_inter << std::endl;
+		odom.left_speed = (odom.left_travel - odom_queue_.front().left_travel) / time_inter;
+		odom.right_speed = (odom.right_travel - odom_queue_.front().right_travel) / time_inter;
+		odom_queue_.pop();
+	}
+	odom_queue_.push(odom);
+	diff_odom_pub_.publish(odom);
+	joints_[0].position = odom.left_travel;
+	joints_[1].position = odom.right_travel;
+	// joints_[0].velocity = odom.left_speed;
+	// joints_[1].velocity = odom.right_speed;
 }
-
 
 bool ArtiHardware::parseOdomStr(const std::string& str, int& left, int& right)
 {
@@ -251,6 +235,51 @@ bool ArtiHardware::parseOdomStr(const std::string& str, int& left, int& right)
 	}
 }
 
+void ArtiHardware::registerControlInterfaces()
+{
+	std::vector<std::string> joint_names;
+	joint_names.push_back(std::string("front_left_wheel"));
+	joint_names.push_back(std::string("front_right_wheel"));
+
+	for (unsigned int i = 0; i < joint_names.size(); i++)
+	{
+		hardware_interface::JointStateHandle joint_state_handle(joint_names[i],
+		        &joints_[i].position, &joints_[i].velocity,
+		        &joints_[i].effort);
+		joint_state_interface_.registerHandle(joint_state_handle);
+
+		hardware_interface::JointHandle joint_handle(
+		    joint_state_handle, &joints_[i].velocity_command);
+		velocity_joint_interface_.registerHandle(joint_handle);
+	}
+	registerInterface(&joint_state_interface_);
+	registerInterface(&velocity_joint_interface_);
+}
+
+// void ArtiHardware::integrateExact(double linear, double angular)
+// {
+// 	if (fabs(angular) < 1e-6)
+// 		integrateRungeKutta2(linear, angular);
+// 	else
+// 	{
+// 		/// Exact integration (should solve problems when angular is zero):
+// 		const double heading_old = heading_;
+// 		const double r = linear / angular;
+// 		heading_ += angular;
+// 		x_       +=  r * (sin(heading_) - sin(heading_old));
+// 		y_       += -r * (cos(heading_) - cos(heading_old));
+// 	}
+// }
+
+// void Odometry::integrateRungeKutta2(double linear, double angular)
+// {
+// 	const double direction = heading_ + angular * 0.5;
+
+// 	x_       += linear * cos(direction);
+// 	y_       += linear * sin(direction);
+// 	heading_ += angular;
+// }
+
 /**
  * @brief      { Send the motor command }
  *
@@ -265,14 +294,14 @@ void ArtiHardware::sendMotorCmd(const double& left, const double right)
 		return;
 	}
 
-	sprintf(cmd_, "\nMOTOS,%d,%d,MOTOE\n", (int) (left * 127), (int) (right * 127));
+	sprintf(cmd_, "\nMOTOS,%d,%d,MOTOE\n", (int) left, (int) right);
 	try
 	{
 
 		serial_->write(cmd_); //Send query
-		if (left != 0.0 && right != 0.0) {
-			std::cout << cmd_;
-		}
+		// if (left != 0.0 && right != 0.0) {
+		// 	std::cout << cmd_;
+		// }
 	}
 	catch (serial::SerialException ex)
 	{
@@ -296,100 +325,41 @@ void ArtiHardware::sendMotorCmd(const double& left, const double right)
 void ArtiHardware::cmdVelCallback(const geometry_msgs::Twist::ConstPtr& msg)
 {
 	ROS_INFO_ONCE("Arti Hardware Get Command");
-	diffToLR(msg->linear.x, msg->angular.z, cmd_left_, cmd_right_);
-	thresholdVelocity();
-	cmd_time_ = ros::Time::now();
-}
-
-void ArtiHardware::diffCmdCallback(const arti_msgs::DiffCmd::ConstPtr& msg)
-{
-	ROS_INFO_ONCE("Arti Hardware Get Diff Command");
 	// diffToLR(msg->linear.x, msg->angular.z, cmd_left_, cmd_right_);
-	cmd_left_ = msg->left;
-	cmd_right_ = msg->right;
-	thresholdVelocity();
+	diffToLR(msg->linear.x, msg->angular.z, joints_[0].velocity_command, joints_[1].velocity_command);
 	cmd_time_ = ros::Time::now();
 }
 
-
-void ArtiHardware::integrateRungeKutta2(const double& linear, const double& angular)
+void ArtiHardware::diffToLR(const double& vx, const double& wz, double& left, double& right)
 {
-	const double direction = theta_ + angular * 0.5;
-
-	/// Runge-Kutta 2nd order integration:
-	px_       += linear * cos(direction);
-	py_       += linear * sin(direction);
-	theta_ += angular;
-}
-
-/**
- * \brief Other possible integration method provided by the class
- * \param linear
- * \param angular
- */
-void ArtiHardware::integrateExact(const double& linear, const double& angular)
-{
-	if (fabs(angular) < 1e-6)
-		integrateRungeKutta2(linear, angular);
-	else
-	{
-		/// Exact integration (should solve problems when angular is zero):
-		const double theta_old = theta_;
-		const double r = linear / angular;
-		theta_ += angular;
-		px_       +=  r * (sin(theta_) - sin(theta_old));
-		py_       += -r * (cos(theta_) - cos(theta_old));
-	}
-}
-
-
-void ArtiHardware::thresholdVelocity()
-{
-	if (cmd_left_ > maximum_vel_) {
-		cmd_left_ = maximum_vel_;
-	}
-
-	if (cmd_left_ < -maximum_vel_) {
-		cmd_left_ = -maximum_vel_;
-	}
-
-	if (cmd_right_ > maximum_vel_) {
-		cmd_right_ = maximum_vel_;
-	}
-
-	if (cmd_right_ < -maximum_vel_) {
-		cmd_right_ = -maximum_vel_;
-	}
-}
-
-void ArtiHardware::diffToLR(const double& vx, const double& wz, double& vl, double& vr)
-{
-	vl = vx - body_width_ / 2 * wz;
-	vr = vx + body_width_ / 2 * wz;
-}
-
-void ArtiHardware::LRtoDiff(const double& vl, const double& vr, double& vx, double& wz)
-{
-	vx  = (vr + vl) * 0.5 ;
-	wz = (vr - vl) / body_width_;
-}
-
-void ArtiHardware::setPose(const double&x, const double& y, const double& theta)
-{
-	px_ = x;
-	py_ = y;
-	theta_ = theta;
+	left = ( vx - body_width_ / 2 * wz ) * 127;
+	right = ( vx + body_width_ / 2 * wz ) * 127;
 }
 
 }  // namespace arti_hadware
 
+// #include "controller_manager/controller_manager.h"
 int main(int argc, char *argv[])
 {
 	ros::init(argc, argv, "arti_base");
 	ros::NodeHandle nh, private_nh("~");
 	arti_hardware::ArtiHardware arti(nh, private_nh);
-
-	// ros::spin();
+	controller_manager::ControllerManager cm(&arti);
+	ros::Rate r(50);
+	time_source::time_point last_time = time_source::now();
+	time_source::time_point this_time = time_source::now();
+	while (nh.ok()) {
+		// ROS_INFO("aaaa");
+		this_time = time_source::now();
+		boost::chrono::duration<double> elapsed_duration = this_time - last_time;
+		ros::Duration elapsed(elapsed_duration.count());
+		last_time = this_time;
+		cm.update(ros::Time::now(), elapsed);
+		arti.commandHardware();
+		r.sleep();
+		ros::spinOnce();
+	}
+	ros::spin();
 
 	return 0;
 }
