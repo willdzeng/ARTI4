@@ -12,11 +12,13 @@ find_package(catkin REQUIRED
             arti_msgs
             # libserial
             nav_msgs
+            controller_manager
+            hardware_interface
         )
 set(CMAKE_CXX_FLAGS "-std=c++0x ${CMAKE_CXX_FLAGS}")
 
 # find_package(Eigen3 REQUIRED)
-find_package(Boost REQUIRED)
+find_package(Boost REQUIRED chrono)
 
 include_directories(
     include

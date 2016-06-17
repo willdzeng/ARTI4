@@ -29,9 +29,9 @@ ArtiHardware::ArtiHardware(ros::NodeHandle nh, ros::NodeHandle private_nh): nh_(
 	ROS_INFO("Control Rate %f", control_rate_);
 	ROS_INFO("Command Time out is %f s", cmd_time_out_);
 
-	if (cmd_from_hardware_) {
-		cmd_sub_ = nh.subscribe<geometry_msgs::Twist>("cmd_vel", 1, boost::bind(&ArtiHardware::cmdVelCallback, this, _1));
-	}
+	// if (cmd_from_hardware_) {
+	// 	cmd_sub_ = nh.subscribe<geometry_msgs::Twist>("cmd_vel", 1, boost::bind(&ArtiHardware::cmdVelCallback, this, _1));
+	// }
 
 	serial::Timeout to = serial::Timeout::simpleTimeout(serial_time_out_);
 	// serial::Timeout to(serial::Timeout::max(), serial_time_out_, serial_time_out_, serial_time_out_, serial_time_out_);
@@ -177,7 +177,7 @@ void ArtiHardware::odomLoop()
 	}
 }
 
-void ArtiHardware::printOdom(const DiffOdom& odom)
+void ArtiHardware::printOdom(const arti_msgs::DiffOdom& odom)
 {
 	std::cout << "left travel: " << odom.left_travel << " right travel: " <<
 	          odom.right_travel << " left speed: " << odom.left_speed << " right speed:" << odom.right_speed
@@ -186,7 +186,7 @@ void ArtiHardware::printOdom(const DiffOdom& odom)
 
 void ArtiHardware::processOdom(const int& left, const int& right)
 {
-	DiffOdom odom;
+	arti_msgs::DiffOdom odom;
 	odom.left_travel = left * wheel_multiplier_;
 	odom.right_travel = right * wheel_multiplier_;
 	odom.header.stamp = ros::Time::now();
@@ -317,6 +317,25 @@ void ArtiHardware::sendMotorCmd(const double& left, const double right)
 
 }
 
+void ArtiHardware::thresholdVelocity()
+{
+	if (cmd_left_ > maximum_vel_) {
+		cmd_left_ = maximum_vel_;
+	}
+
+	if (cmd_left_ < -maximum_vel_) {
+		cmd_left_ = -maximum_vel_;
+	}
+
+	if (cmd_right_ > maximum_vel_) {
+		cmd_right_ = maximum_vel_;
+	}
+
+	if (cmd_right_ < -maximum_vel_) {
+		cmd_right_ = -maximum_vel_;
+	}
+}
+
 /**
  * @brief      { function_description }
  *
@@ -330,6 +349,17 @@ void ArtiHardware::cmdVelCallback(const geometry_msgs::Twist::ConstPtr& msg)
 	cmd_time_ = ros::Time::now();
 }
 
+void ArtiHardware::diffCmdCallback(const arti_msgs::DiffCmd::ConstPtr& msg)
+{
+	ROS_INFO_ONCE("Arti Hardware Get Diff Command");
+	// diffToLR(msg->linear.x, msg->angular.z, cmd_left_, cmd_right_);
+	cmd_left_ = msg->left;
+	cmd_right_ = msg->right;
+	thresholdVelocity();
+	cmd_time_ = ros::Time::now();
+}
+
+
 void ArtiHardware::diffToLR(const double& vx, const double& wz, double& left, double& right)
 {
 	left = ( vx - body_width_ / 2 * wz ) * 127;
@@ -338,7 +368,7 @@ void ArtiHardware::diffToLR(const double& vx, const double& wz, double& left, do
 
 }  // namespace arti_hadware
 
-// #include "controller_manager/controller_manager.h"
+#include "controller_manager/controller_manager.h"
 int main(int argc, char *argv[])
 {
 	ros::init(argc, argv, "arti_base");
