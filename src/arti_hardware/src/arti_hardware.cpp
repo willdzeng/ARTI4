@@ -133,17 +133,20 @@ void ArtiHardware::odomLoop()
 	unsigned char token[1];
 	while (nh_.ok()) {
 
-		if (serial_->available() && serial_->isOpen()) {
+		if (serial_->available()) {
 			try
 			{
 				tmpStr = serial_->readline(20, "ODOMS,");
-				dataStr = serial_->readline(20, "ODOME\n");
-				if (flip_lr_) {
-					parseOdomStr(dataStr, left, right);
-				} else {
-					parseOdomStr(dataStr, right, left);
+				if (!tmpStr.empty()) {
+					if (tmpStr.back() == ',') {
+						dataStr = serial_->readline(20, "ODOME\n");
+						if (flip_lr_) {
+							parseOdomStr(dataStr, left, right);
+						} else {
+							parseOdomStr(dataStr, right, left);
+						}
+					}
 				}
-
 			}
 			catch (serial::SerialException ex) //No data received
 			{
@@ -178,21 +181,33 @@ void ArtiHardware::processOdom(const int& left, const int& right)
 	diff_odom.left_travel = left * wheel_multiplier_ * odom_bias_;
 	diff_odom.right_travel = right * wheel_multiplier_;
 	diff_odom.header.stamp = ros::Time::now();
+	double dl, dr;
+	double dvx, dwz;
+	double dt = 0;
 	// if there is not enough data in the stack add it to the queue
 	if (diff_odom_queue_.size() == odom_window_) {
-		double time_inter = (diff_odom.header.stamp - diff_odom_queue_.front().header.stamp).toSec();
-		// std::cout << time_inter << std::endl;
-		diff_odom.left_speed = (diff_odom.left_travel - diff_odom_queue_.front().left_travel) / time_inter;
-		diff_odom.right_speed = (diff_odom.right_travel - diff_odom_queue_.front().right_travel) / time_inter;
+		dt = (diff_odom.header.stamp - diff_odom_queue_.front().header.stamp).toSec();
+		if (dt < 0.00001) {
+			return;
+		}
+		// std::cout << dt << std::endl;
+		dl = diff_odom.left_travel - diff_odom_old_.left_travel;
+		dr = diff_odom.right_travel - diff_odom_old_.right_travel;
+		diff_odom.left_speed =  (diff_odom.left_travel - diff_odom_queue_.front().left_travel) / dt;
+		diff_odom.right_speed = (diff_odom.right_travel - diff_odom_queue_.front().right_travel) / dt;
 		diff_odom_queue_.pop();
 	}
 	vl_ = diff_odom.left_speed;
 	vr_ = diff_odom.right_speed;
+	diff_odom_old_ = diff_odom;
 	diff_odom_queue_.push(diff_odom);
+	// std::cout << diff_odom_queue_.size() << std::endl;
 	diff_odom_pub_.publish(diff_odom);
-
+	// pose estiamtion and publish the odometry
+	LRtoDiff(dl, dr, dvx, dwz);
+	// std::cout << dl << " " << dr << std::endl;
 	LRtoDiff(vl_, vr_, vx_, wz_);
-	integrateExact(vx_, wz_);
+	integrateExact(dvx, dwz);
 	nav_msgs::Odometry odom;
 	odom.header.stamp = ros::Time::now();
 	odom.header.frame_id = "odom";
@@ -297,7 +312,7 @@ void ArtiHardware::diffCmdCallback(const arti_msgs::DiffCmd::ConstPtr& msg)
 }
 
 
-void ArtiHardware::integrateRungeKutta2(double linear, double angular)
+void ArtiHardware::integrateRungeKutta2(const double& linear, const double& angular)
 {
 	const double direction = theta_ + angular * 0.5;
 
@@ -312,7 +327,7 @@ void ArtiHardware::integrateRungeKutta2(double linear, double angular)
  * \param linear
  * \param angular
  */
-void ArtiHardware::integrateExact(double linear, double angular)
+void ArtiHardware::integrateExact(const double& linear, const double& angular)
 {
 	if (fabs(angular) < 1e-6)
 		integrateRungeKutta2(linear, angular);

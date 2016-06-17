@@ -73,15 +73,18 @@ void ArtiControl::straightLineControl()
 		arti_msgs::DiffOdom* back_odom, *front_odom;
 		back_odom = &odom_queue_.back();
 		front_odom = &odom_queue_.front();
-
-		double vp = kp_ * ( back_odom->left_travel - back_odom->right_travel - odom_diff_);
-		double vd = kd_ * ( (back_odom->left_travel - back_odom->right_travel)
-		                    - (front_odom->left_travel - front_odom->right_travel));
-
-		left_cmd_ -= (vp + vd);
-		left_cmd_ += ki_ * (target_forward_vel_ - left_cmd_);
-		right_cmd_ += (vp + vd);
-		right_cmd_ += ki_ * (target_forward_vel_ - right_cmd_);
+		double dt = (back_odom->header.stamp - front_odom->header.stamp).toSec();
+		double dp = (back_odom->left_travel - back_odom->right_travel - odom_diff_);
+		double dd = ( (back_odom->left_travel - back_odom->right_travel)
+		              - (front_odom->left_travel - front_odom->right_travel)) / dt;
+		double vp = kp_ * dp;
+		double vd = kd_ * dd;
+		// left_cmd_ -= (vp + vd);
+		// left_cmd_ += ki_ * (target_forward_vel_ - left_cmd_);
+		// right_cmd_ += (vp + vd);
+		// right_cmd_ += ki_ * (target_forward_vel_ - right_cmd_);
+		left_cmd_ = target_forward_vel_ - vp - vd;
+		right_cmd_ = target_forward_vel_ + vp + vd;
 
 		if (left_cmd_ > maximum_vel_) {
 			left_cmd_ = maximum_vel_;
@@ -99,7 +102,7 @@ void ArtiControl::straightLineControl()
 			right_cmd_ = -maximum_vel_;
 		}
 
-		std::cout << "kp:" << vp << " kd:" << vd << " left: " << left_cmd_ << " right: " << right_cmd_ << std::endl;
+		std::cout << "kp:" << vp << " kd:" << vd << " dp:" << dp << " dd:" << dd << " left: " << left_cmd_ << " right: " << right_cmd_ << std::endl;
 	}
 
 }

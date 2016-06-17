@@ -36,7 +36,7 @@ private:
 	boost::mutex serial_mutex_;
 	std::queue<arti_msgs::DiffOdom> diff_odom_queue_;
 	int odom_window_;
-	ros::Publisher diff_odom_pub_,odom_pub_;
+	ros::Publisher diff_odom_pub_, odom_pub_;
 	double wheel_multiplier_;
 	double maximum_vel_;
 	double odom_bias_;
@@ -44,6 +44,7 @@ private:
 	double px_, py_, theta_;
 	double vx_, wz_;
 	double vl_, vr_;
+	arti_msgs::DiffOdom diff_odom_old_;
 
 public:
 	ArtiHardware(ros::NodeHandle nh, ros::NodeHandle private_nh);
@@ -58,8 +59,8 @@ public:
 	void processOdom(const int& left, const int& right);
 	void diffCmdCallback(const arti_msgs::DiffCmd::ConstPtr& msg);
 	void thresholdVelocity();
-	void integrateRungeKutta2(double linear, double angular);
-	void integrateExact(double linear, double angular);
+	void integrateRungeKutta2(const double& linear, const double& angular);
+	void integrateExact(const double& linear, const double& angular);
 	void diffToLR(const double& vx, const double& wz, double& vl, double& vr);
 	void LRtoDiff(const double& vl, const double& vr, double& vx, double& wz);
 	void setPose(const double&x, const double& y, const double& theta);
