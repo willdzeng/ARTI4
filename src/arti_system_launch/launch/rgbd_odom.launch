@@ -33,7 +33,7 @@
   <arg name="subscribe_scan_cloud"    default="false"/>
   <!-- Assuming 3D scan if set -->
   <arg name="scan_cloud_topic"        default="/scan_cloud"/>
-  <arg name="visual_odometry"         default="false"/>
+  <arg name="visual_odometry"         default="true"/>
   <!-- Generate visual odometry -->
   <arg name="odom_topic"              default="/odom"/>
   <!-- Odometry topic used if visual_odometry is false -->
