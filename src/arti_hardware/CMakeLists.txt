@@ -12,6 +12,8 @@ find_package(catkin REQUIRED
             arti_msgs
             # libserial
             nav_msgs
+            realtime_tools
+            tf
         )
 set(CMAKE_CXX_FLAGS "-std=c++0x ${CMAKE_CXX_FLAGS}")
 

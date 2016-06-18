@@ -6,9 +6,15 @@
 #include <ros/ros.h>
 #include <boost/thread.hpp>
 #include <boost/asio.hpp>
+#include <boost/assign.hpp>
 #include <arti_msgs/DiffOdom.h>
 #include <arti_msgs/DiffCmd.h>
 #include <nav_msgs/Odometry.h>
+#include <realtime_tools/realtime_buffer.h>
+#include <realtime_tools/realtime_publisher.h>
+#include <tf/tfMessage.h>
+#include <tf/transform_datatypes.h>
+
 // #include <SerialStream.h>
 
 namespace arti_hardware
@@ -20,6 +26,7 @@ private:
 	serial::Serial* serial_;
 	// boost::asio::serial_port* serial_;
 	std::string port_;
+	std::string base_frame_id_;
 	double body_width_;
 	ros::Subscriber cmd_sub_, diff_cmd_sub_;
 	char cmd_[10];
@@ -44,7 +51,9 @@ private:
 	double px_, py_, theta_;
 	double vx_, wz_;
 	double vl_, vr_;
+
 	arti_msgs::DiffOdom diff_odom_old_;
+	boost::shared_ptr<realtime_tools::RealtimePublisher<tf::tfMessage> > tf_odom_pub_;
 
 public:
 	ArtiHardware(ros::NodeHandle nh, ros::NodeHandle private_nh);
@@ -64,6 +73,7 @@ public:
 	void diffToLR(const double& vx, const double& wz, double& vl, double& vr);
 	void LRtoDiff(const double& vl, const double& vr, double& vx, double& wz);
 	void setPose(const double&x, const double& y, const double& theta);
+	void publishOdomTF();
 };
 
 }

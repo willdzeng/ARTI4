@@ -21,6 +21,7 @@ ArtiHardware::ArtiHardware(ros::NodeHandle nh, ros::NodeHandle private_nh): nh_(
 	private_nh.param("odom_bias", odom_bias_, 1.0);
 	private_nh.param("maximum_vel", maximum_vel_, 1.0);
 	private_nh.param("flip_lr", flip_lr_, false);
+	private_nh.param("base_frame_id", base_frame_id_, std::string("base_link"));
 
 	ROS_INFO("Arti Hardware got port %s", port_.c_str());
 	ROS_INFO("Set Serial Timeout %d ms", serial_time_out_);
@@ -33,6 +34,11 @@ ArtiHardware::ArtiHardware(ros::NodeHandle nh, ros::NodeHandle private_nh): nh_(
 	serial_ = new serial::Serial(port_, baud_rate_, to, serial::eightbits, serial::parity_none, serial::stopbits_one, serial::flowcontrol_none);
 	diff_odom_pub_ = nh.advertise<arti_msgs::DiffOdom>("/diff_odom", 1);
 	odom_pub_ = nh.advertise<nav_msgs::Odometry>("odom", 1);
+	tf_odom_pub_.reset(new realtime_tools::RealtimePublisher<tf::tfMessage>(nh_, "/tf", 100));
+	tf_odom_pub_->msg_.transforms.resize(1);
+    tf_odom_pub_->msg_.transforms[0].transform.translation.z = 0.0;
+    tf_odom_pub_->msg_.transforms[0].child_frame_id = base_frame_id_;
+    tf_odom_pub_->msg_.transforms[0].header.frame_id = "odom";
 
 	ros::Duration(2).sleep();
 
@@ -122,6 +128,16 @@ void ArtiHardware::controlLoop()
 	}
 }
 
+void ArtiHardware::publishOdomTF()
+{
+	geometry_msgs::TransformStamped& odom_frame = tf_odom_pub_->msg_.transforms[0];
+	odom_frame.header.stamp = ros::Time::now();
+	odom_frame.transform.translation.x = px_;
+	odom_frame.transform.translation.y = py_;
+	odom_frame.transform.rotation = tf::createQuaternionMsgFromYaw(theta_);
+	tf_odom_pub_->unlockAndPublish();
+}
+
 void ArtiHardware::odomLoop()
 {
 	ROS_INFO_ONCE("Start to publish odom");
@@ -160,6 +176,7 @@ void ArtiHardware::odomLoop()
 			}
 		}
 		processOdom(left, right);
+		publishOdomTF();
 
 		dataStr = "";
 		tmpStr = "";
