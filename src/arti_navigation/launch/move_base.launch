@@ -1,0 +1,41 @@
+<group ns="planner">
+   <remap from="openni_points" to="/planner_cloud"/>
+   <remap from="map" to="/map"/>
+   <remap from="move_base_simple/goal" to="/planner_goal"/>
+   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+      <rosparam file="costmap_common_params.yaml" command="load" ns="global_costmap" />
+      <rosparam file="costmap_common_params.yaml" command="load" ns="local_costmap" />
+      <rosparam file="local_costmap_params.yaml" command="load" />
+      <rosparam file="global_costmap_params.yaml" command="load" />
+      <rosparam file="base_local_planner_params.yaml" command="load" />
+   </node>
+</group>
+
+<group ns="rtabmap">
+   <node pkg="rtabmap_ros" type="map_assembler" name="map_assembler">
+      <param name="occupancy_grid" type="bool" value="true"/>
+      <remap from="mapData" to="mapData_optimized"/>
+      <remap from="grid_projection_map" to="/map"/>
+   </node>
+</group>
+
+<group ns="stereo_camera" >
+   <!-- Generate a point cloud from the disparity image -->
+   <node pkg="nodelet" type="nodelet" name="disparity2cloud" args="load rtabmap_ros/point_cloud_xyz stereo_nodelet">
+      <remap from="disparity/image"          to="disparity"/>
+      <remap from="disparity/camera_info"    to="right/camera_info_throttle"/>
+      <remap from="cloud"                    to="cloudXYZ"/>
+      <param name="voxel_size" type="double" value="0.05"/>
+      <param name="decimation" type="int"    value="4"/>
+      <param name="max_depth"  type="double" value="4"/>
+   </node>
+   <!-- Create point cloud for the local planner -->
+   <node pkg="nodelet" type="nodelet" name="obstacles_detection" args="load rtabmap_ros/obstacles_detection stereo_nodelet">
+      <remap from="cloud"                to="cloudXYZ"/>
+      <remap from="obstacles"            to="/planner_cloud"/>
+      <param name="frame_id"             type="string" value="base_footprint"/>
+      <param name="map_frame_id"         type="string" value="map"/>
+      <param name="min_cluster_size"     type="int" value="20"/>
+      <param name="max_obstacles_height" type="double" value="0.0"/>
+   </node>
+</group>
