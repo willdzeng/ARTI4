@@ -28,7 +28,7 @@
   <arg name="depth_registered_topic"  default="/camera/depth/image_rect_color" />
   <arg name="camera_info_topic"       default="/camera/rgb/camera_info" />
   <arg name="compressed"              default="false"/>
-  <arg name="convert_depth_to_mm"     default="false"/>
+  <arg name="convert_depth_to_mm"     default="true"/>
   <arg name="subscribe_scan"          default="false"/>
   <!-- Assuming 2D scan if set, rtabmap will do 3DoF mapping instead of 6DoF -->
   <arg name="scan_topic"              default="/scan"/>
@@ -37,7 +37,7 @@
   <arg name="scan_cloud_topic"        default="/scan_cloud"/>
   <arg name="visual_odometry"         default="true"/>
   <!-- Generate visual odometry -->
-  <arg name="odom_topic"              default="/odom"/>
+  <arg name="odom_topic"              default="odom"/>
   <!-- Odometry topic used if visual_odometry is false -->
   <arg name="namespace"               default="rtabmap"/>
   <arg name="wait_for_transform"      default="0.2"/>
@@ -51,8 +51,9 @@
       <remap from="depth/image"     to="$(arg depth_registered_topic)"/>
       <remap from="rgb/camera_info" to="$(arg camera_info_topic)"/>
       <param name="frame_id"                    type="string" value="$(arg frame_id)"/>
-      <param name="wait_for_transform_duration" type="double"   value="$(arg wait_for_transform)"/>
+      <param name="wait_for_transform_duration" type="double" value="$(arg wait_for_transform)"/>
       <param name="Odom/FillInfoData"           type="string" value="true"/>
+      <param name="publish_tf"                                value="true"/>
     </node>
     <!-- Visual SLAM (robot side) -->
     <node name="rtabmap" pkg="rtabmap_ros" type="rtabmap" output="screen" args="$(arg rtabmap_args)" launch-prefix="$(arg launch_prefix)">
@@ -121,7 +122,8 @@
     <remap from="depth/image"     to="data_odom_sync/depth"/>
     <remap from="rgb/camera_info" to="data_odom_sync/camera_info"/>
     <remap from="cloud"           to="voxel_cloud" />
-    <param name="decimation" type="double" value="4"/>
+    <param name="decimation" type="double" value="2"/>
     <param name="voxel_size" type="double" value="0.02"/>
+    <param name="max_depth" type="double" value="15.0"/>
   </node>
 </launch>

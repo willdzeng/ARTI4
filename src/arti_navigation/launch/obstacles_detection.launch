@@ -1,0 +1,23 @@
+<launch>
+  <group ns="camera">
+    <node pkg="nodelet" type="nodelet" name="obstacle_detection_nodelet"  args="manager"/>
+    <node pkg="nodelet" type="nodelet" name="points_xyz_planner" args="load rtabmap_ros/point_cloud_xyz obstacle_detection_nodelet">
+      <remap from="depth/image"            to="/camera/depth/image_rect_color"/>
+      <remap from="depth/camera_info"      to="/camera/depth/camera_info"/>
+      <remap from="cloud"                  to="/cloudXYZ" />
+      <param name="decimation" type="int" value="2"/>
+      <param name="max_depth"  type="double" value="3.0"/>
+      <param name="voxel_size" type="double" value="0.02"/>
+    </node>
+    <node pkg="nodelet" type="nodelet" name="obstacles_detection" args="load rtabmap_ros/obstacles_detection obstacle_detection_nodelet">
+      <remap from="cloud"     to="/cloudXYZ"/>
+      <remap from="obstacles" to="/obstacles_cloud"/>
+      <remap from="ground"    to="/ground_cloud"/>
+      <param name="frame_id"             type="string" value="/base_link"/>
+      <param name="map_frame_id"         type="string" value="map"/>
+      <param name="wait_for_transform"   type="bool" value="true"/>
+      <param name="min_cluster_size"     type="int" value="20"/>
+      <param name="max_obstacles_height" type="double" value="0.4"/>
+    </node>
+  </group>
+</launch>

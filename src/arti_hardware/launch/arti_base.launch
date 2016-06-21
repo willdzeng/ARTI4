@@ -13,6 +13,7 @@
     <param name="wheel_multiplier" value="-0.0145"/>
     <param name="cmd_from_hardware" value="true"/>
     <param name="flip_lr" value="false"/>
+    <param name="publish_tf" value="false"/>
     <param name="odom_bias" value="0.98"/>
   </node>
 

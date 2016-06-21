@@ -7,10 +7,10 @@ transform_tolerance: 2
 obstacle_layer:
   obstacle_range: 2.5
   raytrace_range: 3
-  max_obstacle_height: 0.4
+  max_obstacle_height: 5
   track_unknown_space: true
 
-  observation_sources: laser_scan_sensor point_cloud_sensorA point_cloud_sensorB
+  observation_sources: point_cloud_sensorA point_cloud_sensorB
 
   laser_scan_sensor: {
     data_type: LaserScan,
@@ -21,7 +21,7 @@ obstacle_layer:
   }
 
   point_cloud_sensorA: {
-    sensor_frame: base_footprint,
+    sensor_frame: base_link,
     data_type: PointCloud2,
     topic: obstacles_cloud,
     expected_update_rate: 0.5,
@@ -31,7 +31,7 @@ obstacle_layer:
   }
 
   point_cloud_sensorB: {
-    sensor_frame: base_footprint,
+    sensor_frame: base_link,
     data_type: PointCloud2,
     topic: ground_cloud,
     expected_update_rate: 0.5,

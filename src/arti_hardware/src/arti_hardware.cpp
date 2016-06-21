@@ -21,6 +21,7 @@ ArtiHardware::ArtiHardware(ros::NodeHandle nh, ros::NodeHandle private_nh): nh_(
 	private_nh.param("odom_bias", odom_bias_, 1.0);
 	private_nh.param("maximum_vel", maximum_vel_, 1.0);
 	private_nh.param("flip_lr", flip_lr_, false);
+	private_nh.param("publish_tf", publish_tf_, false);
 	private_nh.param("base_frame_id", base_frame_id_, std::string("base_link"));
 
 	ROS_INFO("Arti Hardware got port %s", port_.c_str());
@@ -176,7 +177,10 @@ void ArtiHardware::odomLoop()
 			}
 		}
 		processOdom(left, right);
-		publishOdomTF();
+		if (publish_tf_){
+			publishOdomTF();
+		}
+		
 
 		dataStr = "";
 		tmpStr = "";

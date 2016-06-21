@@ -19,7 +19,7 @@ obstacle_layer:
   max_obstacle_height: 0.4
   track_unknown_space: true
  
-  observation_sources: laser_scan_sensor point_cloud_sensorA point_cloud_sensorB
+  observation_sources: point_cloud_sensorA point_cloud_sensorB
 
   laser_scan_sensor: {
     data_type: LaserScan, 

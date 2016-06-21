@@ -47,7 +47,7 @@ private:
 	double wheel_multiplier_;
 	double maximum_vel_;
 	double odom_bias_;
-	bool flip_lr_;
+	bool flip_lr_, publish_tf_;
 	double px_, py_, theta_;
 	double vx_, wz_;
 	double vl_, vr_;
