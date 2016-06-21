@@ -6,6 +6,7 @@ find_package(catkin REQUIRED
             cmake_modules
             roscpp
             arti_msgs
+            geometry_msgs
         )
 
 # find_package(Eigen REQUIRED)
@@ -26,19 +27,20 @@ include_directories(
 add_definitions(${EIGEN_DEFINITIONS})
 link_directories(${catkin_LIBRARY_DIRS})
 
-# add_library(arti_navigation src/arti_navigation.cpp)
-# target_link_libraries(arti_navigation ${libserial_LIBRARIES} ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-# add_dependencies(arti_navigation arti_msgs_gencpp geometry_msgs_gencpp)
+add_library(arti_goal_publisher src/arti_goal_publisher.cpp)
+target_link_libraries(arti_goal_publisher ${libserial_LIBRARIES} ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+add_dependencies(arti_goal_publisher arti_msgs_gencpp geometry_msgs_gencpp)
 
-# add_executable(arti_control_node src/arti_navigation.cpp)
-# target_link_libraries(arti_control_node arti_navigation ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+add_executable(arti_goal_publisher_node src/arti_goal_publisher.cpp)
+target_link_libraries(arti_goal_publisher_node arti_goal_publisher ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 
 
-# install(TARGETS
-#        ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-#        LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-#        RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-#        )
+install(TARGETS
+    arti_goal_publisher_node
+       ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+       LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+       RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+       )
 
 # ## Mark cpp header files for installation
 # install(DIRECTORY include/${PROJECT_NAME}/
