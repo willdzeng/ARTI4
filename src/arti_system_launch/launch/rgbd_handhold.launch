@@ -85,6 +85,15 @@
       <param if="$(arg subscribe_scan)" name="Reg/Force3DoF"           type="string" value="true"/>
       <!-- when 3D scan is set -->
       <param if="$(arg subscribe_scan_cloud)" name="Reg/Strategy"      type="string" value="1"/>
+      <!-- Proj map parameters-->
+      <param name="grid_cell_size" value="0.05"/>
+      <param name="grid_size" value="50"/>
+      <param name="grid_eroded" value="false"/>
+      <param name="grid_unknown_space_filled" value="false"/>
+      <param name="proj_max_ground_angle" value="45"/>
+      <param name="proj_min_cluster_size" value="30"/>
+      <param name="proj_max_height" value="2.0"/>
+
     </node>
     <!-- Visualisation RTAB-Map -->
     <node if="$(arg rtabmapviz)" pkg="rtabmap_ros" type="rtabmapviz" name="rtabmapviz" args="$(arg rtabmapviz_cfg)" output="screen" launch-prefix="$(arg launch_prefix)">
@@ -100,7 +109,6 @@
       <remap from="scan"            to="$(arg scan_topic)"/>
       <remap from="scan_cloud"      to="$(arg scan_cloud_topic)"/>
       <remap unless="$(arg visual_odometry)" from="odom"  to="$(arg odom_topic)"/>
-      <param name="grid_size" type="double" value="50.0"/>
     </node>
   </group>
   <!-- Visualization RVIZ -->
