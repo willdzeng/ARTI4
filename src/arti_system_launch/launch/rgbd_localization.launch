@@ -18,7 +18,7 @@
   <arg name="optimize_from_last_node" default="false"/>
   <!-- Optimize the map from the last node. Should be true on multi-session mapping and when time threshold is set -->
   <arg name="database_path"           default="~/.ros/rtabmap.db"/>
-  <arg name="rtabmap_args"            default="--delete_db_on_start --Vis/EstimationType 0"/>
+  <arg name="rtabmap_args"            default="--Vis/EstimationType 0"/>
   <!-- delete_db_on_start, udebug -->
   <arg name="launch_prefix"           default=""/>
   <!-- for debugging purpose, it fills launch-prefix tag of the nodes -->
