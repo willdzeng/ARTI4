@@ -11,7 +11,7 @@
   <!-- Corresponding config files -->
   <arg name="rtabmapviz_cfg"          default="-d $(find rtabmap_ros)/launch/config/rgbd_gui.ini" />
   <arg name="rviz_cfg"                default="-d $(find rtabmap_ros)/launch/config/rgbd.rviz" />
-  <arg name="frame_id"                default="base_link"/>
+  <arg name="frame_id"                default="/base_link"/>
   <!-- Fixed frame id, you may set "base_link" or "base_footprint" if they are published -->
   <arg name="time_threshold"          default="0"/>
   <!-- (ms) If not 0 ms, memory management is used to keep processing time on this fixed limit. -->
@@ -28,7 +28,7 @@
   <arg name="depth_registered_topic"  default="/camera/depth/image_rect_color" />
   <arg name="camera_info_topic"       default="/camera/rgb/camera_info" />
   <arg name="compressed"              default="false"/>
-  <arg name="convert_depth_to_mm"     default="true"/>
+  <arg name="convert_depth_to_mm"     default="false"/>
   <arg name="subscribe_scan"          default="false"/>
   <!-- Assuming 2D scan if set, rtabmap will do 3DoF mapping instead of 6DoF -->
   <arg name="scan_topic"              default="/scan"/>
@@ -92,7 +92,7 @@
       <param name="grid_unknown_space_filled" value="false"/>
       <param name="proj_max_ground_angle" value="45"/>
       <param name="proj_min_cluster_size" value="30"/>
-      <param name="proj_max_height" value="2.0"/>
+      <param name="proj_max_obstacles_height" value="1"/>
 
     </node>
     <!-- Visualisation RTAB-Map -->

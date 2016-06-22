@@ -11,11 +11,13 @@
   <!-- Corresponding config files -->
   <arg name="rtabmapviz_cfg"          default="-d $(find rtabmap_ros)/launch/config/rgbd_gui.ini" />
   <arg name="rviz_cfg"                default="-d $(find rtabmap_ros)/launch/config/rgbd.rviz" />
-  <arg name="frame_id"                default="camera_link"/>
+  <arg name="frame_id"                default="/base_link"/>
   <!-- Fixed frame id, you may set "base_link" or "base_footprint" if they are published -->
   <arg name="time_threshold"          default="0"/>
   <!-- (ms) If not 0 ms, memory management is used to keep processing time on this fixed limit. -->
   <arg name="optimize_from_last_node" default="false"/>
+  <arg name="optimize_robust"         default="false"/>
+  <arg name="optimize_mode"          default="2"/> <!-- g2o=1, GTSAM=2 -->
   <!-- Optimize the map from the last node. Should be true on multi-session mapping and when time threshold is set -->
   <arg name="database_path"           default="~/.ros/rtabmap.db"/>
   <arg name="rtabmap_args"            default="--Vis/EstimationType 0"/>
@@ -26,7 +28,7 @@
   <arg name="depth_registered_topic"  default="/camera/depth/image_rect_color" />
   <arg name="camera_info_topic"       default="/camera/rgb/camera_info" />
   <arg name="compressed"              default="false"/>
-  <arg name="convert_depth_to_mm"     default="false"/>
+  <arg name="convert_depth_to_mm"     default="true"/>
   <arg name="subscribe_scan"          default="false"/>
   <!-- Assuming 2D scan if set, rtabmap will do 3DoF mapping instead of 6DoF -->
   <arg name="scan_topic"              default="/scan"/>
@@ -35,7 +37,7 @@
   <arg name="scan_cloud_topic"        default="/scan_cloud"/>
   <arg name="visual_odometry"         default="true"/>
   <!-- Generate visual odometry -->
-  <arg name="odom_topic"              default="/odom"/>
+  <arg name="odom_topic"              default="odom"/>
   <!-- Odometry topic used if visual_odometry is false -->
   <arg name="namespace"               default="rtabmap"/>
   <arg name="wait_for_transform"      default="0.2"/>
@@ -49,8 +51,9 @@
       <remap from="depth/image"     to="$(arg depth_registered_topic)"/>
       <remap from="rgb/camera_info" to="$(arg camera_info_topic)"/>
       <param name="frame_id"                    type="string" value="$(arg frame_id)"/>
-      <param name="wait_for_transform_duration" type="double"   value="$(arg wait_for_transform)"/>
+      <param name="wait_for_transform_duration" type="double" value="$(arg wait_for_transform)"/>
       <param name="Odom/FillInfoData"           type="string" value="true"/>
+      <param name="publish_tf"                                value="true"/>
     </node>
     <!-- Visual SLAM (robot side) -->
     <node name="rtabmap" pkg="rtabmap_ros" type="rtabmap" output="screen" args="$(arg rtabmap_args)" launch-prefix="$(arg launch_prefix)">
@@ -68,6 +71,8 @@
       <remap unless="$(arg visual_odometry)" from="odom"  to="$(arg odom_topic)"/>
       <param name="Rtabmap/TimeThr"              type="string" value="$(arg time_threshold)"/>
       <param name="RGBD/OptimizeFromGraphEnd"    type="string" value="$(arg optimize_from_last_node)"/>
+      <param if="$(arg optimize_robust)" name="RGBD/OptimizeStrategy" type="string" value="$(arg optimize_mode)"/> 
+      <param if="$(arg optimize_robust)" name="RGBD/OptimizeRobust" type="string" value="true"/>
       <param name="Mem/SaveDepth16Format"        type="string" value="$(arg convert_depth_to_mm)"/>
       <!-- localization mode -->
       <param     if="$(arg localization)" name="Mem/IncrementalMemory" type="string" value="false"/>
@@ -80,6 +85,15 @@
       <param if="$(arg subscribe_scan)" name="Reg/Force3DoF"           type="string" value="true"/>
       <!-- when 3D scan is set -->
       <param if="$(arg subscribe_scan_cloud)" name="Reg/Strategy"      type="string" value="1"/>
+      <!-- Proj map parameters-->
+      <param name="grid_cell_size" value="0.05"/>
+      <param name="grid_size" value="50"/>
+      <param name="grid_eroded" value="false"/>
+      <param name="grid_unknown_space_filled" value="false"/>
+      <param name="proj_max_ground_angle" value="45"/>
+      <param name="proj_min_cluster_size" value="30"/>
+      <param name="proj_max_height" value="2.0"/>
+
     </node>
     <!-- Visualisation RTAB-Map -->
     <node if="$(arg rtabmapviz)" pkg="rtabmap_ros" type="rtabmapviz" name="rtabmapviz" args="$(arg rtabmapviz_cfg)" output="screen" launch-prefix="$(arg launch_prefix)">
@@ -117,7 +131,8 @@
     <remap from="depth/image"     to="data_odom_sync/depth"/>
     <remap from="rgb/camera_info" to="data_odom_sync/camera_info"/>
     <remap from="cloud"           to="voxel_cloud" />
-    <param name="decimation" type="double" value="4"/>
+    <param name="decimation" type="double" value="2"/>
     <param name="voxel_size" type="double" value="0.02"/>
+    <param name="max_depth" type="double" value="15.0"/>
   </node>
 </launch>
