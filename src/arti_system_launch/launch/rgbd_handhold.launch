@@ -71,6 +71,7 @@
       <!-- Optical flow may give more matches, but less robust correspondences -->
       <param name="Vis/CorType" type="string" value="0"/>
       <param name="Vis/EstimationType" value="0"/>
+      
     </node>
     <!-- Visual SLAM (robot side) -->
     <node name="rtabmap" pkg="rtabmap_ros" type="rtabmap" output="screen" args="$(arg rtabmap_args)" launch-prefix="$(arg launch_prefix)">
@@ -110,6 +111,8 @@
       <param name="proj_max_ground_angle" value="45"/>
       <param name="proj_min_cluster_size" value="30"/>
       <param name="proj_max_obstacles_height" value="1"/>
+      <param name="cloud_noise_filtering_radius" value="0.05"/>
+      <param name="cloud_noise_filtering_min_neighbors" value="2"/>
     </node>
     <!-- Visualisation RTAB-Map -->
     <node if="$(arg rtabmapviz)" pkg="rtabmap_ros" type="rtabmapviz" name="rtabmapviz" args="$(arg rtabmapviz_cfg)" output="screen" launch-prefix="$(arg launch_prefix)">

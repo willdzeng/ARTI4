@@ -7,7 +7,8 @@ Panels:
         - /Global Options1
         - /Status1
         - /Grid1
-        - /Global Costmap1/Status1
+        - /Teb_Local_Path1
+        - /TrajROS_local_path1
       Splitter Ratio: 0.448819
     Tree Height: 775
   - Class: rviz/Selection
@@ -116,6 +117,41 @@ Visualization Manager:
       Shape: Arrow
       Topic: /planner/move_base/current_goal
       Value: true
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz/Path
+      Color: 255; 0; 0
+      Enabled: true
+      Line Style: Lines
+      Line Width: 0.03
+      Name: Teb_Local_Path
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Topic: /planner/move_base/TebLocalPlannerROS/local_plan
+      Value: true
+    - Alpha: 1
+      Class: rviz/Polygon
+      Color: 25; 255; 0
+      Enabled: true
+      Name: Robot Foot Print
+      Topic: /planner/move_base/local_costmap/footprint
+      Value: true
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz/Path
+      Color: 255; 0; 0
+      Enabled: true
+      Line Style: Lines
+      Line Width: 0.03
+      Name: TrajROS_local_path
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Topic: /planner/move_base/TrajectoryPlannerROS/local_plan
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -140,22 +176,22 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 25.9559
+      Distance: 20.7918
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.06
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.771498
-        Y: -1.39323
-        Z: -0.0242483
+        X: -0.851072
+        Y: -4.78594
+        Z: 0.0286429
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 1.5398
+      Pitch: 1.5648
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 3.1654
+      Yaw: 1.8654
     Saved: ~
 Window Geometry:
   Displays:
@@ -174,4 +210,4 @@ Window Geometry:
     collapsed: false
   Width: 1855
   X: 65
-  Y: 52
+  Y: 24

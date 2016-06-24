@@ -8,9 +8,9 @@
 
   <!-- <node pkg="tf" type="static_transform_publisher" name="$(arg camera)_base_link1" args="0 0 0 0 0 0 1 map $(arg tf_prefix)/$(arg camera)_initial_frame 100" /> -->
   <node pkg="tf" type="static_transform_publisher" name="static_tf_1" 
-  	args="0.05 0 0.025 0 0 0 1 base_link /$(arg camera)_camera_link 100" />
+  	args="0.05 0 0.025 0 0 0 1 base_link /$(arg camera)_camera_link 30" />
 
-  <node pkg="tf" type="static_transform_publisher" name="static_tf_2" args="$(arg optical_rotate) /$(arg camera)_camera_link /$(arg camera)_optical_frame 100" />
+  <node pkg="tf" type="static_transform_publisher" name="static_tf_2" args="$(arg optical_rotate) /$(arg camera)_camera_link /$(arg camera)_optical_frame 30" />
 
 <!-- 	<node pkg="tf" type="static_transform_publisher" name="base_link_to_camera_link"
     args="-0.05 0 -0.025 0 0 0 camera_link base_link 100" /> -->

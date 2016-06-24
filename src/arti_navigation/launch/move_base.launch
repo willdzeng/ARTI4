@@ -1,6 +1,9 @@
 <launch>
   <arg name="base_global_planner" default="navfn/NavfnROS"/>
-  <arg name="base_local_planner" default="dwa_local_planner/DWAPlannerROS"/>
+  <!-- <arg name="base_local_planner" default="dwa_local_planner/DWAPlannerROS"/> -->
+  <!-- <arg name="base_local_planner" default="teb_local_planner/TebLocalPlannerROS" /> -->
+  <arg name="base_local_planner" default="base_local_planner/TrajectoryPlannerROS" />
+    <param name="controller_frequency" value="10.0" />
   <remap from="cmd_vel" to="/cmd_vel"/>
   <!-- <arg name="base_local_planner" default="dwa_local_planner/TrajectoryPlannerROS"/> -->
   <group ns="planner">
@@ -18,7 +21,7 @@
       <rosparam file="$(find arti_navigation)/config/costmap_common_params_2d.yaml" command="load" ns="local_costmap" />
       <rosparam file="$(find arti_navigation)/config/local_costmap_params.yaml" command="load" ns="local_costmap" />
       <rosparam file="$(find arti_navigation)/config/global_costmap_params.yaml" command="load" ns="global_costmap"/>
-      <rosparam file="$(find arti_navigation)/config/base_local_planner_params.yaml" command="load" />
+      <rosparam file="$(find arti_navigation)/config/planner.yaml" command="load" />
       <param name="global_costmap/obstacle_layer/observation_sources" value="$(arg observation_sources)"/>
       <param name="local_costmap/obstacle_layer/observation_sources" value="$(arg observation_sources)"/>
     </node>
