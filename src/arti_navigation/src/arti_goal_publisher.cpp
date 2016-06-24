@@ -6,7 +6,7 @@
 #include <vector>
 #include <eigen3/Eigen/Dense>
 #include <ros/ros.h>
-// #include <geometry_msgs/PointStamped.h>
+#include <geometry_msgs/PointStamped.h>
 #include <geometry_msgs/PoseStamped.h>
 #include <nav_msgs/Odometry.h>
 #include <math.h>
@@ -21,9 +21,12 @@ public:
 		nh_ = nh;
 		point_sub_ = nh_.subscribe ("way_point", 10, &ArtiGoalPublisher::pointCallback, this);
 		goal_pub_ = nh_.advertise<geometry_msgs::PoseStamped>("goal", 1);
+		maximum_point_pub_size_ = 20;
+		point_pub_ = nh_.advertise<geometry_msgs::PointStamped>("point", maximum_point_pub_size_);
 		odom_sub_ = nh.subscribe("odom", 1, &ArtiGoalPublisher::odomCallback, this);
 		ros::NodeHandle priviate_nh("~");
 		tolerance_ = 0.2;
+
 		reset();
 	}
 
@@ -50,15 +53,20 @@ public:
 					add = true;
 				}
 			}
-			else{
+			else {
 				add = true;
 			}
 			//only add the point if it is not too close. this is a hack to overcome lack of UI support in rviz
 			if ( add == true ) {
 				ROS_INFO("Add a new point %f %f %f", point.pose.position.x, point.pose.position.y, point.pose.orientation.z);
 				points_.push_back(point);
+				// publish point on rviz;
+				geometry_msgs::PointStamped ps;
+				ps.point = point.pose.position;
+				ps.header = point.header;
+				point_pub_.publish(ps);
 			}
-			else{
+			else {
 				ROS_INFO("Finished points receiveing, start control");
 				status_ = CONTROLLING;
 				controlling();
@@ -69,6 +77,7 @@ public:
 			ROS_INFO("Cancel control and Wait new points publishing");
 			reset();
 			points_.push_back(point);
+
 		}
 	}
 
@@ -98,24 +107,30 @@ public:
 
 	double distBetweenPose(const geometry_msgs::Pose& pose1, const geometry_msgs::Pose& pose2) {
 		return sqrt(pow((pose1.position.x - pose2.position.x), 2) +
-		       pow((pose1.position.y - pose2.position.y), 2));
+		            pow((pose1.position.y - pose2.position.y), 2));
 	}
 
 	void reset()
 	{
 		points_.clear();
 		status_ = READY;
+
+		for (int i = 0 ; i < maximum_point_pub_size_; i++){
+			geometry_msgs::PointStamped empty_point;
+			point_pub_.publish(empty_point);
+		}
 	}
 
 
 private:
 	ros::NodeHandle nh_;
 	ros::Subscriber point_sub_, odom_sub_;
-	ros::Publisher goal_pub_;
+	ros::Publisher goal_pub_, point_pub_;
 	STATUS status_;
 	std::vector<geometry_msgs::PoseStamped> points_;
 	double tolerance_;
 	geometry_msgs::Pose current_pose_;
+	int maximum_point_pub_size_;
 };
 
 } // end of namesapce
