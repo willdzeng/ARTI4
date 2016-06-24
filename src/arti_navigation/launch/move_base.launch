@@ -23,6 +23,8 @@
       <param name="local_costmap/obstacle_layer/observation_sources" value="$(arg observation_sources)"/>
     </node>
   </group>
+   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find arti_navigation)/rviz/move_base.rviz" output="screen"/>
+
   <group ns="camera">
     <node pkg="nodelet" type="nodelet" name="obstacle_detection_nodelet"  args="manager"/>
     <node pkg="nodelet" type="nodelet" name="points_xyz_planner" args="load rtabmap_ros/point_cloud_xyz obstacle_detection_nodelet">

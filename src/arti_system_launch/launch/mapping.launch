@@ -36,9 +36,9 @@
   <arg name="subscribe_scan_cloud"    default="false"/>
   <!-- Assuming 3D scan if set -->
   <arg name="scan_cloud_topic"        default="/scan_cloud"/>
-  <arg name="visual_odometry"         default="true"/>
+  <arg name="visual_odometry"         default="false"/>
   <!-- Generate visual odometry -->
-  <arg name="odom_topic"              default="odom"/>
+  <arg name="odom_topic"              default="/camera/odom"/>
   <!-- Odometry topic used if visual_odometry is false -->
   <arg name="namespace"               default="rtabmap"/>
   <arg name="wait_for_transform"      default="0.2"/>
@@ -46,32 +46,6 @@
   <group ns="$(arg namespace)">
     <node if="$(arg compressed)" name="republish_rgb"   type="republish" pkg="image_transport" args="compressed in:=$(arg rgb_topic) raw out:=$(arg rgb_topic)" />
     <node if="$(arg compressed)" name="republish_depth" type="republish" pkg="image_transport" args="compressedDepth in:=$(arg depth_registered_topic) raw out:=$(arg depth_registered_topic)" />
-    <!-- Odometry -->
-    <node if="$(arg visual_odometry)" pkg="rtabmap_ros" type="rgbd_odometry" name="rgbd_odometry" output="screen" args="$(arg rtabmap_args)" launch-prefix="$(arg launch_prefix)">
-      <remap from="rgb/image"       to="$(arg rgb_topic)"/>
-      <remap from="depth/image"     to="$(arg depth_registered_topic)"/>
-      <remap from="rgb/camera_info" to="$(arg camera_info_topic)"/>
-      <param name="frame_id"                    type="string" value="$(arg frame_id)"/>
-      <param name="wait_for_transform_duration" type="double" value="$(arg wait_for_transform)"/>
-      <param name="Odom/FillInfoData"           type="string" value="true"/>
-      <param name="publish_tf"                                value="true"/>
-      <!-- default 5 pixels -->
-      <param name="GFTT/MinDistance" type="string" value="10"/>
-      <!-- reduce the number of features matched/extracted -->
-      <!-- maximum features map size, default 2000 -->
-      <param name="OdomF2M/MaxSize" type="string" value="2000"/>
-      <!-- maximum features extracted by image, default 1000 -->
-      <param name="Vis/MaxFeatures" type="string" value="1000"/>
-      <!-- Change feature type 0=SURF 1=SIFT 2=ORB 3=FAST/FREAK 4=FAST/BRIEF 5=GFTT/FREAK 6=GFTT/BRIEF 7=BRISK 8=GFTT/ORB. -->
-      <param name="Vis/FeatureType" type="string" value="8"/>
-      <param name="SURF/GpuVersion" value="true"/>
-      <!-- 0=Frame-to-Map (F2M) 1=Frame-to-Frame (F2F) -->
-      <param name="Odom/Strategy" type="string" value="0"/>
-      <!-- Correspondences: 0=Features Matching, 1=Optical Flow -->
-      <!-- Optical flow may give more matches, but less robust correspondences -->
-      <param name="Vis/CorType" type="string" value="0"/>
-      <param name="Vis/EstimationType" value="0"/>
-    </node>
     <!-- Visual SLAM (robot side) -->
     <node name="rtabmap" pkg="rtabmap_ros" type="rtabmap" output="screen" args="$(arg rtabmap_args)" launch-prefix="$(arg launch_prefix)">
       <param name="subscribe_depth"             type="bool"   value="true"/>

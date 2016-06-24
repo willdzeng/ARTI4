@@ -17,7 +17,8 @@
   <!-- (ms) If not 0 ms, memory management is used to keep processing time on this fixed limit. -->
   <arg name="optimize_from_last_node" default="false"/>
   <arg name="optimize_robust"         default="false"/>
-  <arg name="optimize_mode"          default="2"/> <!-- g2o=1, GTSAM=2 -->
+  <arg name="optimize_mode"          default="2"/>
+  <!-- g2o=1, GTSAM=2 -->
   <!-- Optimize the map from the last node. Should be true on multi-session mapping and when time threshold is set -->
   <arg name="database_path"           default="~/.ros/rtabmap.db"/>
   <arg name="rtabmap_args"            default="--Vis/EstimationType 0"/>
@@ -54,6 +55,22 @@
       <param name="wait_for_transform_duration" type="double" value="$(arg wait_for_transform)"/>
       <param name="Odom/FillInfoData"           type="string" value="true"/>
       <param name="publish_tf"                                value="true"/>
+      <!-- default 5 pixels -->
+      <param name="GFTT/MinDistance" type="string" value="10"/>
+      <!-- reduce the number of features matched/extracted -->
+      <!-- maximum features map size, default 2000 -->
+      <param name="OdomF2M/MaxSize" type="string" value="2000"/>
+      <!-- maximum features extracted by image, default 1000 -->
+      <param name="Vis/MaxFeatures" type="string" value="1000"/>
+      <!-- Change feature type 0=SURF 1=SIFT 2=ORB 3=FAST/FREAK 4=FAST/BRIEF 5=GFTT/FREAK 6=GFTT/BRIEF 7=BRISK 8=GFTT/ORB. -->
+      <param name="Vis/FeatureType" type="string" value="8"/>
+      <param name="SURF/GpuVersion" value="true"/>
+      <!-- 0=Frame-to-Map (F2M) 1=Frame-to-Frame (F2F) -->
+      <param name="Odom/Strategy" type="string" value="0"/>
+      <!-- Correspondences: 0=Features Matching, 1=Optical Flow -->
+      <!-- Optical flow may give more matches, but less robust correspondences -->
+      <param name="Vis/CorType" type="string" value="0"/>
+      <param name="Vis/EstimationType" value="0"/>
     </node>
     <!-- Visual SLAM (robot side) -->
     <node name="rtabmap" pkg="rtabmap_ros" type="rtabmap" output="screen" args="$(arg rtabmap_args)" launch-prefix="$(arg launch_prefix)">
@@ -71,7 +88,7 @@
       <remap unless="$(arg visual_odometry)" from="odom"  to="$(arg odom_topic)"/>
       <param name="Rtabmap/TimeThr"              type="string" value="$(arg time_threshold)"/>
       <param name="RGBD/OptimizeFromGraphEnd"    type="string" value="$(arg optimize_from_last_node)"/>
-      <param if="$(arg optimize_robust)" name="RGBD/OptimizeStrategy" type="string" value="$(arg optimize_mode)"/> 
+      <param if="$(arg optimize_robust)" name="RGBD/OptimizeStrategy" type="string" value="$(arg optimize_mode)"/>
       <param if="$(arg optimize_robust)" name="RGBD/OptimizeRobust" type="string" value="true"/>
       <param name="Mem/SaveDepth16Format"        type="string" value="$(arg convert_depth_to_mm)"/>
       <!-- localization mode -->
@@ -85,15 +102,14 @@
       <param if="$(arg subscribe_scan)" name="Reg/Force3DoF"           type="string" value="true"/>
       <!-- when 3D scan is set -->
       <param if="$(arg subscribe_scan_cloud)" name="Reg/Strategy"      type="string" value="1"/>
-      <!-- Proj map parameters-->
+      <!-- Proj map parameters -->
       <param name="grid_cell_size" value="0.05"/>
       <param name="grid_size" value="50"/>
       <param name="grid_eroded" value="false"/>
       <param name="grid_unknown_space_filled" value="false"/>
       <param name="proj_max_ground_angle" value="45"/>
       <param name="proj_min_cluster_size" value="30"/>
-      <param name="proj_max_height" value="2.0"/>
-
+      <param name="proj_max_obstacles_height" value="1"/>
     </node>
     <!-- Visualisation RTAB-Map -->
     <node if="$(arg rtabmapviz)" pkg="rtabmap_ros" type="rtabmapviz" name="rtabmapviz" args="$(arg rtabmapviz_cfg)" output="screen" launch-prefix="$(arg launch_prefix)">
