@@ -17,10 +17,10 @@
     <node pkg="move_base" type="move_base" respawn="true" name="move_base" output="screen">
       <param name="base_global_planner" value="$(arg base_global_planner)"/>
       <param name="base_local_planner" value="$(arg base_local_planner)"/>
-      <rosparam file="$(find arti_navigation)/config/costmap_common_params_2d.yaml" command="load" ns="global_costmap" />
-      <rosparam file="$(find arti_navigation)/config/costmap_common_params_2d.yaml" command="load" ns="local_costmap" />
-      <rosparam file="$(find arti_navigation)/config/local_costmap_params.yaml" command="load" ns="local_costmap" />
+      <rosparam file="$(find arti_navigation)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+      <rosparam file="$(find arti_navigation)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
       <rosparam file="$(find arti_navigation)/config/global_costmap_params.yaml" command="load" ns="global_costmap"/>
+      <rosparam file="$(find arti_navigation)/config/local_costmap_params.yaml" command="load" ns="local_costmap" />
       <rosparam file="$(find arti_navigation)/config/planner.yaml" command="load" />
       <param name="global_costmap/obstacle_layer/observation_sources" value="$(arg observation_sources)"/>
       <param name="local_costmap/obstacle_layer/observation_sources" value="$(arg observation_sources)"/>

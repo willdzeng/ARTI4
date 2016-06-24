@@ -1,10 +1,44 @@
-footprint: [[ 0.3,  0.3], [-0.3,  0.3], [-0.3, -0.3], [ 0.3, -0.3]]
-footprint_padding: 0.02
-#robot_radius: 0.38
-#robot_radius: ir_of_robot
+footprint: [[ 0.42,  0.25], [-0.42,  0.25], [-0.42, -0.25], [ 0.42, -0.25]]
+footprint_padding: 0.05
 inflation_layer:
-  inflation_radius: 0.7 # 2xfootprint, it helps to keep the global planned path farther from obstacles
+  inflation_radius: 0.4 # 2xfootprint, it helps to keep the global planned path farther from obstacles
 transform_tolerance: 2
 
+obstacle_layer:
+  # The default maximum distance from the robot at which an obstacle will be inserted into the cost map in meters. This can be over-ridden on a per-sensor basis.
+  obstacle_range: 5
+  # The default range in meters at which to raytrace out obstacles from the map using sensor data. This can be over-ridden on a per-sensor basis.
+  raytrace_range: 3
+  max_obstacle_height: 5
+  track_unknown_space: true
+  clearing: true
 
+  observation_sources: point_cloud_sensorA point_cloud_sensorB
 
+  laser_scan_sensor: {
+    data_type: LaserScan,
+    topic: scan,
+    expected_update_rate: 0.1,
+    marking: true,
+    clearing: true
+  }
+
+  point_cloud_sensorA: {
+    sensor_frame: base_link,
+    data_type: PointCloud2,
+    topic: obstacles_cloud,
+    expected_update_rate: 0.5,
+    marking: true,
+    clearing: true,
+    min_obstacle_height: 0.1
+  }
+
+  point_cloud_sensorB: {
+    sensor_frame: base_link,
+    data_type: PointCloud2,
+    topic: ground_cloud,
+    expected_update_rate: 0.5,
+    marking: false,
+    clearing: true,
+    min_obstacle_height: -1.0 # make sure the ground is not filtered
+  }
