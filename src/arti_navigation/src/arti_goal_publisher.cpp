@@ -17,16 +17,15 @@ class ArtiGoalPublisher {
 
 public:
 	enum STATUS { READY, CONTROLLING, DONE };
-	ArtiGoalPublisher(ros::NodeHandle nh) {
+	ArtiGoalPublisher(ros::NodeHandle nh, ros::NodeHandle private_nh) {
 		nh_ = nh;
 		point_sub_ = nh_.subscribe ("way_point", 10, &ArtiGoalPublisher::pointCallback, this);
 		goal_pub_ = nh_.advertise<geometry_msgs::PoseStamped>("goal", 1);
 		maximum_point_pub_size_ = 20;
 		point_pub_ = nh_.advertise<geometry_msgs::PointStamped>("point", maximum_point_pub_size_);
 		odom_sub_ = nh.subscribe("odom", 1, &ArtiGoalPublisher::odomCallback, this);
-		ros::NodeHandle priviate_nh("~");
-		tolerance_ = 0.2;
-
+		private_nh.param("distance_tolerance", dist_tolerance_, 0.5);
+		goal_point_tolerance_ = 0.2;
 		reset();
 	}
 
@@ -49,7 +48,7 @@ public:
 			if ( !points_.empty()) {
 				// calcuate the euclidean distance
 				double dist = distBetweenPose(point.pose, points_.back().pose);
-				if ( dist > 0.2 ) {
+				if ( dist > goal_point_tolerance_ ) {
 					add = true;
 				}
 			}
@@ -88,9 +87,11 @@ public:
 			geometry_msgs::PoseStamped current_goal = points_[i];
 			goal_pub_.publish(current_goal);
 			bool next_goal = false;
+			ROS_INFO("Wait for the robot moving");
 			while (nh_.ok() && status_ == CONTROLLING && !next_goal) {
 				double dist = distBetweenPose(current_goal.pose, current_pose_); //current_goal.pose.position.x - current_pose_.position.x
-				if (dist < tolerance_) {
+				ROS_INFO("Distance is %f",dist);
+				if (dist < dist_tolerance_) {
 					next_goal = true;
 				}
 				ros::spinOnce();
@@ -128,7 +129,7 @@ private:
 	ros::Publisher goal_pub_, point_pub_;
 	STATUS status_;
 	std::vector<geometry_msgs::PoseStamped> points_;
-	double tolerance_;
+	double dist_tolerance_, goal_point_tolerance_;
 	geometry_msgs::Pose current_pose_;
 	int maximum_point_pub_size_;
 };
@@ -140,7 +141,8 @@ int main ( int argc, char **argv )
 {
 	ros::init ( argc, argv, "arti_goal_publisher" );
 	ros::NodeHandle nh;
-	arti_navigation::ArtiGoalPublisher arti_goal_publisher(nh);
+	ros::NodeHandle private_nh("~");
+	arti_navigation::ArtiGoalPublisher arti_goal_publisher(nh,private_nh);
 	ros::spin();
 	return 0;
 }

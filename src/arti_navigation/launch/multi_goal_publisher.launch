@@ -1,0 +1,10 @@
+<launch>
+  <group ns="arti_navigation">
+    <node pkg="arti_navigation" type="arti_goal_publisher_node" name="goal_publisher" output="screen">
+      <remap from="way_point" to="/way_point"/>
+      <remap from="goal" to="/move_base_simple/goal"/>
+      <remap from="odom" to="/rtabmap/odom"/>
+      <param name="distance_tolerance" value="0.5"/>
+    </node>
+  </group>
+</launch>

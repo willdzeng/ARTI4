@@ -1,6 +1,6 @@
 <launch>
 
-  <include file="$(find arti_system_launch)/launch/zed_tf.launch" />
+  <include file="$(find arti_vision)/launch/zed_tf.launch" />
 
   <arg name="svo_file" default=""/>
   

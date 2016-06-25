@@ -15,6 +15,7 @@
     <param name="flip_lr" value="false"/>
     <param name="publish_tf" value="false"/>
     <param name="odom_bias" value="0.98"/>
+    <remap from="odom" to="/arti/odom"/>
   </node>
 
 </launch>
