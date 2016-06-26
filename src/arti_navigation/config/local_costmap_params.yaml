@@ -3,8 +3,8 @@ robot_base_frame: base_link
 update_frequency: 2
 publish_frequency: 1
 rolling_window: true
-width: 5.0
-height: 5.0
+width: 10.0
+height: 10.0
 resolution: 0.025
 origin_x: 0
 origin_y: 0

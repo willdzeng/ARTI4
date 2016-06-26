@@ -6,14 +6,14 @@ transform_tolerance: 2
 
 obstacle_layer:
   # The default maximum distance from the robot at which an obstacle will be inserted into the cost map in meters. This can be over-ridden on a per-sensor basis.
-  obstacle_range: 5
+  obstacle_range: 10
   # The default range in meters at which to raytrace out obstacles from the map using sensor data. This can be over-ridden on a per-sensor basis.
-  raytrace_range: 3
-  max_obstacle_height: 5
+  raytrace_range: 10
+  max_obstacle_height: 20
   track_unknown_space: true
   clearing: true
 
-  observation_sources: point_cloud_sensorA point_cloud_sensorB
+  observation_sources: laser_scan_sensor point_cloud_sensorA point_cloud_sensorB
 
   laser_scan_sensor: {
     data_type: LaserScan,
@@ -30,7 +30,9 @@ obstacle_layer:
     expected_update_rate: 0.5,
     marking: true,
     clearing: true,
-    min_obstacle_height: 0.05
+    min_obstacle_height: -9999.0,
+    max_obstacle_height: 9999,
+    observation_persistence: 5
   }
 
   point_cloud_sensorB: {
