@@ -4,7 +4,7 @@
       <remap from="way_point" to="/way_point"/>
       <remap from="goal" to="/move_base_simple/goal"/>
       <remap from="odom" to="/rtabmap/odom"/>
-      <param name="distance_tolerance" value="0.5"/>
+      <param name="distance_tolerance" value="1.0"/>
     </node>
   </group>
 </launch>

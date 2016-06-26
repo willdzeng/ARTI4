@@ -7,6 +7,8 @@ Panels:
         - /Global Options1
         - /Status1
         - /Grid1
+        - /Global Costmap1
+        - /Local Costmap1
         - /Teb_Local_Path1
         - /TrajROS_local_path1
       Splitter Ratio: 0.448819
@@ -61,7 +63,7 @@ Visualization Manager:
       Value: false
     - Alpha: 0.7
       Class: rviz/Map
-      Color Scheme: map
+      Color Scheme: costmap
       Draw Behind: false
       Enabled: true
       Name: Global Costmap
@@ -69,7 +71,7 @@ Visualization Manager:
       Value: true
     - Alpha: 0.7
       Class: rviz/Map
-      Color Scheme: map
+      Color Scheme: costmap
       Draw Behind: false
       Enabled: true
       Name: Local Costmap
@@ -176,22 +178,22 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 20.7918
+      Distance: 11.9378
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.06
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -0.851072
-        Y: -4.78594
-        Z: 0.0286429
+        X: -3.33257
+        Y: 3.48496
+        Z: 0.0354129
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 1.5648
+      Pitch: 1.5698
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 1.8654
+      Yaw: 5.67359
     Saved: ~
 Window Geometry:
   Displays:

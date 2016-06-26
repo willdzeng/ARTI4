@@ -66,7 +66,7 @@ public:
 				point_pub_.publish(ps);
 			}
 			else {
-				ROS_INFO("Finished points receiveing, start control");
+				ROS_INFO("Finished points receiveing, goal size is %lu, start control", points_.size());
 				status_ = CONTROLLING;
 				controlling();
 			}
@@ -75,6 +75,7 @@ public:
 		if (status_ == CONTROLLING) {
 			ROS_INFO("Cancel control and Wait new points publishing");
 			reset();
+			ROS_INFO("Add a new point %f %f %f", point.pose.position.x, point.pose.position.y, point.pose.orientation.z);
 			points_.push_back(point);
 
 		}
@@ -90,20 +91,25 @@ public:
 			ROS_INFO("Wait for the robot moving");
 			while (nh_.ok() && status_ == CONTROLLING && !next_goal) {
 				double dist = distBetweenPose(current_goal.pose, current_pose_); //current_goal.pose.position.x - current_pose_.position.x
-				ROS_INFO("Distance is %f",dist);
+				// ROS_INFO("Distance is %f",dist);
 				if (dist < dist_tolerance_) {
 					next_goal = true;
 				}
 				ros::spinOnce();
 				r.sleep();
 			}
+			if(status_!=CONTROLLING){
+				break;
+			}
 			i++;
 			ROS_INFO("Reached the goal, go to the next one, id: %d", i);
 		}
-
-		ROS_INFO("All goal reached, wait for new input");
-		status_ = READY;
-		reset();
+		if(status_!=CONTROLLING){
+			ROS_INFO("Mission Canceled");
+		}else{
+			ROS_INFO("All goal reached, wait for new input");
+		}
+		// reset();
 	}
 
 	double distBetweenPose(const geometry_msgs::Pose& pose1, const geometry_msgs::Pose& pose2) {
