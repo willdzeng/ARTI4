@@ -1,7 +1,7 @@
 recovery_behaviour_enabled: true
 recovery_behaviors: [{name: conservative_reset, type: clear_costmap_recovery/ClearCostmapRecovery}, {name: aggressive_reset, type: clear_costmap_recovery/ClearCostmapRecovery}] 
-planner_frequency: 0
-controller_frequency: 10.0
+planner_frequency: 10
+controller_frequency: 20.0
 
 NavfnROS:
   allow_unknown: true # Specifies whether or not to allow navfn to create plans that traverse unknown space.

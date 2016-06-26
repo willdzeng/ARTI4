@@ -109,11 +109,11 @@
       <param name="grid_eroded" value="true"/>
       <param name="grid_unknown_space_filled" value="false"/>
       <param name="proj_max_ground_angle" value="45"/>
-      <param name="proj_min_cluster_size" value="20"/>
-      <param name="proj_max_obstacles_height" value="3"/>
+      <param name="proj_min_cluster_size" value="30"/>
+      <param name="proj_max_obstacles_height" value="1"/>
       <param name="cloud_noise_filtering_radius" value="0.05"/>
-      <param name="cloud_floor_culling_height" value="0.1"/>
-      <param name="cloud_noise_filtering_min_neighbors" value="5"/>
+      <!-- <param name="cloud_floor_culling_height" value="0.1"/> -->
+      <param name="cloud_noise_filtering_min_neighbors" value="2"/>
       <!-- <param name="cloud_voxel_size" value="0.05"/> -->
       <!-- <param name="cloud_output_voxelized" value="true"/> -->
     </node>
