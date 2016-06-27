@@ -27,6 +27,7 @@ public:
 		private_nh_.param("stair_climb_vel", stair_climb_vel_, 0.5);
 		private_nh_.param("cmd_rate", cmd_rate_, 20.0);
 		private_nh.param("distance_tolerance", dist_tolerance_, 0.5);
+		private_nh.param("angle_tolerance", angle_tolerance_, 0.5);
 		private_nh.param("robot_namespace", robot_namespace_, std::string(""));
 		private_nh.param("map_frame_name", map_frame_name_, std::string("map"));
 		private_nh.param("body_link_name", body_link_name_, std::string("base_link"));
@@ -119,8 +120,9 @@ public:
 		while (nh_.ok() && status_ == CONTROLLING) {
 			updateRobotPose();
 			double dist = distBetweenPose(current_goal.pose, current_pose_);
+			double angle_dist = angleDistBetweenPose(current_goal.pose, current_pose_);
 			ROS_INFO("Distance is %f", dist);
-			if (dist < dist_tolerance_) {
+			if (dist < dist_tolerance_&& angle_dist < angle_dist) {
 				ROS_INFO("Reached the goal %d", goal_index);
 				return true;
 			}
@@ -158,6 +160,12 @@ public:
 	double distBetweenPose(const geometry_msgs::Pose& pose1, const geometry_msgs::Pose& pose2) {
 		return sqrt(pow((pose1.position.x - pose2.position.x), 2) +
 		            pow((pose1.position.y - pose2.position.y), 2));
+	}
+
+	double angleDistBetweenPose(const geometry_msgs::Pose& pose1, const geometry_msgs::Pose& pose2) {
+		double yaw1 = tf::getYaw(pose1.orientation);
+		double yaw2 = tf::getYaw(pose2.orientation);
+		return std::abs(yaw1 - yaw2);
 	}
 
 
@@ -208,7 +216,7 @@ private:
 	ros::Publisher goal_pub_, point_pub_, cmd_pub_;
 	STATUS status_;
 	std::vector<geometry_msgs::PoseStamped> goal_points_;
-	double dist_tolerance_, goal_point_tolerance_;
+	double dist_tolerance_, goal_point_tolerance_, angle_tolerance_;
 	geometry_msgs::Pose current_pose_;
 	int maximum_point_pub_size_;
 
