@@ -4,11 +4,11 @@
       <remap from="way_point" to="/way_point"/>
       <remap from="goal" to="/move_base_simple/goal"/>
       <remap from="odom" to="/rtabmap/odom"/>
-      <param name="distance_tolerance" value="2.5"/>
+      <param name="distance_tolerance" value="0.6"/>
     </node>
-    <node pkg="arti_navigation" type="costmap_cleanner" name="costmap_cleanner" output="screen">
+<!--     <node pkg="arti_navigation" type="costmap_cleanner" name="costmap_cleanner" output="screen">
       <param name="service_name" value="/planner/move_base/clear_costmaps"/>
       <param name="frequency" value="0.1"/>
-    </node>
+    </node> -->
   </group>
 </launch>

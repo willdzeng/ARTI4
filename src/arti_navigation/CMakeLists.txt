@@ -8,6 +8,7 @@ find_package(catkin REQUIRED
             arti_msgs
             geometry_msgs
             std_srvs
+            tf
         )
 
 # find_package(Eigen REQUIRED)

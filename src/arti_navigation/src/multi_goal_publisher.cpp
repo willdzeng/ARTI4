@@ -10,6 +10,8 @@
 #include <geometry_msgs/PoseStamped.h>
 #include <nav_msgs/Odometry.h>
 #include <math.h>
+#include <tf/transform_listener.h>
+#include <tf/transform_datatypes.h>
 
 namespace arti_navigation {
 
@@ -23,8 +25,11 @@ public:
 		goal_pub_ = nh_.advertise<geometry_msgs::PoseStamped>("goal", 1);
 		maximum_point_pub_size_ = 20;
 		point_pub_ = nh_.advertise<geometry_msgs::PointStamped>("point", maximum_point_pub_size_);
-		odom_sub_ = nh.subscribe("odom", 1, &MultiGoalPublisher::odomCallback, this);
+		// odom_sub_ = nh.subscribe("odom", 1, &MultiGoalPublisher::odomCallback, this);
 		private_nh.param("distance_tolerance", dist_tolerance_, 0.5);
+		private_nh.param("robot_namespace", robot_namespace_, std::string(""));
+		private_nh.param("map_frame_name", map_frame_name_, std::string("map"));
+		private_nh.param("body_link_name", body_link_name_, std::string("base_link"));
 		goal_point_tolerance_ = 0.2;
 		reset();
 	}
@@ -69,6 +74,7 @@ public:
 				ROS_INFO("Finished points receiveing, goal size is %lu, start control", points_.size());
 				status_ = CONTROLLING;
 				controlling();
+				return;
 			}
 		}
 
@@ -81,6 +87,47 @@ public:
 		}
 	}
 
+
+	void updateRobotPose()
+	{
+
+		ros::Time tTime;
+		std::string error;
+		tf::StampedTransform transform;
+		bool success = true;
+		try
+		{
+			ros::Time now = ros::Time::now();
+			tf_.waitForTransform(robot_namespace_ + map_frame_name_,
+			                     robot_namespace_ + body_link_name_,
+			                     ros::Time(),
+			                     ros::Duration(1.0));
+			tf_.lookupTransform(robot_namespace_ + map_frame_name_,
+			                    robot_namespace_ + body_link_name_,
+			                    ros::Time(),
+			                    transform);
+		}
+		catch (tf::TransformException ex)
+		{
+			ROS_WARN("tf failure: %s", ex.what());
+			success = false;
+		}
+		if (success) {
+			// geometry_msgs::PoseStamped pose;
+			// tf::poseStampedTFToMsg(transform, pose);
+			// current_pose_ = pose.pose;
+			current_pose_.position.x = transform.getOrigin().getX();
+			current_pose_.position.y = transform.getOrigin().getY();
+			current_pose_.position.z = transform.getOrigin().getZ();
+			current_pose_.orientation.x = transform.getRotation().getX();
+			current_pose_.orientation.y = transform.getRotation().getY();
+			current_pose_.orientation.z = transform.getRotation().getZ();
+			current_pose_.orientation.w = transform.getRotation().getW();
+		}
+
+	}
+
+
 	void controlling() {
 		ros::Rate r(10);
 		int i = 0;
@@ -90,24 +137,26 @@ public:
 			bool next_goal = false;
 			ROS_INFO("Wait for the robot moving");
 			while (nh_.ok() && status_ == CONTROLLING && !next_goal) {
+				updateRobotPose();
 				double dist = distBetweenPose(current_goal.pose, current_pose_);
-				ROS_INFO("Distance is %f",dist);
+				ROS_INFO("Distance is %f", dist);
 				if (dist < dist_tolerance_) {
 					next_goal = true;
 				}
 				ros::spinOnce();
 				r.sleep();
 			}
-			if(status_!=CONTROLLING){
+			if (status_ != CONTROLLING) {
 				break;
 			}
 			i++;
 			ROS_INFO("Reached the goal, go to the next one, id: %d", i);
 		}
-		if(status_!=CONTROLLING){
+		if (status_ != CONTROLLING) {
 			ROS_INFO("Mission Canceled");
-		}else{
+		} else {
 			ROS_INFO("All goal reached, wait for new input");
+			reset();
 		}
 		// reset();
 	}
@@ -122,7 +171,7 @@ public:
 		points_.clear();
 		status_ = READY;
 
-		for (int i = 0 ; i < maximum_point_pub_size_; i++){
+		for (int i = 0 ; i < maximum_point_pub_size_; i++) {
 			geometry_msgs::PointStamped empty_point;
 			point_pub_.publish(empty_point);
 		}
@@ -138,6 +187,11 @@ private:
 	double dist_tolerance_, goal_point_tolerance_;
 	geometry_msgs::Pose current_pose_;
 	int maximum_point_pub_size_;
+
+	tf::TransformListener tf_;
+	std::string robot_namespace_;
+	std::string map_frame_name_;
+	std::string body_link_name_;
 };
 
 } // end of namesapce
@@ -148,7 +202,7 @@ int main ( int argc, char **argv )
 	ros::init ( argc, argv, "arti_goal_publisher" );
 	ros::NodeHandle nh;
 	ros::NodeHandle private_nh("~");
-	arti_navigation::MultiGoalPublisher arti_goal_publisher(nh,private_nh);
+	arti_navigation::MultiGoalPublisher arti_goal_publisher(nh, private_nh);
 	ros::spin();
 	return 0;
 }
