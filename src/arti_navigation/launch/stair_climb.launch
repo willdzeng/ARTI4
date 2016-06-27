@@ -1,0 +1,15 @@
+<launch>
+  <group ns="arti_navigation">
+    <node pkg="arti_navigation" type="stair_climb_node" name="stair_climb" output="screen">
+      <remap from="way_point" to="/way_point"/>
+      <remap from="goal" to="/move_base_simple/goal"/>
+      <remap from="odom" to="/rtabmap/odom"/>
+      <remap from="cmd_vel" to="/cmd_vel"/>
+      <param name="distance_tolerance" value="0.6"/>
+      <param name="climb_time" value="10.0"/>
+      <param name="goal_index" value="1"/>
+      <param name="stair_climb_vel" value="1"/>
+      <param name="cmd_rate" value="20"/>
+    </node>
+  </group>
+</launch>

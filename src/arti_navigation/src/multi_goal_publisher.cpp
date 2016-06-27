@@ -12,6 +12,7 @@
 #include <math.h>
 #include <tf/transform_listener.h>
 #include <tf/transform_datatypes.h>
+#include <geometry_msgs/Twist.h>
 
 namespace arti_navigation {
 
@@ -83,14 +84,12 @@ public:
 			reset();
 			ROS_INFO("Add a new point %f %f %f", point.pose.position.x, point.pose.position.y, point.pose.orientation.z);
 			points_.push_back(point);
-
 		}
 	}
 
 
 	void updateRobotPose()
 	{
-
 		ros::Time tTime;
 		std::string error;
 		tf::StampedTransform transform;
@@ -124,7 +123,6 @@ public:
 			current_pose_.orientation.z = transform.getRotation().getZ();
 			current_pose_.orientation.w = transform.getRotation().getW();
 		}
-
 	}
 
 

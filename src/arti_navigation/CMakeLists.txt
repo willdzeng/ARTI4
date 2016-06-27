@@ -39,6 +39,12 @@ target_link_libraries(multi_goal_publisher_node multi_goal_publisher ${catkin_LI
 add_executable(costmap_cleanner src/costmap_cleanner.cpp)
 target_link_libraries(costmap_cleanner ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 
+add_library(stair_climb src/stair_climb.cpp)
+target_link_libraries(stair_climb ${libserial_LIBRARIES} ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+add_dependencies(stair_climb arti_msgs_gencpp geometry_msgs_gencpp)
+
+add_executable(stair_climb_node src/stair_climb.cpp)
+target_link_libraries(stair_climb_node stair_climb ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 
 install(TARGETS
         multi_goal_publisher_node
