@@ -11,28 +11,8 @@
 #include <math.h>
 #include <tf/transform_listener.h>
 #include <tf/transform_datatypes.h>
-
-
-// #include <chores/DoDishesAction.h>
-// #include <actionlib/client/simple_action_client.h>
-
-// typedef actionlib::SimpleActionClient<chores::DoDishesAction> Client;
-
-// int main(int argc, char** argv)
-// {
-//   ros::init(argc, argv, "do_dishes_client");
-//   Client client("do_dishes", true); // true -> don't need ros::spin()
-//   client.waitForServer();
-//   chores::DoDishesGoal goal;
-//   // Fill in goal here
-//   client.sendGoal(goal);
-//   client.waitForResult(ros::Duration(5.0));
-//   if (client.getState() == actionlib::SimpleClientGoalState::SUCCEEDED)
-//     printf("Yay! The dishes are now clean");
-//   printf("Current State: %s\n", client.getState().toString().c_str());
-//   return 0;
-// }
-
+#include <std_srvs/Empty.h>
+#include <move_base_msgs/MoveBaseActionFeedback.h>
 
 namespace arti_navigation {
 class StairClimb {
@@ -49,7 +29,6 @@ public:
 		private_nh_.param("stair_climb_vel", stair_climb_vel_, 0.5);
 		private_nh_.param("cmd_rate", cmd_rate_, 20.0);
 		private_nh.param("distance_tolerance", dist_tolerance_, 0.5);
-		private_nh.param("angle_tolerance", angle_tolerance_, 0.5);
 		private_nh.param("robot_namespace", robot_namespace_, std::string(""));
 		private_nh.param("map_frame_name", map_frame_name_, std::string("map"));
 		private_nh.param("body_link_name", body_link_name_, std::string("base_link"));
@@ -59,6 +38,11 @@ public:
 		cmd_pub_ = nh_.advertise<geometry_msgs::Twist>("cmd_vel", 1);
 		goal_pub_ = nh_.advertise<geometry_msgs::PoseStamped>("goal", 1);
 		point_pub_ = nh_.advertise<geometry_msgs::PointStamped>("point", maximum_point_pub_size_);
+
+		map_pause_srv_ =  nh_.serviceClient<std_srvs::Empty>("/rtabmap/pause");
+		map_resume_srv_ =  nh_.serviceClient<std_srvs::Empty>("/rtabmap/resume");
+		odom_reset_srv_ =  nh_.serviceClient<std_srvs::Empty>("/rtabmap/reset_odom");
+		
 		reset();
 	}
 
@@ -70,9 +54,12 @@ public:
 		int index = 0;
 		while (nh_.ok() && index < goal_points_.size() && status_ == CONTROLLING) {
 			if ( index == goal_index_ ) {
-				shutdownMapping();
+				pauseMapping();
 				goStraight(climb_time_, stair_climb_vel_);
 				resumeMapping();
+				odomReset();
+				ros::Duration r(5.0);
+				r.sleep();
 				goToGoal(index);
 				index++;
 			} else {
@@ -82,12 +69,24 @@ public:
 		}
 	}
 
-	void shutdownMapping(){
-
+	void pauseMapping() {
+		std_srvs::Empty srv;
+		map_pause_srv_.call(srv);
 	}
 
-	void resumeMapping(){
-		
+	void resumeMapping() {
+		std_srvs::Empty srv;
+		map_resume_srv_.call(srv);
+	}
+
+	void odomReset() {
+		std_srvs::Empty srv;
+		odom_reset_srv_.call(srv);
+	}
+
+	void statusCallback(const move_base_msgs::MoveBaseActionFeedback::ConstPtr& msg) {
+		goal_status_ = msg->status;
+		ROS_INFO("move base status is %d",goal_status_.status);
 	}
 
 	void pointCallback(const geometry_msgs::PoseStamped::ConstPtr& msg) {
@@ -235,7 +234,7 @@ private:
 	double climb_time_, cmd_rate_, stair_climb_vel_;
 	int goal_index_;
 
-	ros::Subscriber point_sub_, odom_sub_;
+	ros::Subscriber point_sub_, odom_sub_, status_sub_;
 	ros::Publisher goal_pub_, point_pub_, cmd_pub_;
 	STATUS status_;
 	std::vector<geometry_msgs::PoseStamped> goal_points_;
@@ -247,6 +246,13 @@ private:
 	std::string robot_namespace_;
 	std::string map_frame_name_;
 	std::string body_link_name_;
+
+
+	ros::ServiceClient map_pause_srv_;
+	ros::ServiceClient map_resume_srv_;
+	ros::ServiceClient odom_reset_srv_;
+
+	actionlib_msgs::GoalStatus goal_status_;
 };
 
 } //  end of namespace
