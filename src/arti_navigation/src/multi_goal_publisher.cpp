@@ -13,23 +13,23 @@
 
 namespace arti_navigation {
 
-class ArtiGoalPublisher {
+class MultiGoalPublisher {
 
 public:
 	enum STATUS { READY, CONTROLLING, DONE };
-	ArtiGoalPublisher(ros::NodeHandle nh, ros::NodeHandle private_nh) {
+	MultiGoalPublisher(ros::NodeHandle nh, ros::NodeHandle private_nh) {
 		nh_ = nh;
-		point_sub_ = nh_.subscribe ("way_point", 10, &ArtiGoalPublisher::pointCallback, this);
+		point_sub_ = nh_.subscribe ("way_point", 10, &MultiGoalPublisher::pointCallback, this);
 		goal_pub_ = nh_.advertise<geometry_msgs::PoseStamped>("goal", 1);
 		maximum_point_pub_size_ = 20;
 		point_pub_ = nh_.advertise<geometry_msgs::PointStamped>("point", maximum_point_pub_size_);
-		odom_sub_ = nh.subscribe("odom", 1, &ArtiGoalPublisher::odomCallback, this);
+		odom_sub_ = nh.subscribe("odom", 1, &MultiGoalPublisher::odomCallback, this);
 		private_nh.param("distance_tolerance", dist_tolerance_, 0.5);
 		goal_point_tolerance_ = 0.2;
 		reset();
 	}
 
-	~ArtiGoalPublisher() {
+	~MultiGoalPublisher() {
 
 	}
 
@@ -148,7 +148,7 @@ int main ( int argc, char **argv )
 	ros::init ( argc, argv, "arti_goal_publisher" );
 	ros::NodeHandle nh;
 	ros::NodeHandle private_nh("~");
-	arti_navigation::ArtiGoalPublisher arti_goal_publisher(nh,private_nh);
+	arti_navigation::MultiGoalPublisher arti_goal_publisher(nh,private_nh);
 	ros::spin();
 	return 0;
 }
