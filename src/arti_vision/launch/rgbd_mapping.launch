@@ -111,6 +111,7 @@
       <param name="proj_max_ground_angle" value="45"/>
       <param name="proj_min_cluster_size" value="30"/>
       <param name="proj_max_obstacles_height" value="1"/>
+      <param name="proj_max_ground_height" value="0.1"/>
       <param name="cloud_noise_filtering_radius" value="0.05"/>
       <!-- <param name="cloud_floor_culling_height" value="0.1"/> -->
       <param name="cloud_noise_filtering_min_neighbors" value="2"/>
