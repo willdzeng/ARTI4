@@ -5,6 +5,7 @@
       <remap from="goal" to="/move_base_simple/goal"/>
       <remap from="odom" to="/rtabmap/odom"/>
       <remap from="cmd_vel" to="/cmd_vel"/>
+      <remap from="status" to="/planner/move_base/result"/>
       <param name="distance_tolerance" value="0.1"/>
       <param name="angle_tolerance" value="0.1"/>
       <param name="climb_time" value="10.0"/>

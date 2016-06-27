@@ -12,7 +12,7 @@
 #include <tf/transform_listener.h>
 #include <tf/transform_datatypes.h>
 #include <std_srvs/Empty.h>
-#include <move_base_msgs/MoveBaseActionFeedback.h>
+#include <move_base_msgs/MoveBaseActionResult.h>
 
 namespace arti_navigation {
 class StairClimb {
@@ -34,7 +34,8 @@ public:
 		private_nh.param("body_link_name", body_link_name_, std::string("base_link"));
 
 		point_sub_ = nh_.subscribe ("way_point", 10, &StairClimb::pointCallback, this);
-		status_sub_ = nh_.subscribe ("way_point", 10, &StairClimb::pointCallback, this);
+		status_sub_ = nh_.subscribe ("status", 1, &StairClimb::statusCallback, this);
+		odom_info_sub_ = nh_.subscribe("odom_info",1, &StairClimb::odomInfoCallback, this);
 		cmd_pub_ = nh_.advertise<geometry_msgs::Twist>("cmd_vel", 1);
 		goal_pub_ = nh_.advertise<geometry_msgs::PoseStamped>("goal", 1);
 		point_pub_ = nh_.advertise<geometry_msgs::PointStamped>("point", maximum_point_pub_size_);
@@ -54,11 +55,12 @@ public:
 		int index = 0;
 		while (nh_.ok() && index < goal_points_.size() && status_ == CONTROLLING) {
 			if ( index == goal_index_ ) {
+				ros::Duration r(5.0);
 				pauseMapping();
+				r.sleep();
 				goStraight(climb_time_, stair_climb_vel_);
 				resumeMapping();
 				odomReset();
-				ros::Duration r(5.0);
 				r.sleep();
 				goToGoal(index);
 				index++;
@@ -67,26 +69,34 @@ public:
 				index++;
 			}
 		}
+		ROS_INFO("Finished Control");
 	}
 
 	void pauseMapping() {
+		ROS_INFO("Pausing Mapping");
 		std_srvs::Empty srv;
 		map_pause_srv_.call(srv);
 	}
 
 	void resumeMapping() {
+		ROS_INFO("Resumed Mapping");
 		std_srvs::Empty srv;
 		map_resume_srv_.call(srv);
 	}
 
 	void odomReset() {
+		ROS_INFO("Reset Odometry");
 		std_srvs::Empty srv;
 		odom_reset_srv_.call(srv);
 	}
 
-	void statusCallback(const move_base_msgs::MoveBaseActionFeedback::ConstPtr& msg) {
-		goal_status_ = msg->status;
-		ROS_INFO("move base status is %d",goal_status_.status);
+	void odomInfoCallback(const ){
+		
+	}
+
+	void statusCallback(const move_base_msgs::MoveBaseActionResult::ConstPtr& msg) {
+		ROS_INFO("Receved status callback");
+		goal_status_ = 1;
 	}
 
 	void pointCallback(const geometry_msgs::PoseStamped::ConstPtr& msg) {
@@ -137,15 +147,10 @@ public:
 		ros::Rate r(cmd_rate_);
 		geometry_msgs::PoseStamped current_goal = goal_points_[goal_index];
 		goal_pub_.publish(current_goal);
-
+		goal_status_ = 0;
 		ROS_INFO("Go to goal index %d,Wait for the robot moving", goal_index);
 		while (nh_.ok() && status_ == CONTROLLING) {
-			updateRobotPose();
-			double dist = distBetweenPose(current_goal.pose, current_pose_);
-			double angle_dist = angleDistBetweenPose(current_goal.pose, current_pose_);
-			ROS_INFO("Distance is %f", dist);
-			if (dist < dist_tolerance_&& angle_dist < angle_tolerance_) {
-				ROS_INFO("Reached the goal %d", goal_index);
+			if (goal_status_ == 1 ){
 				return true;
 			}
 			ros::spinOnce();
@@ -172,6 +177,7 @@ public:
 
 	void reset() {
 		goal_points_.clear();
+		goal_status_ = 0;
 		status_ = READY;
 		for (int i = 0 ; i < maximum_point_pub_size_; i++) {
 			geometry_msgs::PointStamped empty_point;
@@ -252,7 +258,7 @@ private:
 	ros::ServiceClient map_resume_srv_;
 	ros::ServiceClient odom_reset_srv_;
 
-	actionlib_msgs::GoalStatus goal_status_;
+	int goal_status_;
 };
 
 } //  end of namespace
