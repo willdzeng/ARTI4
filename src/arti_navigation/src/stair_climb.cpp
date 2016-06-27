@@ -11,6 +11,8 @@
 #include <math.h>
 #include <tf/transform_listener.h>
 #include <tf/transform_datatypes.h>
+#include <std_srvs/Empty.h>
+#include <move_base_msgs/MoveBaseActionFeedback.h>
 
 namespace arti_navigation {
 class StairClimb {
@@ -32,9 +34,16 @@ public:
 		private_nh.param("body_link_name", body_link_name_, std::string("base_link"));
 
 		point_sub_ = nh_.subscribe ("way_point", 10, &StairClimb::pointCallback, this);
+		status_sub_ = nh_.subscribe("move_base_status", 1, &StairClimb::statusCallback, this);
+
 		cmd_pub_ = nh_.advertise<geometry_msgs::Twist>("cmd_vel", 1);
 		goal_pub_ = nh_.advertise<geometry_msgs::PoseStamped>("goal", 1);
 		point_pub_ = nh_.advertise<geometry_msgs::PointStamped>("point", maximum_point_pub_size_);
+
+		map_pause_srv_ =  nh_.serviceClient<std_srvs::Empty>("/rtabmap/pause");
+		map_resume_srv_ =  nh_.serviceClient<std_srvs::Empty>("/rtabmap/resume");
+		odom_reset_srv_ =  nh_.serviceClient<std_srvs::Empty>("/rtabmap/reset_odom");
+		
 		reset();
 	}
 
@@ -46,9 +55,12 @@ public:
 		int index = 0;
 		while (nh_.ok() && index < goal_points_.size() && status_ == CONTROLLING) {
 			if ( index == goal_index_ ) {
-				shutdownMapping();
+				pauseMapping();
 				goStraight(climb_time_, stair_climb_vel_);
 				resumeMapping();
+				odomReset();
+				ros::Duration r(5.0);
+				r.sleep();
 				goToGoal(index);
 				index++;
 			} else {
@@ -58,12 +70,24 @@ public:
 		}
 	}
 
-	void shutdownMapping(){
-
+	void pauseMapping() {
+		std_srvs::Empty srv;
+		map_pause_srv_.call(srv);
 	}
 
-	void resumeMapping(){
-		
+	void resumeMapping() {
+		std_srvs::Empty srv;
+		map_resume_srv_.call(srv);
+	}
+
+	void odomReset() {
+		std_srvs::Empty srv;
+		odom_reset_srv_.call(srv);
+	}
+
+	void statusCallback(const move_base_msgs::MoveBaseActionFeedback::ConstPtr& msg) {
+		goal_status_ = msg->status;
+		ROS_INFO("move base status is %d",goal_status_.status);
 	}
 
 	void pointCallback(const geometry_msgs::PoseStamped::ConstPtr& msg) {
@@ -204,7 +228,7 @@ private:
 	double climb_time_, cmd_rate_, stair_climb_vel_;
 	int goal_index_;
 
-	ros::Subscriber point_sub_, odom_sub_;
+	ros::Subscriber point_sub_, odom_sub_, status_sub_;
 	ros::Publisher goal_pub_, point_pub_, cmd_pub_;
 	STATUS status_;
 	std::vector<geometry_msgs::PoseStamped> goal_points_;
@@ -216,6 +240,13 @@ private:
 	std::string robot_namespace_;
 	std::string map_frame_name_;
 	std::string body_link_name_;
+
+
+	ros::ServiceClient map_pause_srv_;
+	ros::ServiceClient map_resume_srv_;
+	ros::ServiceClient odom_reset_srv_;
+
+	actionlib_msgs::GoalStatus goal_status_;
 };
 
 } //  end of namespace
