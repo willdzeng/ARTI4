@@ -12,6 +12,28 @@
 #include <tf/transform_listener.h>
 #include <tf/transform_datatypes.h>
 
+
+// #include <chores/DoDishesAction.h>
+// #include <actionlib/client/simple_action_client.h>
+
+// typedef actionlib::SimpleActionClient<chores::DoDishesAction> Client;
+
+// int main(int argc, char** argv)
+// {
+//   ros::init(argc, argv, "do_dishes_client");
+//   Client client("do_dishes", true); // true -> don't need ros::spin()
+//   client.waitForServer();
+//   chores::DoDishesGoal goal;
+//   // Fill in goal here
+//   client.sendGoal(goal);
+//   client.waitForResult(ros::Duration(5.0));
+//   if (client.getState() == actionlib::SimpleClientGoalState::SUCCEEDED)
+//     printf("Yay! The dishes are now clean");
+//   printf("Current State: %s\n", client.getState().toString().c_str());
+//   return 0;
+// }
+
+
 namespace arti_navigation {
 class StairClimb {
 public:
@@ -33,6 +55,7 @@ public:
 		private_nh.param("body_link_name", body_link_name_, std::string("base_link"));
 
 		point_sub_ = nh_.subscribe ("way_point", 10, &StairClimb::pointCallback, this);
+		status_sub_ = nh_.subscribe ("way_point", 10, &StairClimb::pointCallback, this);
 		cmd_pub_ = nh_.advertise<geometry_msgs::Twist>("cmd_vel", 1);
 		goal_pub_ = nh_.advertise<geometry_msgs::PoseStamped>("goal", 1);
 		point_pub_ = nh_.advertise<geometry_msgs::PointStamped>("point", maximum_point_pub_size_);
@@ -122,7 +145,7 @@ public:
 			double dist = distBetweenPose(current_goal.pose, current_pose_);
 			double angle_dist = angleDistBetweenPose(current_goal.pose, current_pose_);
 			ROS_INFO("Distance is %f", dist);
-			if (dist < dist_tolerance_&& angle_dist < angle_dist) {
+			if (dist < dist_tolerance_&& angle_dist < angle_tolerance_) {
 				ROS_INFO("Reached the goal %d", goal_index);
 				return true;
 			}
