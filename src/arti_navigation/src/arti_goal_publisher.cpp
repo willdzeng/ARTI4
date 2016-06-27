@@ -90,8 +90,8 @@ public:
 			bool next_goal = false;
 			ROS_INFO("Wait for the robot moving");
 			while (nh_.ok() && status_ == CONTROLLING && !next_goal) {
-				double dist = distBetweenPose(current_goal.pose, current_pose_); //current_goal.pose.position.x - current_pose_.position.x
-				// ROS_INFO("Distance is %f",dist);
+				double dist = distBetweenPose(current_goal.pose, current_pose_);
+				ROS_INFO("Distance is %f",dist);
 				if (dist < dist_tolerance_) {
 					next_goal = true;
 				}

@@ -21,7 +21,7 @@
   <!-- g2o=1, GTSAM=2 -->
   <!-- Optimize the map from the last node. Should be true on multi-session mapping and when time threshold is set -->
   <arg name="database_path"           default="~/.ros/rtabmap.db"/>
-  <arg name="rtabmap_args"            default="--Reg/Force3DoF true --Optimizer/Slam2D true --delete_db_on_start --Vis/EstimationType 0"/>
+  <arg name="rtabmap_args"            default="--Reg/Force3DoF true --Optimizer/Slam2D true --delete_db_on_start"/>
   <!-- delete_db_on_start, udebug -->
   <arg name="launch_prefix"           default=""/>
   <!-- for debugging purpose, it fills launch-prefix tag of the nodes -->
@@ -63,7 +63,7 @@
       <!-- maximum features extracted by image, default 1000 -->
       <param name="Vis/MaxFeatures" type="string" value="1000"/>
       <!-- Change feature type 0=SURF 1=SIFT 2=ORB 3=FAST/FREAK 4=FAST/BRIEF 5=GFTT/FREAK 6=GFTT/BRIEF 7=BRISK 8=GFTT/ORB. -->
-      <param name="Vis/FeatureType" type="string" value="8"/>
+      <param name="Vis/FeatureType" type="string" value="6"/>
       <param name="SURF/GpuVersion" value="true"/>
       <!-- 0=Frame-to-Map (F2M) 1=Frame-to-Frame (F2F) -->
       <param name="Odom/Strategy" type="string" value="0"/>

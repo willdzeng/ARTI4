@@ -1,7 +1,7 @@
 footprint: [[ 0.42,  0.25], [-0.42,  0.25], [-0.42, -0.25], [ 0.42, -0.25]]
 footprint_padding: 0.03 # 0.05
 inflation_layer:
-  inflation_radius: 2.0 # 2xfootprint, it helps to keep the global planned path farther from obstacles
+  inflation_radius: 0.5 # 2xfootprint, it helps to keep the global planned path farther from obstacles
 transform_tolerance: 2
 
 obstacle_layer:
@@ -9,7 +9,7 @@ obstacle_layer:
   obstacle_range: 10
   # The default range in meters at which to raytrace out obstacles from the map using sensor data. This can be over-ridden on a per-sensor basis.
   raytrace_range: 10
-  max_obstacle_height: 20
+  max_obstacle_height: 5
   track_unknown_space: true
   clearing: true
 
@@ -30,9 +30,8 @@ obstacle_layer:
     expected_update_rate: 0.5,
     marking: true,
     clearing: true,
-    min_obstacle_height: -9999.0,
-    max_obstacle_height: 9999,
-    observation_persistence: 5
+    min_obstacle_height: 0.2,
+    max_obstacle_height: 2,
   }
 
   point_cloud_sensorB: {
