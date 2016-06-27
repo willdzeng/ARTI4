@@ -40,6 +40,7 @@ int main(int argc, char **argv)
 	std_srvs::Empty srv;
 	while (n.ok()){
 		client.call(srv);
+		ROS_INFO("Called clear_costmaps service_name");
 		r.sleep();
 	}
 	return 0;
