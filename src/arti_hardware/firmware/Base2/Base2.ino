@@ -6,7 +6,7 @@
 #include <Arduino.h>
 // #define ENCODER_OPTIMIZE_INTERRUPTS
 #define ENCODER_DO_NOT_USE_INTERRUPTS
-#include <Encoder.h>
+//#include <Encoder.h>
 #include <Rotary.h>
 
 // Change these pin numbers to the pins connected to your encoder.
