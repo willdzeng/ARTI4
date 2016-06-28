@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="no_static_map" default="false"/>
+  <arg name="robot_name" default=""/>
+  <arg name="odom_topic" default="/odometry/filtered"/>
+
+  <node pkg="dad_local_planner" type="dad_planner_node" respawn="true" name="local_planner" output="screen" >
+    <param name="robot_namespace" value="$(arg robot_name)"/>
+    <param name="odom_topic" value="$(arg odom_topic)"/>
+
+    <param name="static_cost_map/global_frame" value="$(arg robot_name)/odom"/>
+    <param name="static_cost_map/robot_base_frame" value="$(arg robot_name)/base_link"/>
+    <param name="static_cost_map/static/map_topic" value="/map"/>
+
+    <rosparam ns="static_cost_map">
+    width: 20.0
+    height: 20.0
+    static:
+        subscribe_to_updates: true
+    footprint: [[-0.5, -0.34], [-0.5, 0.34], [0.5, 0.34], [0.5, -0.34]]
+    footprint_padding: 0.01
+    update_frequency: 4.0
+    publish_frequency: 3.0
+    transform_tolerance: 0.5
+
+    resolution: 0.05
+
+    obstacle_range: 24.5
+    raytrace_range: 25.5
+
+    obstacles_laser:
+        observation_sources: laser
+        laser: {data_type: LaserScan, clearing: true, marking: true, topic: scan, inf_is_valid: true}
+
+    inflation:
+        inflation_radius: 0.65
+        cost_scaling_factor: 7
+
+    rolling_window: true
+
+    plugins:
+      - {name: obstacles_laser,           type: "costmap_2d::ObstacleLayer"}
+      - {name: inflation,                 type: "costmap_2d::InflationLayer"}
+
+    </rosparam>
+
+    <!-- planner parameter setup -->
+	<param name="mp_path" value="$(find dad_local_planner)/MP/motion_primitives.txt"/>
+
+    <rosparam>
+        dynamic_obstacle_topic: /dynamic_obstacles
+        # reference_path_topic: /global_planner/global_plan
+        reference_path_topic: /ref_path
+    </rosparam>
+
+    <rosparam>
+        spatial_convergence_threshold: 0.5
+        angular_convergence_threshold: 3.14
+        robot_radius: 0.6
+        traj_resolution: 200
+        detour_cost_factor: 2
+        tube_size: 0.1
+        max_iteration_count: 100
+        mp_duration: 3
+        debug: false
+        debug_wait_input: false
+        spatial_hash_size: 101
+        acc_max_fwd: 3.0
+        acc_max_back: -1.0
+        vel_max_fwd: 1.0
+        vel_max_back: -1.0
+        curvature_max: 10
+        skip_cost_factor: 0.1 
+        static_obs_collision_risk_factor: 0.05
+        dynamic_obs_collision_risk_factor: 0.05
+        sub_optimality_eps: 0.0 
+    </rosparam>
+
+  </node>
+
+</launch>
+

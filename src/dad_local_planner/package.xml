@@ -1,0 +1,44 @@
+<package>
+    <name>dad_local_planner</name>
+    <version>1.0.0</version>
+    <description>
+      TODO
+    </description>
+    <author>Pradeep Rajendran</author>
+    <author>pradeepunique1989@gmail.com</author>
+    <maintainer email="pradeepunique1989@gmail.com">Pradeep Rajendran</maintainer>
+    <license>BSD</license>
+    
+    <buildtool_depend>catkin</buildtool_depend>
+
+    <build_depend>cmake_modules</build_depend>
+    <build_depend>costmap_2d</build_depend>
+    <build_depend>dynamic_reconfigure</build_depend>
+    <build_depend>eigen</build_depend>
+    <build_depend>nav_core</build_depend>
+    <build_depend>nav_msgs</build_depend>
+    <build_depend>roscpp</build_depend>
+    <build_depend>tf</build_depend>
+    <build_depend>rviz_debug_tools</build_depend>
+    <build_depend>nav_msgs</build_depend>
+    <build_depend>dynamic_obstacle</build_depend>
+    <!-- <build_depend>dynamic_obstacle_cost_evaluator</build_depend> -->
+
+    <run_depend>costmap_2d</run_depend>
+    <run_depend>dynamic_reconfigure</run_depend>
+    <run_depend>eigen</run_depend>
+    <run_depend>nav_core</run_depend>
+    <run_depend>nav_msgs</run_depend>
+    <run_depend>roscpp</run_depend>
+    <run_depend>tf</run_depend>
+    <run_depend>rviz_debug_tools</run_depend>
+    <run_depend>nav_msgs</run_depend>
+    <run_depend>dynamic_obstacle</run_depend>
+    <!-- <run_depend>dynamic_obstacle_cost_evaluator</run_depend> -->
+
+    <export>
+    </export>
+
+</package>
+
+

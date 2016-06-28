@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="no_static_map" default="false"/>
+  <arg name="robot_name" default=""/>
+  <!-- <arg name="odom_topic" default="/odometry/filtered"/> -->
+  <arg name="odom_topic" default="/amcl_pose"/>
+  <!-- <arg name="map_file" default="$(find husky_navigation)/maps/playpen_map.yaml"/> -->
+  <arg name="map_file" default="$(find test_world)/maps/willowgarage_perfect.yaml"/>
+
+  <node pkg="dad_local_planner" type="dad_planner_node" respawn="true" name="local_planner" output="screen" >
+    <param name="robot_namespace" value="$(arg robot_name)"/>
+    <param name="odom_topic" value="$(arg odom_topic)"/>
+
+    <param name="static_cost_map/global_frame" value="$(arg robot_name)/odom"/>
+    <param name="static_cost_map/robot_base_frame" value="$(arg robot_name)/base_link"/>
+    <!-- <param name="static_cost_map/static/map_topic" value="/map"/> -->
+
+    <rosparam ns="static_cost_map">
+    # width: 20.0
+    # height: 20.0
+    static:
+        subscribe_to_updates: true
+        map_topic: map
+    footprint: [[-0.5, -0.34], [-0.5, 0.34], [0.5, 0.34], [0.5, -0.34]]
+    footprint_padding: 0.01
+    update_frequency: 4.0
+    publish_frequency: 3.0
+    transform_tolerance: 0.5
+
+    resolution: 0.05
+
+    obstacle_range: 24.5
+    raytrace_range: 25.5
+
+    obstacles_laser:
+        observation_sources: laser
+        laser: {data_type: LaserScan, clearing: true, marking: true, topic: scan, inf_is_valid: true}
+
+    inflation:
+        inflation_radius: 0.65
+        cost_scaling_factor: 7
+
+    rolling_window: false
+
+    plugins:
+      - {name: static,                  type: "costmap_2d::StaticLayer"}
+      # - {name: obstacles_laser,           type: "costmap_2d::ObstacleLayer"}
+      - {name: inflation,                 type: "costmap_2d::InflationLayer"}
+
+    </rosparam>
+
+  </node>
+
+  <!-- Run Map Server -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+  <!--- Run AMCL -->
+  <include file="$(find husky_navigation)/launch/amcl.launch" />
+
+</launch>
+
