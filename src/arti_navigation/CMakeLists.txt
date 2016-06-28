@@ -9,6 +9,7 @@ find_package(catkin REQUIRED
             geometry_msgs
             std_srvs
             tf
+            # rtabmap_ros
         )
 
 # find_package(Eigen REQUIRED)

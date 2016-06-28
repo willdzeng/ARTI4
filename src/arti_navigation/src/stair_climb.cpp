@@ -13,6 +13,7 @@
 #include <tf/transform_datatypes.h>
 #include <std_srvs/Empty.h>
 #include <move_base_msgs/MoveBaseActionResult.h>
+// #include <rtabmap_ros/OdomInfo.h>
 
 namespace arti_navigation {
 class StairClimb {
@@ -28,22 +29,26 @@ public:
 		private_nh_.param("goal_index", goal_index_, 1);
 		private_nh_.param("stair_climb_vel", stair_climb_vel_, 0.5);
 		private_nh_.param("cmd_rate", cmd_rate_, 20.0);
-		private_nh.param("distance_tolerance", dist_tolerance_, 0.5);
-		private_nh.param("robot_namespace", robot_namespace_, std::string(""));
-		private_nh.param("map_frame_name", map_frame_name_, std::string("map"));
-		private_nh.param("body_link_name", body_link_name_, std::string("base_link"));
+		private_nh_.param("distance_tolerance", dist_tolerance_, 0.5);
+		private_nh_.param("robot_namespace", robot_namespace_, std::string(""));
+		private_nh_.param("map_frame_name", map_frame_name_, std::string("map"));
+		private_nh_.param("body_link_name", body_link_name_, std::string("base_link"));
+		private_nh_.param("map_pause_srv_name", map_pause_srv_name_, std::string("/rtabmap/pause"));
+		private_nh_.param("map_resume_srv_name", map_resume_srv_name_, std::string("/rtabmap/resume"));
+		private_nh_.param("odom_reset_srv_name", odom_reset_srv_name_, std::string("/rtabmap/reset_odom"));
 
 		point_sub_ = nh_.subscribe ("way_point", 10, &StairClimb::pointCallback, this);
 		status_sub_ = nh_.subscribe ("status", 1, &StairClimb::statusCallback, this);
-		odom_info_sub_ = nh_.subscribe("odom_info",1, &StairClimb::odomInfoCallback, this);
+		// odom_info_sub_ = nh_.subscribe("odom_info", 1, &StairClimb::odomInfoCallback, this);
+
 		cmd_pub_ = nh_.advertise<geometry_msgs::Twist>("cmd_vel", 1);
 		goal_pub_ = nh_.advertise<geometry_msgs::PoseStamped>("goal", 1);
 		point_pub_ = nh_.advertise<geometry_msgs::PointStamped>("point", maximum_point_pub_size_);
 
-		map_pause_srv_ =  nh_.serviceClient<std_srvs::Empty>("/rtabmap/pause");
-		map_resume_srv_ =  nh_.serviceClient<std_srvs::Empty>("/rtabmap/resume");
-		odom_reset_srv_ =  nh_.serviceClient<std_srvs::Empty>("/rtabmap/reset_odom");
-		
+		map_pause_srv_ =  nh_.serviceClient<std_srvs::Empty>(map_pause_srv_name_);
+		map_resume_srv_ =  nh_.serviceClient<std_srvs::Empty>(map_resume_srv_name_);
+		odom_reset_srv_ =  nh_.serviceClient<std_srvs::Empty>(odom_reset_srv_name_);
+
 		reset();
 	}
 
@@ -53,15 +58,15 @@ public:
 
 	void controlling() {
 		int index = 0;
+		ros::Rate r(20);
 		while (nh_.ok() && index < goal_points_.size() && status_ == CONTROLLING) {
 			if ( index == goal_index_ ) {
-				ros::Duration r(5.0);
+				ros::Duration five_second(5.0);
 				pauseMapping();
-				r.sleep();
+				five_second.sleep();
 				goStraight(climb_time_, stair_climb_vel_);
 				resumeMapping();
 				odomReset();
-				r.sleep();
 				goToGoal(index);
 				index++;
 			} else {
@@ -88,11 +93,17 @@ public:
 		ROS_INFO("Reset Odometry");
 		std_srvs::Empty srv;
 		odom_reset_srv_.call(srv);
+		ros::Rate r(5);
+		while (nh_.ok() && odom_status_ == 1) {
+			r.sleep();
+			ros::spinOnce();
+		}
+		ROS_INFO("Odometry resumed");
 	}
 
-	void odomInfoCallback(const ){
-		
-	}
+	// void odomInfoCallback(const rtabmap_ros::OdomInfo::ConstPtr& msg) {
+	// 	odom_status_ = msg.lost;
+	// }
 
 	void statusCallback(const move_base_msgs::MoveBaseActionResult::ConstPtr& msg) {
 		ROS_INFO("Receved status callback");
@@ -150,7 +161,7 @@ public:
 		goal_status_ = 0;
 		ROS_INFO("Go to goal index %d,Wait for the robot moving", goal_index);
 		while (nh_.ok() && status_ == CONTROLLING) {
-			if (goal_status_ == 1 ){
+			if (goal_status_ == 1 ) {
 				return true;
 			}
 			ros::spinOnce();
@@ -164,7 +175,7 @@ public:
 		ros::Time start_time = ros::Time::now();
 		ros::Time end_time = start_time + ros::Duration(time);
 		ROS_INFO("Start Stair Climb");
-		while (nh_.ok() && ros::Time::now() < end_time) {
+		while (nh_.ok() && ros::Time::now() < end_time && status_ == CONTROLLING) {
 			ros::spinOnce();
 			geometry_msgs::Twist cmd_vel;
 			cmd_vel.linear.x = cmd_vel_x;
@@ -252,6 +263,7 @@ private:
 	std::string robot_namespace_;
 	std::string map_frame_name_;
 	std::string body_link_name_;
+	std::string map_pause_srv_name_,map_resume_srv_name_,odom_reset_srv_name_;
 
 
 	ros::ServiceClient map_pause_srv_;
@@ -259,6 +271,7 @@ private:
 	ros::ServiceClient odom_reset_srv_;
 
 	int goal_status_;
+	bool odom_status_; // 0 for good, 1 for lost
 };
 
 } //  end of namespace
