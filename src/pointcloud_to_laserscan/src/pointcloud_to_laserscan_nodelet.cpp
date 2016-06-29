@@ -103,13 +103,9 @@ void PointCloudToLaserScanNodelet::onInit()
   {
     sub_.registerCallback(boost::bind(&PointCloudToLaserScanNodelet::cloudCb, this, _1));
   }
-
-  pub_ = nh_.advertise<sensor_msgs::LaserScan>("scan", 10,
-         boost::bind(&PointCloudToLaserScanNodelet::connectCb, this),
-         boost::bind(&PointCloudToLaserScanNodelet::disconnectCb, this));
-  fake_pub_ = nh_.advertise<sensor_msgs::LaserScan>("fake_scan", 10,
-              boost::bind(&PointCloudToLaserScanNodelet::connectCb, this),
-              boost::bind(&PointCloudToLaserScanNodelet::disconnectCb, this));
+  sub_.subscribe(nh_, "cloud_in", input_queue_size_);
+  pub_ = nh_.advertise<sensor_msgs::LaserScan>("scan", 10);
+  fake_pub_ = nh_.advertise<sensor_msgs::LaserScan>("fake_scan", 10);
 }
 
 void PointCloudToLaserScanNodelet::connectCb()
@@ -144,7 +140,7 @@ void PointCloudToLaserScanNodelet::cloudCb(const sensor_msgs::PointCloud2ConstPt
 
   //build laserscan output
   sensor_msgs::LaserScan output;
-  sensor_msgs::LaserScan fake_output;
+  
   output.header = cloud_msg->header;
   if (!target_frame_.empty())
   {
@@ -238,12 +234,12 @@ void PointCloudToLaserScanNodelet::cloudCb(const sensor_msgs::PointCloud2ConstPt
   }
   pub_.publish(output);
   // do a fake out to flip the laser scan
-  fake_output = output;
+  sensor_msgs::LaserScan fake_output = output;
   for (int i = 0; i < output.ranges.size(); i++) {
     if (output.ranges[i] < range_max_) {
       fake_output.ranges[i] = std::numeric_limits<double>::infinity();
     }
-    if (output.ranges[i] >= range_max_){
+    if (output.ranges[i] >= range_max_ || std::isinf(output.ranges[i])){
       fake_output.ranges[i] = range_max_;
     }
   }

@@ -17,9 +17,9 @@ obstacle_layer:
 
   laser_scan_sensor: {
     data_type: LaserScan,
-    topic: scan,
+    topic: fake_scan,
     expected_update_rate: 0.1,
-    marking: true,
+    marking: false,
     clearing: true
   }
 
@@ -32,7 +32,7 @@ obstacle_layer:
     clearing: true,
     min_obstacle_height: 0.2,
     max_obstacle_height: 2,
-    inf_is_valid: true
+    inf_is_valid: false
   }
 
   point_cloud_sensorB: {
