@@ -106,7 +106,7 @@
       <param if="$(arg subscribe_scan_cloud)" name="Reg/Strategy"      type="string" value="1"/>
       <!-- Proj map parameters -->
       <param name="grid_cell_size" value="0.05"/>
-      <param name="grid_size" value="50"/>
+      <!-- <param name="grid_size" value="50"/> -->
       <param name="grid_eroded" value="true"/>
       <param name="grid_unknown_space_filled" value="false"/>
       <param name="proj_max_ground_angle" value="45"/>
