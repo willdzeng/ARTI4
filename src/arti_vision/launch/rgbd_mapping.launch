@@ -21,7 +21,7 @@
   <!-- g2o=1, GTSAM=2 -->
   <!-- Optimize the map from the last node. Should be true on multi-session mapping and when time threshold is set -->
   <arg name="database_path"           default="~/.ros/rtabmap.db"/>
-  <arg unless="$(arg localization)"     name="rtabmap_args"  default="--Reg/Force3DoF true --Optimizer/Slam2D true --delete_db_on_start"/>
+  <arg unless="$(arg localization)"     name="rtabmap_args"  default="--Reg/Force3DoF true --Optimizer/Slam2D true"/>
   <arg if="$(arg localization)" name="rtabmap_args"  default="--Reg/Force3DoF true --Optimizer/Slam2D true"/>
   <!-- delete_db_on_start, udebug -->
   <arg name="launch_prefix"           default=""/>
@@ -106,7 +106,7 @@
       <param if="$(arg subscribe_scan_cloud)" name="Reg/Strategy"      type="string" value="1"/>
       <!-- Proj map parameters -->
       <param name="grid_cell_size" value="0.05"/>
-      <param name="grid_size" value="50"/>
+      <!-- <param name="grid_size" value="50"/> -->
       <param name="grid_eroded" value="true"/>
       <param name="grid_unknown_space_filled" value="false"/>
       <param name="proj_max_ground_angle" value="45"/>
