@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string>
 #include <opencv2/opencv.hpp>
-#include <opencv2/core/core.hpp>
 #include <ros/ros.h>
 #include <cv_bridge/cv_bridge.h>
 #include <sensor_msgs/Image.h>
@@ -49,10 +48,10 @@ public:
 
 	void setResolution(int type) {
 
-		if (type == 0) { width_ = 4416; height_ = 1242;}
-		if (type == 1) { width_ = 3840; height_ = 1080;}
-		if (type == 2) { width_ = 2560; height_ = 720;}
-		if (type == 3) { width_ = 1344; height_ = 376;}
+		if (type == 0) { width_ = 4416; height_ = 1242;} // 2K
+		if (type == 1) { width_ = 3840; height_ = 1080;} // FHD
+		if (type == 2) { width_ = 2560; height_ = 720;}  // HD
+		if (type == 3) { width_ = 1344; height_ = 376;}  // VGA
 
 		camera_->set(cv::CAP_PROP_FRAME_WIDTH, width_);
 		camera_->set(cv::CAP_PROP_FRAME_HEIGHT, height_);
@@ -122,7 +121,9 @@ public:
 
 		//get camera info
 		getCameraInfo(config_file_location_, resolution, left_cam_info_msg_ptr, right_cam_info_msg_ptr);
+		ROS_INFO("Left Camera Info as following");
 		std::cout << *left_cam_info_msg_ptr << std::endl;
+		ROS_INFO("Right Camera Info as following");
 		std::cout << *right_cam_info_msg_ptr << std::endl;
 
 		// loop to publish images;
