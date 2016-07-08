@@ -13,25 +13,11 @@
 
 namespace arti {
 
-// class RESOLUTION {
-// public:
-// RESOLUTION(){
-
-// }
-
-// };
 
 class StereoCamera
 {
 
 public:
-
-	enum RESOLUTION : int
-	{
-		HD = 0, // 3840x1080
-		SD = 1, // 2560x720
-		VGA = 2// 1280x480
-	};
 
 	StereoCamera(int resolution, double frame_rate) {
 
@@ -143,10 +129,10 @@ public:
 				publishImage(right_image, right_image_pub, "right_frame", now);
 			}
 			if (left_cam_info_pub.getNumSubscribers() > 0) {
-				publishCamInfo(left_cam_info_pub, left_cam_info_msg_ptr);
+				publishCamInfo(left_cam_info_pub, left_cam_info_msg_ptr, now);
 			}
 			if (right_cam_info_pub.getNumSubscribers() > 0) {
-				publishCamInfo(right_cam_info_pub, right_cam_info_msg_ptr);
+				publishCamInfo(right_cam_info_pub, right_cam_info_msg_ptr, now);
 			}
 		}
 	}
@@ -237,8 +223,8 @@ public:
 		right_cam_info_msg->header.frame_id = right_frame_id_;
 	}
 
-	void publishCamInfo(ros::Publisher pub_cam_info, sensor_msgs::CameraInfoPtr cam_info_msg) {
-		cam_info_msg->header.stamp = ros::Time::now();
+	void publishCamInfo(ros::Publisher pub_cam_info, sensor_msgs::CameraInfoPtr cam_info_msg, ros::Time now) {
+		cam_info_msg->header.stamp = now;
 		pub_cam_info.publish(cam_info_msg);
 	}
 

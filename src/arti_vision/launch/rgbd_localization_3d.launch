@@ -1,0 +1,5 @@
+<launch>
+  <include file="$(find arti_vision)/launch/rgbd_mapping_3d.launch">
+    <arg name="localization" value="true"/>
+  </include>
+</launch>

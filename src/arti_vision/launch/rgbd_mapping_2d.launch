@@ -28,7 +28,6 @@
   <!-- for debugging purpose, it fills launch-prefix tag of the nodes -->
   <arg name="rgb_topic"               default="/camera/rgb/image_rect_color" />
   <arg name="depth_registered_topic"  default="/camera/depth/image_rect_color" />
-  <arg name="depth_registered_topic"  default="/camera/depth/image_rect_color" />
   <arg name="camera_info_topic"       default="/camera/rgb/camera_info" />
   <arg name="compressed"              default="false"/>
   <arg name="convert_depth_to_mm"     default="true"/>
