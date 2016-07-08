@@ -1,0 +1,50 @@
+<!-- Launch in the camera namespace containing "image_raw" and "camera_info" -->
+<launch>
+
+  <arg name="manager" default="proc_manager"/> <!-- Must be globally qualified -->
+  <arg name="respawn" default="false" />
+<!--   <arg name="left" default="/camera/left" />
+  <arg name="right" default="/camera/right" /> -->
+  <!-- TODO Arguments for sync policy, etc? -->
+
+  <arg     if="$(arg respawn)" name="bond" value="" />
+  <arg unless="$(arg respawn)" name="bond" value="--no-bond" />
+
+  <!-- Basic processing for left camera -->
+<!--   <include file="$(find image_proc)/launch/image_proc.launch"
+	   ns="$(arg left)">
+    <arg name="manager" value="$(arg manager)" />
+    <arg name="respawn" value="$(arg respawn)" />
+  </include> -->
+
+  <!-- Basic processing for right camera -->
+<!--   <include file="$(find image_proc)/launch/image_proc.launch"
+	   ns="$(arg right)">
+    <arg name="manager" value="$(arg manager)" />
+    <arg name="respawn" value="$(arg respawn)" />
+  </include> -->
+
+<group ns="proc">
+  <!-- Disparity image -->
+  <remap from="left/image_rect" to="/camera/left/image_rect_color"/>
+  <remap from="left/camera_info" to="/camera/left/camera_info"/>
+  <remap from="rgiht/image_rect" to="/camera/rgiht/image_rect_color"/>
+  <remap from="rgiht/camera_info" to="/camera/rgiht/camera_info"/>
+  <remap from="disparity" to="/disparity"/>
+  <node pkg="nodelet" type="nodelet" name="$(arg manager)"  args="manager" output="screen"/>
+  <node pkg="nodelet" type="nodelet" name="disparity" args="load stereo_image_proc/disparity $(arg manager) $(arg bond)" respawn="$(arg respawn)">
+<!--     <param name="queue_size" value="1"/>
+    <param name="approximate_sync" value="false"/> -->
+  </node>
+
+  <!-- PointCloud2 -->
+<!--   <node pkg="nodelet" type="nodelet" name="point_cloud2"
+        args="load stereo_image_proc/point_cloud2 $(arg manager) $(arg bond)"
+	respawn="$(arg respawn)" /> -->
+
+  <node pkg="nodelet" type="nodelet" name="disparity_to_depth" args="load rtabmap_ros/disparity_to_depth $(arg manager) $(arg bond)" respawn="$(arg respawn)">
+    <remap from="camera_info" to="/camera/left/camera_info"/>
+  </node>
+</group>
+
+</launch>
