@@ -15,11 +15,13 @@ set(CMAKE_CXX_FLAGS "-std=c++0x ${CMAKE_CXX_FLAGS}")
 
 # find_package(Eigen3 REQUIRED)
 find_package(Boost REQUIRED)
+find_package(OpenCV 3.0.0 REQUIRED)
 
 include_directories(
     include
     ${catkin_INCLUDE_DIRS}
     ${EIGEN_INCLUDE_DIRS}
+    ${OpenCV_INCLUDE_DIRS}
     )
 
 add_definitions(${EIGEN_DEFINITIONS})
