@@ -19,6 +19,12 @@ class StereoCamera
 
 public:
 
+	/**
+	 * @brief      { stereo camera driver }
+	 *
+	 * @param[in]  resolution  The resolution
+	 * @param[in]  frame_rate  The frame rate
+	 */
 	StereoCamera(int resolution, double frame_rate) {
 
 		camera_ = new cv::VideoCapture(0);
@@ -32,6 +38,11 @@ public:
 		std::cout << "Stereo Camera Set Frame Rate: " << camera_->get(cv::CAP_PROP_FPS) << std::endl;
 	}
 
+	/**
+	 * @brief      Sets the resolution.
+	 *
+	 * @param[in]  type  The type
+	 */
 	void setResolution(int type) {
 
 		if (type == 0) { width_ = 4416; height_ = 1242;} // 2K
@@ -47,11 +58,24 @@ public:
 
 	}
 
+	/**
+	 * @brief      Sets the frame rate.
+	 *
+	 * @param[in]  frame_rate  The frame rate
+	 */
 	void setFrameRate(double frame_rate) {
 		frame_rate_ = frame_rate;
 		camera_->set(cv::CAP_PROP_FPS, frame_rate_);
 	}
 
+	/**
+	 * @brief      Gets the images.
+	 *
+	 * @param      left_image   The left image
+	 * @param      right_image  The right image
+	 *
+	 * @return     The images.
+	 */
 	bool getImages(cv::Mat& left_image, cv::Mat& right_image) {
 		cv::Mat raw;
 		if (camera_->grab()) {
@@ -77,8 +101,18 @@ private:
 	double frame_rate_;
 };
 
+/**
+ * @brief       the camera ros warpper class
+ */
 class ZedCameraROS {
 public:
+
+	/**
+	 * @brief      { function_description }
+	 *
+	 * @param[in]  resolution  The resolution
+	 * @param[in]  frame_rate  The frame rate
+	 */
 	ZedCameraROS(int resolution, double frame_rate) {
 		ros::NodeHandle nh;
 		ros::NodeHandle private_nh("~");
@@ -86,14 +120,13 @@ public:
 		private_nh.param("resolution", resolution_, 1);
 		private_nh.param("frame_rate", frame_rate_, 30.0);
 		private_nh.param("config_file_location", config_file_location_, std::string("~/SN1267.conf"));
-
-
 		private_nh.param("left_frame_id", left_frame_id_, std::string("left_camera"));
 		private_nh.param("right_frame_id", right_frame_id_, std::string("right_camera"));
 		private_nh.param("show_image", show_image_, false);
+
 		// initialize camera
 		StereoCamera zed(resolution, frame_rate);
-
+		// set up empty message pointer
 		sensor_msgs::CameraInfoPtr left_cam_info_msg_ptr(new sensor_msgs::CameraInfo());
 		sensor_msgs::CameraInfoPtr right_cam_info_msg_ptr(new sensor_msgs::CameraInfo());
 
@@ -134,9 +167,18 @@ public:
 			if (right_cam_info_pub.getNumSubscribers() > 0) {
 				publishCamInfo(right_cam_info_pub, right_cam_info_msg_ptr, now);
 			}
+			// since the frame rate was set inside the camera, no need to do a ros sleep
 		}
 	}
 
+	/**
+	 * @brief      Gets the camera information.
+	 *
+	 * @param[in]  config_file         The configuration file
+	 * @param[in]  resolution          The resolution
+	 * @param[in]  left_cam_info_msg   The left camera information message
+	 * @param[in]  right_cam_info_msg  The right camera information message
+	 */
 	void getCameraInfo(std::string config_file, int resolution, sensor_msgs::CameraInfoPtr left_cam_info_msg, sensor_msgs::CameraInfoPtr right_cam_info_msg) {
 		boost::property_tree::ptree pt;
 		boost::property_tree::ini_parser::read_ini(config_file, pt);
@@ -164,7 +206,9 @@ public:
 		double r_fy = pt.get<double>(right_str + reso_str + ".fy");
 		double r_k1 = pt.get<double>(right_str + reso_str + ".k1");
 		double r_k2 = pt.get<double>(right_str + reso_str + ".k2");
+		// conver mm to m
 		double baseline = pt.get<double>("STEREO.BaseLine") * 0.001;
+		// assume zeros, maybe not right
 		double p1 = 0, p2 = 0, k3 = 0;
 
 		left_cam_info_msg->distortion_model = sensor_msgs::distortion_models::PLUMB_BOB;
@@ -223,11 +267,26 @@ public:
 		right_cam_info_msg->header.frame_id = right_frame_id_;
 	}
 
+	/**
+	 * @brief      { publish cameara info }
+	 *
+	 * @param[in]  pub_cam_info  The pub camera information
+	 * @param[in]  cam_info_msg  The camera information message
+	 * @param[in]  now           The now
+	 */
 	void publishCamInfo(ros::Publisher pub_cam_info, sensor_msgs::CameraInfoPtr cam_info_msg, ros::Time now) {
 		cam_info_msg->header.stamp = now;
 		pub_cam_info.publish(cam_info_msg);
 	}
 
+	/**
+	 * @brief      { publish image }
+	 *
+	 * @param[in]  img           The image
+	 * @param      img_pub       The image pub
+	 * @param[in]  img_frame_id  The image frame identifier
+	 * @param[in]  t             { parameter_description }
+	 */
 	void publishImage(cv::Mat img, image_transport::Publisher &img_pub, std::string img_frame_id, ros::Time t) {
 		cv_bridge::CvImage cv_image;
 		cv_image.image = img;

@@ -5,13 +5,11 @@ find_package(catkin REQUIRED
         COMPONENTS
             cmake_modules
             roscpp
-            message_generation
-            realtime_tools
             tf
             cv_bridge
             image_transport
         )
-set(CMAKE_CXX_FLAGS "-std=c++0x ${CMAKE_CXX_FLAGS}")
+# set(CMAKE_CXX_FLAGS "-std=c++0x ${CMAKE_CXX_FLAGS}")
 
 # find_package(Eigen3 REQUIRED)
 find_package(Boost REQUIRED)
@@ -37,7 +35,6 @@ catkin_package(
 # add_library(zed_cpu_ros src/zed_cpu_ros.cpp)
 # target_link_libraries(zed_cpu_ros ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${Boost_LIBRARIES})
 # add_dependencies(zed_cpu_ros arti_msgs_gencpp)
-
 
 add_executable(zed_cpu_ros src/zed_cpu_ros.cpp)
 target_link_libraries(zed_cpu_ros ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${OpenCV_LIBS})
