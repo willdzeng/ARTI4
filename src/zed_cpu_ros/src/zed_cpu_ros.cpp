@@ -11,6 +11,10 @@
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/ini_parser.hpp>
 
+#define WIDTH_ID 3
+#define HEIGHT_ID 4
+#define FPS_ID 5
+
 namespace arti {
 
 
@@ -25,17 +29,7 @@ public:
 	 * @param[in]  resolution  The resolution
 	 * @param[in]  frame_rate  The frame rate
 	 */
-	StereoCamera(int resolution, double frame_rate) {
-
-		// check opencv version
-		cv_three_ = false;
-		std::cout << "OpenCV version : " << CV_VERSION << std::endl;
-		if (std::atof(CV_VERSION) > 2) {
-			std::cout << "Using OpenCV 3"<< std::endl;
-			cv_three_ = true;
-		}else{
-			std::cout << "Using OpenCV 2" << std::endl;
-		}
+	StereoCamera(int resolution, double frame_rate):frame_rate_(30.0) {
 
 		camera_ = new cv::VideoCapture(0);
 		cv::Mat raw;
@@ -44,8 +38,8 @@ public:
 		setResolution(resolution);
 		setFrameRate(frame_rate);
 		
-		std::cout << "Stereo Camera Set Resolution: " << camera_->get(cv::CAP_PROP_FRAME_WIDTH) << "x" << camera_->get(cv::CAP_PROP_FRAME_HEIGHT) << std::endl;
-		std::cout << "Stereo Camera Set Frame Rate: " << camera_->get(cv::CAP_PROP_FPS) << std::endl;
+		std::cout << "Stereo Camera Set Resolution: " << camera_->get(WIDTH_ID) << "x" << camera_->get(HEIGHT_ID) << std::endl;
+		std::cout << "Stereo Camera Set Frame Rate: " << camera_->get(FPS_ID) << std::endl;
 	}
 
 	/**
@@ -60,11 +54,12 @@ public:
 		if (type == 2) { width_ = 2560; height_ = 720;}  // HD
 		if (type == 3) { width_ = 1344; height_ = 376;}  // VGA
 
-		camera_->set(cv::CAP_PROP_FRAME_WIDTH, width_);
-		camera_->set(cv::CAP_PROP_FRAME_HEIGHT, height_);
-		// make sure that the number set are right
-		width_ = camera_->get(cv::CAP_PROP_FRAME_WIDTH);
-		height_ = camera_->get(cv::CAP_PROP_FRAME_HEIGHT);
+		camera_->set(WIDTH_ID, width_);
+		camera_->set(HEIGHT_ID, height_);
+
+		// make sure that the number set are right from the hardware
+		width_ = camera_->get(WIDTH_ID);
+		height_ = camera_->get(HEIGHT_ID);
 
 	}
 
@@ -74,8 +69,8 @@ public:
 	 * @param[in]  frame_rate  The frame rate
 	 */
 	void setFrameRate(double frame_rate) {
-		frame_rate_ = frame_rate;
-		camera_->set(cv::CAP_PROP_FPS, frame_rate_);
+		camera_->set(FPS_ID, frame_rate);
+		frame_rate_ = camera_->get(FPS_ID);
 	}
 
 	/**
@@ -124,7 +119,7 @@ public:
 	 * @param[in]  resolution  The resolution
 	 * @param[in]  frame_rate  The frame rate
 	 */
-	ZedCameraROS(int resolution, double frame_rate) {
+	ZedCameraROS() {
 		ros::NodeHandle nh;
 		ros::NodeHandle private_nh("~");
 		// get ros param
@@ -136,7 +131,7 @@ public:
 		private_nh.param("show_image", show_image_, false);
 
 		// initialize camera
-		StereoCamera zed(resolution, frame_rate);
+		StereoCamera zed(resolution_, frame_rate_);
 		// set up empty message pointer
 		sensor_msgs::CameraInfoPtr left_cam_info_msg_ptr(new sensor_msgs::CameraInfo());
 		sensor_msgs::CameraInfoPtr right_cam_info_msg_ptr(new sensor_msgs::CameraInfo());
@@ -150,17 +145,21 @@ public:
 		ros::Publisher right_cam_info_pub = nh.advertise<sensor_msgs::CameraInfo>("right/camera_info", 1);
 
 		//get camera info
-		getCameraInfo(config_file_location_, resolution, left_cam_info_msg_ptr, right_cam_info_msg_ptr);
-		ROS_INFO("Left Camera Info as following");
-		std::cout << *left_cam_info_msg_ptr << std::endl;
-		ROS_INFO("Right Camera Info as following");
-		std::cout << *right_cam_info_msg_ptr << std::endl;
+		getCameraInfo(config_file_location_, resolution_, left_cam_info_msg_ptr, right_cam_info_msg_ptr);
+		// ROS_INFO("Left Camera Info as following");
+		// std::cout << *left_cam_info_msg_ptr << std::endl;
+		// ROS_INFO("Right Camera Info as following");
+		// std::cout << *right_cam_info_msg_ptr << std::endl;
 
 		// loop to publish images;
 		cv::Mat left_image, right_image;
 		while (nh.ok()) {
 			ros::Time now = ros::Time::now();
-			zed.getImages(left_image, right_image);
+			if (!zed.getImages(left_image, right_image)){
+				ROS_INFO_ONCE("Can't find camera");
+			}else{
+				ROS_INFO_ONCE("Success, found camera");
+			}
 			if (show_image_) {
 				cv::imshow("left", left_image);
 				cv::imshow("right", right_image);
@@ -322,6 +321,6 @@ private:
 
 int main(int argc, char **argv) {
 	ros::init(argc, argv, "zed_camera");
-	arti::ZedCameraROS zed_ros(1, 30.0);
+	arti::ZedCameraROS zed_ros;
 	return 0;
 }
