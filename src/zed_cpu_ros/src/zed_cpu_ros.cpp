@@ -27,13 +27,23 @@ public:
 	 */
 	StereoCamera(int resolution, double frame_rate) {
 
+		// check opencv version
+		cv_three_ = false;
+		std::cout << "OpenCV version : " << CV_VERSION << std::endl;
+		if (std::atof(CV_VERSION) > 2) {
+			std::cout << "Using OpenCV 3"<< std::endl;
+			cv_three_ = true;
+		}else{
+			std::cout << "Using OpenCV 2" << std::endl;
+		}
+
 		camera_ = new cv::VideoCapture(0);
 		cv::Mat raw;
 		cv::Mat left_image;
 		cv::Mat right_image;
 		setResolution(resolution);
 		setFrameRate(frame_rate);
-
+		
 		std::cout << "Stereo Camera Set Resolution: " << camera_->get(cv::CAP_PROP_FRAME_WIDTH) << "x" << camera_->get(cv::CAP_PROP_FRAME_HEIGHT) << std::endl;
 		std::cout << "Stereo Camera Set Frame Rate: " << camera_->get(cv::CAP_PROP_FPS) << std::endl;
 	}
@@ -99,6 +109,7 @@ private:
 	int width_;
 	int height_;
 	double frame_rate_;
+	bool cv_three_;
 };
 
 /**
