@@ -28,7 +28,7 @@ link_directories(${catkin_LIBRARY_DIRS})
 
 add_library(arti_control src/arti_control.cpp)
 target_link_libraries(arti_control ${libserial_LIBRARIES} ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-add_dependencies(arti_control arti_msgs_gencpp geometry_msgs_gencpp)
+add_dependencies(arti_control arti_msgs_gencpp)
 
 add_executable(arti_control_node src/arti_control.cpp)
 target_link_libraries(arti_control_node arti_control ${catkin_LIBRARIES} ${Boost_LIBRARIES})

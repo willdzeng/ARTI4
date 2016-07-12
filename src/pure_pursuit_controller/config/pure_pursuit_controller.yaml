@@ -1,0 +1,13 @@
+ros:
+  queue_depth: 100
+  path_topic_name: "/global_planner/plan"
+  odometry_topic_name: "/odometry/filtered"
+  cmd_velocity_topic_name: "/husky_velocity_controller/cmd_vel"
+  cmd_trajectory_topic_name: "/local_planner_solution_trajectory"
+  pose_frame_id: "base_link"
+controller:
+  frequency: 20.0
+  initial_waypoint: -1
+  velocity: 0.7 # [m/s]
+  look_ahead_ratio: 0.5 # w.r.t. velocity
+  epsilon: 1e-6

@@ -32,7 +32,7 @@ link_directories(${catkin_LIBRARY_DIRS})
 
 add_library(multi_goal_publisher src/multi_goal_publisher.cpp)
 target_link_libraries(multi_goal_publisher ${libserial_LIBRARIES} ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-add_dependencies(multi_goal_publisher arti_msgs_gencpp geometry_msgs_gencpp)
+add_dependencies(multi_goal_publisher arti_msgs_gencpp)
 
 add_executable(multi_goal_publisher_node src/multi_goal_publisher.cpp)
 target_link_libraries(multi_goal_publisher_node multi_goal_publisher ${catkin_LIBRARIES} ${Boost_LIBRARIES})
@@ -42,7 +42,7 @@ target_link_libraries(costmap_cleanner ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 
 add_library(stair_climb src/stair_climb.cpp)
 target_link_libraries(stair_climb ${libserial_LIBRARIES} ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-add_dependencies(stair_climb arti_msgs_gencpp geometry_msgs_gencpp)
+add_dependencies(stair_climb arti_msgs_gencpp)
 
 add_executable(stair_climb_node src/stair_climb.cpp)
 target_link_libraries(stair_climb_node stair_climb ${catkin_LIBRARIES} ${Boost_LIBRARIES})
