@@ -33,11 +33,11 @@ include_directories(
     ${EIGEN_INCLUDE_DIRS}
 )
 
-add_executable(pure_pursuit_controller_node src/pure_pursuit_controller_node.cpp src/pure_pursuit_controller.cpp)
+# add_executable(pure_pursuit_controller_node src/pure_pursuit_controller_node.cpp src/pure_pursuit_controller.cpp)
 
-target_link_libraries(pure_pursuit_controller_node
-   ${catkin_LIBRARIES}
- )
+# target_link_libraries(pure_pursuit_controller_node
+   # ${catkin_LIBRARIES}
+ # )
 
 #install(
 #    TARGETS

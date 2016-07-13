@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<launch>
+  
+  <include file="$(find global_planner)/launch/global_planner_node.launch">
+    <arg name="robot_name" value="robot1" />
+  </include>
+
+  <include file="$(find global_planner)/launch/global_planner_node.launch">
+    <arg name="robot_name" value="robot2" />
+  </include>
+
+</launch>

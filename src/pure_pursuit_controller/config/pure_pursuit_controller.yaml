@@ -1,9 +1,9 @@
 ros:
   queue_depth: 100
-  path_topic_name: "/global_planner/plan"
-  odometry_topic_name: "/odometry/filtered"
-  cmd_velocity_topic_name: "/husky_velocity_controller/cmd_vel"
-  cmd_trajectory_topic_name: "/local_planner_solution_trajectory"
+  path_topic_name: "/global_planner/global_plan"
+  odom_topic_name: "/odometry/filtered"
+  cmd_vel_topic_name: "/cmd_vel"
+  cmd_traj_topic_name: "/local_planner_solution_trajectory"
   pose_frame_id: "base_link"
 controller:
   frequency: 20.0
