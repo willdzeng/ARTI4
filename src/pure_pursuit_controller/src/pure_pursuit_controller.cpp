@@ -136,8 +136,7 @@ bool PurePursuitController::getNextCmdVel(geometry_msgs::Twist &twist)
         ROS_INFO(" Waypoint number %d ", next_waypoint_);
 
         if (getInterpolatedPose(next_waypoint_, pose)) {
-            //if (1) {
-            //  pose = cur_ref_path_.poses[next_waypoint_];
+
             visualization_msgs::MarkerArray marker_array;
 
             visualization_msgs::Marker marker;
@@ -168,17 +167,24 @@ bool PurePursuitController::getNextCmdVel(geometry_msgs::Twist &twist)
             double look_ahead_angle = getLookAheadAngle(pose);
 
             double angular_vel = 0.0;
+            double linear_vel = target_velocity_;
+
             if (std::abs(std::sin(look_ahead_angle)) >= epsilon_) {
                 double radius = 0.5 * (look_ahead_dist / std::sin(look_ahead_angle));
 
-                double linear_vel = velocity_;
+
                 if (std::abs(radius) >= epsilon_)
+                    // this is omega = V_set * curvature
                     angular_vel = linear_vel / radius;
 
                 twist.linear.x = linear_vel;
                 twist.angular.z = angular_vel;
                 //ROS_INFO(" Advancing");
                 return true;
+            } else {
+                // look ahead angle is too small, so just moving forward
+                twist.linear.x = linear_vel;
+                twist.angular.z = 0;
             }
         }
     }
@@ -219,23 +225,18 @@ int PurePursuitController::getNextWayPoint(int wayPoint) const
 
     if (!cur_ref_path_.poses.empty()) {
         if (next_waypoint_ >= 0) {
-            geometry_msgs::PoseStamped origin = getCurrentPose();
-            tf::Vector3 v_1(origin.pose.position.x,
-                            origin.pose.position.y,
-                            origin.pose.position.z);
             double look_ahead_th = getLookAheadThreshold();
             ROS_INFO("LookAheadThreshold is %f ", look_ahead_th);
-            for (int i = next_waypoint_; i < cur_ref_path_.poses.size();
-                    ++i) {
+            for (int i = next_waypoint_; i < cur_ref_path_.poses.size(); ++i) {
+                // construct a tf vector with the i th point
                 tf::Vector3 v_2(cur_ref_path_.poses[i].pose.position.x,
                                 cur_ref_path_.poses[i].pose.position.y,
                                 cur_ref_path_.poses[i].pose.position.z);
-
+                // check if the distance is higher than the lookahead threshold
                 if (tf::tfDistance(cur_pose_.getOrigin(), v_2) > look_ahead_th) {
                     ROS_INFO("Next waypoint id is %d ", i);
                     return i;
                 }
-
             }
             ROS_INFO("Next waypoint id is %d ", next_waypoint_);
             return next_waypoint_;
@@ -249,10 +250,13 @@ int PurePursuitController::getNextWayPoint(int wayPoint) const
 }
 
 
+/**
+ * @brief      Thread to get the robot pose from TF.
+ */
 void PurePursuitController::getRobotPoseTFthread()
 {
     ros::NodeHandle n;
-    ros::Rate r(record_frequency_);
+    ros::Rate r(control_frequency_);
     ROS_INFO_ONCE("Setup TF thread, reading tf pose");
     while (n.ok()) {
         std::string error;
@@ -283,6 +287,7 @@ void PurePursuitController::getRobotPoseTFthread()
         // // get angle
         // tf::Matrix3x3 m(transform.getRotation());
         // m.getRPY(theta_x_, theta_y_, theta_z_);
+        r.sleep();
 
     }
 }
@@ -300,7 +305,7 @@ void PurePursuitController::getParameters()
 
     nh_.param<double> ("controller/frequency",        frequency_,         20.0);
     nh_.param<int>    ("controller/initial_waypoint", initial_waypoint_,  -1);
-    nh_.param<double> ("controller/velocity",         velocity_,          0.2);
+    nh_.param<double> ("controller/velocity",         target_velocity_,          0.2);
     nh_.param<double> ("controller/look_ahead_ratio", lookahead_ratio_,   1.0);
     nh_.param<double> ("controller/epsilon",          epsilon_,           1e-6);
 }

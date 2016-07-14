@@ -89,7 +89,7 @@ private:
     /// Initial way point
     int initial_waypoint_;
     /// Velocity
-    double velocity_;
+    double target_velocity_;
     /// Lookahead ratio
     double lookahead_ratio_;
     /// Epsilon
