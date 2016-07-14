@@ -3,11 +3,12 @@ Author: Tom Bonar
 Date: 12-11-2013
 Analog pin 1 for reading in the analog voltage from the MaxSonar device.
 This variable is a constant because the pin will not change throughout execution of this code.*/
-const int anPin1 = 1;
-const int anPin2 = 2;
-const int anPin3 = 3;
+const int anPin1 = 0;
+const int anPin2 = 1;
+const int anPin3 = 2;
+const int anPin4 = 3;
 const int triggerPin = 13;
-long anVolt1, anVolt2, anVolt3, sensor1, sensor2, sensor3;
+long anVolt1, anVolt2, anVolt3, anVolt4, sensor1, sensor2, sensor3, sensor4;
 
 void setup() {
   //This opens up a serial connection to shoot the results back to the PC console
@@ -28,9 +29,11 @@ void read_sensor(){
   anVolt1 = analogRead(anPin1);
   anVolt2 = analogRead(anPin2);
   anVolt3 = analogRead(anPin3);
-  sensor1 = anVolt1*2;
+  // anVolt4 = analogRead(anPin4);
+  sensor1 = anVzolt1*2;
   sensor2 = anVolt2*2;
   sensor3 = anVolt3*2;
+  // sensor4 = anVolt3*2;
 }
 
 void printall() {
@@ -38,16 +41,25 @@ void printall() {
   Serial.print("=");
   Serial.print(sensor1);
   Serial.print("cm");
+
   Serial.print(" ");
   Serial.print("S2");
   Serial.print("=");
   Serial.print(sensor2);
   Serial.print("cm");
+
   Serial.print(" ");
   Serial.print("S3");
   Serial.print("=");
   Serial.print(sensor3);
   Serial.print("cm");
+
+  // Serial.print(" ");
+  // Serial.print("S3");
+  // Serial.print("=");
+  // Serial.print(sensor4);
+  // Serial.print("cm");
+
   Serial.println();
 }
 
