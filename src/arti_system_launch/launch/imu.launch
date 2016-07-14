@@ -1,0 +1,15 @@
+<launch>
+<include file="$(find imu_3dm_gx4)/launch/imu.launch">
+	<arg name="enable_filter"       value="true"/>
+    <arg name="enable_accel_update" value="true"/>
+    <arg name="enable_mag_update"   value="true"/>
+    <arg name="imu"                 value="imu"/>
+    <arg name="imu_rate"            value="500"/>
+    <arg name="filter_rate"         value="100"/>
+</include>
+<arg name="pi" value="3.141592654" />
+<arg name="imu_pose" value="0 0 0.01 $(arg pi) 0 $(arg pi)" />
+
+<node pkg="tf" type="static_transform_publisher" name="static_tf_3" args="$(arg imu_pose) zed_camera_link imu 30" />
+
+</launch>
