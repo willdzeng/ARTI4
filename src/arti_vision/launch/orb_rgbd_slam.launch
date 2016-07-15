@@ -1,5 +1,5 @@
 <launch>
-	<arg name="voc_file" default="/home/m1/voc.txt"/>
+	<arg name="voc_file" default="/home/zeng/voc.txt"/>
 	<arg name="setting_file" default="$(find arti_vision)/config/zed.yaml"/>
 
 	<node pkg="ORB_SLAM2" type="RGBD" args="$(arg voc_file) $(arg setting_file)" name="orb_slam2" output="screen">
