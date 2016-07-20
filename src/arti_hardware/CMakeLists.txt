@@ -5,8 +5,8 @@ find_package(catkin REQUIRED
         COMPONENTS
             cmake_modules
             roscpp
-            rosserial_arduino
-            rosserial_client
+            # rosserial_arduino
+            # rosserial_client
             serial
             message_generation
             arti_msgs

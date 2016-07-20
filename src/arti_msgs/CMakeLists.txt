@@ -5,9 +5,6 @@ find_package(catkin REQUIRED
         COMPONENTS
             cmake_modules
             roscpp
-            rosserial_arduino
-            rosserial_client
-            serial
             message_generation
             # libserial
         )
@@ -41,22 +38,6 @@ catkin_package(
     LIBRARIES 
     CATKIN_DEPENDS
 )
-
-# rosserial_generate_ros_lib(
-#   PACKAGE rosserial_arduino
-#   SCRIPT make_libraries.py
-# )
-
-# rosserial_configure_client(
-#   DIRECTORY firmware
-#   TOOLCHAIN_FILE ${ROSSERIAL_ARDUINO_TOOLCHAIN}
-# )
-
-# add_library(arti_msgs src/arti_msgs.cpp)
-# target_link_libraries(arti_msgs ${libserial_LIBRARIES} ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-
-# add_executable(arti_base src/arti_msgs.cpp)
-# target_link_libraries(arti_base arti_msgs ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 
 install(TARGETS 
        ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}

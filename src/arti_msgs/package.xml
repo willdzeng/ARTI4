@@ -14,8 +14,6 @@
     <build_depend>cmake_modules</build_depend>
     <!-- <build_depend>eigen3</build_depend> -->
     <build_depend>roscpp</build_depend>
-    <build_depend>rosserial_arduino</build_depend>
-    <build_depend>rosserial_client</build_depend>
     <build_depend>serial</build_depend>
     <build_depend>message_generation</build_depend>
     <!-- <build_depend>libserial</build_depend> -->
@@ -23,8 +21,6 @@
     <run_depend>cmake_modules</run_depend>
     <run_depend>roscpp</run_depend>
     <!-- <run_depend>eigen3</run_depend> -->
-    <run_depend>rosserial_arduino</run_depend>
-    <run_depend>rosserial_client</run_depend>
     <run_depend>serial</run_depend>
     <run_depend>message_generation</run_depend>
     <!-- <run_depend>libserial</run_depend> -->
