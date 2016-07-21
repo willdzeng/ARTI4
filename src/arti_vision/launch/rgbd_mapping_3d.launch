@@ -55,6 +55,7 @@
       <param name="frame_id"                    type="string" value="$(arg frame_id)"/>
       <param name="wait_for_transform_duration" type="double" value="$(arg wait_for_transform)"/>
       <param name="Odom/FillInfoData"           type="string" value="true"/>
+      <param name="Odom/ResetCountdown"         value="1"/>
       <param name="publish_tf"                                value="true"/>
       <!-- default 5 pixels -->
       <param name="GFTT/MinDistance" type="string" value="10"/>
@@ -88,7 +89,9 @@
       <remap from="scan"            to="$(arg scan_topic)"/>
       <remap from="scan_cloud"      to="$(arg scan_cloud_topic)"/>
       <remap unless="$(arg visual_odometry)" from="odom"  to="$(arg odom_topic)"/>
-      <param name="Rtabmap/TimeThr"              type="string" value="$(arg time_threshold)"/>
+      <param name="Rtabmap/TimeThr"                   type="string" value="$(arg time_threshold)"/>
+      <param name="Rtabmap/StartNewMapOnLoopClosure"  type="string" value="true"/>
+
       <param name="RGBD/OptimizeFromGraphEnd"    type="string" value="$(arg optimize_from_last_node)"/>
       <param if="$(arg optimize_robust)" name="RGBD/OptimizeStrategy" type="string" value="$(arg optimize_mode)"/>
       <param if="$(arg optimize_robust)" name="RGBD/OptimizeRobust" type="string" value="true"/>
@@ -121,6 +124,7 @@
     </node>
     <!-- Visualisation RTAB-Map -->
     <node if="$(arg rtabmapviz)" pkg="rtabmap_ros" type="rtabmapviz" name="rtabmapviz" args="$(arg rtabmapviz_cfg)" output="screen" launch-prefix="$(arg launch_prefix)">
+      
       <param name="subscribe_depth"       type="bool"   value="true"/>
       <param name="subscribe_scan"        type="bool"   value="$(arg subscribe_scan)"/>
       <param name="subscribe_scan_cloud"  type="bool"   value="$(arg subscribe_scan_cloud)"/>
