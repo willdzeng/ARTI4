@@ -27,6 +27,7 @@ add_message_files(
   FILES
   DiffOdom.msg
   DiffCmd.msg
+  Ultrasound.msg
 )
 generate_messages(
   DEPENDENCIES
