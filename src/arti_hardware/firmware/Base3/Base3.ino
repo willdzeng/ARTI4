@@ -22,6 +22,13 @@ Rotary knobRight(53, 51);
 // #define USBCON true
 Sabertooth ST(128, Serial);
 
+#include <Ultrasound.h>
+Ultrasound US;
+
+byte ultra_value_pins[] = {0, 1};
+byte ultra_trigger_pin = 49;
+
+
 int left = 0; // store motor value
 int right = 0; // store voltage value
 long baud_rate = 9600;
@@ -45,6 +52,9 @@ void setup() {
     ST.setBaudRate(baud_rate);
     // ST.autobaud();
     ST.setTimeout(time_out);
+    // initialzed
+    double ultrasound_frequency = 5;
+    US.initialize(ultra_value_pins, sizeof(ultra_value_pins), ultra_trigger_pin, ultrasound_frequency);
 }
 
 void loop() {
@@ -97,6 +107,12 @@ void loop() {
         left = 0;
         right = 0;
     }
+
+    if (US.isReady()) {
+        US.readValue();
+        US.printValue();
+    }
+
 }
 
 bool parseMotorCmd(String str, int& left, int& right) {
