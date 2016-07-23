@@ -8,6 +8,7 @@
   <arg name="rtabmapviz"              default="true" />
   <!-- Localization-only mode -->
   <arg name="localization"            default="false"/>
+  <arg name="2d_slam"                 default="false"/>
   <!-- Corresponding config files -->
   <arg name="rtabmapviz_cfg"          default="-d $(find rtabmap_ros)/launch/config/rgbd_gui.ini" />
   <arg name="rviz_cfg"                default="-d $(find rtabmap_ros)/launch/config/rgbd.rviz" />
@@ -16,10 +17,10 @@
   <arg name="time_threshold"          default="0"/>
   <!-- (ms) If not 0 ms, memory management is used to keep processing time on this fixed limit. -->
   <arg name="optimize_from_last_node" default="false"/>
-  <arg name="optimize_robust"         default="false"/>
-  <arg name="optimize_mode"          default="2"/>
-  <!-- g2o=1, GTSAM=2 -->
   <!-- Optimize the map from the last node. Should be true on multi-session mapping and when time threshold is set -->
+  <arg name="optimize_robust"         default="false"/>
+  <!-- optimized mode g2o=1, GTSAM=2 -->
+  <arg name="optimize_mode"          default="2"/>
   <arg name="database_path"           default="~/.ros/rtabmap.db"/>
   <arg unless="$(arg localization)"     name="rtabmap_args"  default="--delete_db_on_start"/>
   <arg if="$(arg localization)" name="rtabmap_args"  default=""/>

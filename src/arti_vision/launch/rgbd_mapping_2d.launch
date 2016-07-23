@@ -8,6 +8,7 @@
   <arg name="rtabmapviz"              default="true" />
   <!-- Localization-only mode -->
   <arg name="localization"            default="false"/>
+  
   <!-- Corresponding config files -->
   <arg name="rtabmapviz_cfg"          default="-d $(find rtabmap_ros)/launch/config/rgbd_gui.ini" />
   <arg name="rviz_cfg"                default="-d $(find rtabmap_ros)/launch/config/rgbd.rviz" />

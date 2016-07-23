@@ -7,7 +7,7 @@ const int anPin1 = 0;
 const int anPin2 = 1;
 const int anPin3 = 2;
 const int anPin4 = 3;
-const int triggerPin = 13;
+const int triggerPin = 52;
 long anVolt1, anVolt2, anVolt3, anVolt4, sensor1, sensor2, sensor3, sensor4;
 
 void setup() {
@@ -28,11 +28,11 @@ void read_sensor(){
   //Scale factor is (Vcc/1024) per  2 centimeter. A 5V supply yields ~4.9mV/2 cm for long range sensors
   anVolt1 = analogRead(anPin1);
   anVolt2 = analogRead(anPin2);
-  anVolt3 = analogRead(anPin3);
+//  anVolt3 = analogRead(anPin3);/
   // anVolt4 = analogRead(anPin4);
-  sensor1 = anVzolt1*2;
+  sensor1 = anVolt1*2;
   sensor2 = anVolt2*2;
-  sensor3 = anVolt3*2;
+//  sensor3 = anVolt3*2;/
   // sensor4 = anVolt3*2;
 }
 
