@@ -5,8 +5,7 @@ namespace arti_hardware
 
 ArtiHardware::ArtiHardware(ros::NodeHandle nh, ros::NodeHandle private_nh): nh_(nh)
 {
-	cmd_sub_ = nh.subscribe<geometry_msgs::Twist>("cmd_vel", 1, boost::bind(&ArtiHardware::cmdVelCallback, this, _1));
-	diff_cmd_sub_ = nh.subscribe<arti_msgs::DiffCmd>("diff_cmd_vel", 1, boost::bind(&ArtiHardware::diffCmdCallback, this, _1));
+	
 
 	private_nh.param("port", port_, std::string("/dev/ttyACM0"));
 	private_nh.param("body_width", body_width_, 1.0);
@@ -33,8 +32,12 @@ ArtiHardware::ArtiHardware(ros::NodeHandle nh, ros::NodeHandle private_nh): nh_(
 	serial::Timeout to = serial::Timeout::simpleTimeout(serial_time_out_);
 	// serial::Timeout to(serial::Timeout::max(), serial_time_out_, serial_time_out_, serial_time_out_, serial_time_out_);
 	serial_ = new serial::Serial(port_, baud_rate_, to, serial::eightbits, serial::parity_none, serial::stopbits_one, serial::flowcontrol_none);
+
 	diff_odom_pub_ = nh.advertise<arti_msgs::DiffOdom>("/diff_odom", 1);
 	odom_pub_ = nh.advertise<nav_msgs::Odometry>("odom", 1);
+	cmd_sub_ = nh.subscribe<geometry_msgs::Twist>("cmd_vel", 1, boost::bind(&ArtiHardware::cmdVelCallback, this, _1));
+	diff_cmd_sub_ = nh.subscribe<arti_msgs::DiffCmd>("diff_cmd_vel", 1, boost::bind(&ArtiHardware::diffCmdCallback, this, _1));
+
 	tf_odom_pub_.reset(new realtime_tools::RealtimePublisher<tf::tfMessage>(nh_, "/tf", 100));
 	tf_odom_pub_->msg_.transforms.resize(1);
     tf_odom_pub_->msg_.transforms[0].transform.translation.z = 0.0;
@@ -57,7 +60,6 @@ ArtiHardware::ArtiHardware(ros::NodeHandle nh, ros::NodeHandle private_nh): nh_(
 
 	}
 
-	// test();
 	// odomLoop();
 	odom_thread_ = new boost::thread(boost::bind(&ArtiHardware::odomLoop, this));
 	controlLoop();
