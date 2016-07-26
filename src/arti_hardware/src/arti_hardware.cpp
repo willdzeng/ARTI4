@@ -5,7 +5,7 @@ namespace arti_hardware
 
 ArtiHardware::ArtiHardware(ros::NodeHandle nh, ros::NodeHandle private_nh): nh_(nh)
 {
-	
+
 
 	private_nh.param("port", port_, std::string("/dev/ttyACM0"));
 	private_nh.param("body_width", body_width_, 1.0);
@@ -33,16 +33,18 @@ ArtiHardware::ArtiHardware(ros::NodeHandle nh, ros::NodeHandle private_nh): nh_(
 	// serial::Timeout to(serial::Timeout::max(), serial_time_out_, serial_time_out_, serial_time_out_, serial_time_out_);
 	serial_ = new serial::Serial(port_, baud_rate_, to, serial::eightbits, serial::parity_none, serial::stopbits_one, serial::flowcontrol_none);
 
-	diff_odom_pub_ = nh.advertise<arti_msgs::DiffOdom>("/diff_odom", 1);
+	diff_odom_pub_ = nh.advertise<arti_msgs::DiffOdom>("diff_odom", 1);
 	odom_pub_ = nh.advertise<nav_msgs::Odometry>("odom", 1);
+	ultra_pub_ = nh.advertise<arti_msgs::Ultrasound>("ultrasound", 1);
+
 	cmd_sub_ = nh.subscribe<geometry_msgs::Twist>("cmd_vel", 1, boost::bind(&ArtiHardware::cmdVelCallback, this, _1));
 	diff_cmd_sub_ = nh.subscribe<arti_msgs::DiffCmd>("diff_cmd_vel", 1, boost::bind(&ArtiHardware::diffCmdCallback, this, _1));
 
 	tf_odom_pub_.reset(new realtime_tools::RealtimePublisher<tf::tfMessage>(nh_, "/tf", 100));
 	tf_odom_pub_->msg_.transforms.resize(1);
-    tf_odom_pub_->msg_.transforms[0].transform.translation.z = 0.0;
-    tf_odom_pub_->msg_.transforms[0].child_frame_id = base_frame_id_;
-    tf_odom_pub_->msg_.transforms[0].header.frame_id = "odom";
+	tf_odom_pub_->msg_.transforms[0].transform.translation.z = 0.0;
+	tf_odom_pub_->msg_.transforms[0].child_frame_id = base_frame_id_;
+	tf_odom_pub_->msg_.transforms[0].header.frame_id = "odom";
 
 	ros::Duration(2).sleep();
 
@@ -60,8 +62,8 @@ ArtiHardware::ArtiHardware(ros::NodeHandle nh, ros::NodeHandle private_nh): nh_(
 
 	}
 
-	// odomLoop();
-	odom_thread_ = new boost::thread(boost::bind(&ArtiHardware::odomLoop, this));
+	// sensorLoop();
+	odom_thread_ = new boost::thread(boost::bind(&ArtiHardware::sensorLoop, this));
 	controlLoop();
 
 }
@@ -141,29 +143,44 @@ void ArtiHardware::publishOdomTF()
 	tf_odom_pub_->unlockAndPublish();
 }
 
-void ArtiHardware::odomLoop()
+void ArtiHardware::sensorLoop()
 {
 	ROS_INFO_ONCE("Start to publish odom");
 	ros::Rate r(odom_rate_);
-	std::string dataStr;
-	std::string tmpStr;
+	std::string data_str;
+	std::string type_str;
+	std::string tmp_str, use_str;
 	int num = 0;
 	int left = 0, right = 0;
 	unsigned char token[1];
+	std::vector<int> ultra;
+	std::vector<int> odom;
 	while (nh_.ok()) {
 
 		if (serial_->available()) {
 			try
 			{
-				tmpStr = serial_->readline(20, "ODOMS,");
-				if (!tmpStr.empty()) {
-					if (tmpStr.back() == ',') {
-						dataStr = serial_->readline(20, "ODOME\n");
-						if (flip_lr_) {
-							parseOdomStr(dataStr, left, right);
-						} else {
-							parseOdomStr(dataStr, right, left);
+				tmp_str = serial_->readline(100,"\r");
+				use_str = serial_->readline(30, "\n");
+				if (use_str[0] == '$') {
+					// std::cout << "get some data\n";
+					// there is no way that the useful data would be smaller than 10;
+					if (use_str.size()<10){
+						continue;
+					}
+					type_str = use_str.substr(1, 4);
+					data_str = use_str.substr(5, use_str.size() - 5);
+					// std::cout << "type_str: " << type_str << std::endl;
+					// std::cout << "data_str: " << data_str;
+					if (type_str == "ODOM") {
+						parseDataStr(data_str, odom);
+					} else if (type_str == "ULTR") {
+						std::cout << "receved ultrasound: ";
+						parseDataStr(data_str, ultra);
+						for (int i = 0; i < ultra.size(); i++) {
+							std::cout << ultra[i] << " " ;
 						}
+						std::cout << std::endl;
 					}
 				}
 			}
@@ -178,14 +195,17 @@ void ArtiHardware::odomLoop()
 				// continue;
 			}
 		}
-		processOdom(left, right);
-		if (publish_tf_){
+		processOdom(odom);
+		if (publish_tf_) {
 			publishOdomTF();
 		}
-		
 
-		dataStr = "";
-		tmpStr = "";
+		data_str = "";
+		type_str = "";
+		use_str = "";
+		tmp_str = "";
+		odom.clear();
+		ultra.clear();
 		num = 0;
 		r.sleep();
 	}
@@ -198,8 +218,22 @@ void ArtiHardware::printOdom(const arti_msgs::DiffOdom& odom)
 	          << std::endl;
 }
 
-void ArtiHardware::processOdom(const int& left, const int& right)
+void ArtiHardware::processOdom(const std::vector<int>& odom)
 {
+	if (odom.size() != 2) {
+		return;
+	}
+	// flip left right value, if flip_lr_ is ture;
+	int left = 0;
+	int right = 0;
+	if (flip_lr_) {
+		left = odom[1];
+		right = odom[0];
+	} else {
+		left = odom[0];
+		right = odom[1];
+	}
+
 	arti_msgs::DiffOdom diff_odom;
 	diff_odom.left_travel = left * wheel_multiplier_ * odom_bias_;
 	diff_odom.right_travel = right * wheel_multiplier_;
@@ -231,20 +265,29 @@ void ArtiHardware::processOdom(const int& left, const int& right)
 	// std::cout << dl << " " << dr << std::endl;
 	LRtoDiff(vl_, vr_, vx_, wz_);
 	integrateExact(dvx, dwz);
-	nav_msgs::Odometry odom;
-	odom.header.stamp = ros::Time::now();
-	odom.header.frame_id = "odom";
-	odom.pose.pose.position.x = px_;
-	odom.pose.pose.position.y = py_;
-	odom.pose.pose.orientation.z = theta_;
-	odom.pose.pose.orientation.w = 1;
-	odom.twist.twist.linear.x = vx_;
-	odom.twist.twist.angular.z = wz_;
-	odom_pub_.publish(odom);
+	nav_msgs::Odometry odom_msg;
+	odom_msg.header.stamp = ros::Time::now();
+	odom_msg.header.frame_id = "odom";
+	odom_msg.pose.pose.position.x = px_;
+	odom_msg.pose.pose.position.y = py_;
+	odom_msg.pose.pose.orientation.z = theta_;
+	odom_msg.pose.pose.orientation.w = 1;
+	odom_msg.twist.twist.linear.x = vx_;
+	odom_msg.twist.twist.angular.z = wz_;
+	odom_pub_.publish(odom_msg);
 
 }
 
 
+/**
+ * @brief      parse the odom string
+ *
+ * @param[in]  str    The string
+ * @param      left   The left
+ * @param      right  The right
+ *
+ * @return     { description_of_the_return_value }
+ */
 bool ArtiHardware::parseOdomStr(const std::string& str, int& left, int& right)
 {
 	std::vector<int> ids;
@@ -274,6 +317,43 @@ bool ArtiHardware::parseOdomStr(const std::string& str, int& left, int& right)
 	}
 }
 
+
+/**
+ * @brief      parse the data string
+ *
+ * @param[in]  str   The string
+ * @param[in]  data  The data
+ *
+ * @return     { description_of_the_return_value }
+ */
+template<class dataType>
+bool ArtiHardware::parseDataStr(const std::string& str, std::vector<dataType>& data_vector)
+{
+	std::vector<int> ids;
+	for (int i = 0; i < str.length(); i++) {
+		if (str[i] == ',') {
+			ids.push_back(i);
+		}
+	}
+
+	if (ids.size() < 2) {
+		return false;
+	}
+
+	for (int i = 0; i < (ids.size() - 1); i++) {
+		try {
+			// use boost to cast the data
+			dataType data = boost::lexical_cast<dataType, std::string>(str.substr(ids[i] + 1, ids[i + 1] - ids[i] - 1));
+			// add it to data vector
+			data_vector.push_back(data);
+		}
+		catch (boost::bad_lexical_cast ex) {
+			return false;
+		}
+	}
+	return true;
+}
+
 /**
  * @brief      { Send the motor command }
  *
@@ -288,7 +368,7 @@ void ArtiHardware::sendMotorCmd(const double& left, const double right)
 		return;
 	}
 
-	sprintf(cmd_, "\nMOTOS,%d,%d,MOTOE\n", (int) (left * 127), (int) (right * 127));
+	sprintf(cmd_, "\r$MOTO,%d,%d,\n", (int) (left * 127), (int) (right * 127));
 	try
 	{
 
