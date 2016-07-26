@@ -19,6 +19,7 @@ ArtiHardware::ArtiHardware(ros::NodeHandle nh, ros::NodeHandle private_nh): nh_(
 	private_nh.param("maximum_vel", maximum_vel_, 1.0);
 	private_nh.param("odom_bias", odom_bias_, 1.0);
 	private_nh.param("maximum_vel", maximum_vel_, 1.0);
+	private_nh.param("ultra_dist_multipiler", ultra_dist_multipiler_, 1.0);
 	private_nh.param("flip_lr", flip_lr_, false);
 	private_nh.param("publish_tf", publish_tf_, false);
 	private_nh.param("base_frame_id", base_frame_id_, std::string("base_link"));
@@ -160,12 +161,12 @@ void ArtiHardware::sensorLoop()
 		if (serial_->available()) {
 			try
 			{
-				tmp_str = serial_->readline(100,"\r");
+				tmp_str = serial_->readline(100, "\r");
 				use_str = serial_->readline(30, "\n");
 				if (use_str[0] == '$') {
 					// std::cout << "get some data\n";
 					// there is no way that the useful data would be smaller than 10;
-					if (use_str.size()<10){
+					if (use_str.size() < 10) {
 						continue;
 					}
 					type_str = use_str.substr(1, 4);
@@ -175,12 +176,13 @@ void ArtiHardware::sensorLoop()
 					if (type_str == "ODOM") {
 						parseDataStr(data_str, odom);
 					} else if (type_str == "ULTR") {
-						std::cout << "receved ultrasound: ";
+						// std::cout << "receved ultrasound: ";
 						parseDataStr(data_str, ultra);
-						for (int i = 0; i < ultra.size(); i++) {
-							std::cout << ultra[i] << " " ;
-						}
-						std::cout << std::endl;
+						publishUltrasound(ultra);
+						// for (int i = 0; i < ultra.size(); i++) {
+						// 	std::cout << ultra[i] << " " ;
+						// }
+						// std::cout << std::endl;
 					}
 				}
 			}
@@ -218,8 +220,7 @@ void ArtiHardware::printOdom(const arti_msgs::DiffOdom& odom)
 	          << std::endl;
 }
 
-void ArtiHardware::processOdom(const std::vector<int>& odom)
-{
+void ArtiHardware::processOdom(const std::vector<int>& odom) {
 	if (odom.size() != 2) {
 		return;
 	}
@@ -278,6 +279,21 @@ void ArtiHardware::processOdom(const std::vector<int>& odom)
 
 }
 
+/**
+ * @brief      publish Ultrasound msges
+ *
+ * @param[in]  ultra  The ultra
+ */
+void ArtiHardware::publishUltrasound(const std::vector<int>& ultra)
+{
+	std::vector<double> dist;
+	arti_msgs::Ultrasound ultra_msg;
+	ultra_msg.header.stamp = ros::Time::now();
+	for (int i = 0; i < ultra.size(); i++) {
+		ultra_msg.distance.push_back(ultra[i] * ultra_dist_multipiler_);
+	}
+	ultra_pub_.publish(ultra_msg);
+}
 
 /**
  * @brief      parse the odom string

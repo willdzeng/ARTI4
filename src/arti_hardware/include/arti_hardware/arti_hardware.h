@@ -45,7 +45,7 @@ private:
 	std::queue<arti_msgs::DiffOdom> diff_odom_queue_;
 	int odom_window_;
 	ros::Publisher diff_odom_pub_, odom_pub_, ultra_pub_;
-	double wheel_multiplier_;
+	double wheel_multiplier_,ultra_dist_multipiler_;
 	double maximum_vel_;
 	double odom_bias_;
 	bool flip_lr_, publish_tf_;
@@ -75,6 +75,7 @@ public:
 	void LRtoDiff(const double& vl, const double& vr, double& vx, double& wz);
 	void setPose(const double&x, const double& y, const double& theta);
 	void publishOdomTF();
+	void publishUltrasound(const std::vector<int>& ultra);
 
 	template<class dataType>
 	bool parseDataStr(const std::string& str, std::vector<dataType>& data_vector);
