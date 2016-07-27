@@ -5,8 +5,6 @@ namespace arti_hardware
 
 ArtiHardware::ArtiHardware(ros::NodeHandle nh, ros::NodeHandle private_nh): nh_(nh)
 {
-
-
 	private_nh.param("port", port_, std::string("/dev/ttyACM0"));
 	private_nh.param("body_width", body_width_, 1.0);
 	private_nh.param("baud_rate", baud_rate_, 9600);
