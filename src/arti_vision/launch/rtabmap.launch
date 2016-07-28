@@ -23,8 +23,8 @@
   <!-- g2o=1, GTSAM=2 -->
   <!-- Optimize the map from the last node. Should be true on multi-session mapping and when time threshold is set -->
   <arg name="database_path"           default="~/.ros/rtabmap.db"/>
-  <arg unless="$(arg localization)"     name="rtabmap_args"  default="--delete_db_on_start"/>
-  <arg if="$(arg localization)" name="rtabmap_args"  default=""/>
+  <arg name="rtabmap_args"            default="--delete_db_on_start" unless="$(arg localization)"/>
+  <arg name="rtabmap_args"            default=""                         if="$(arg localization)"/>
   <!-- delete_db_on_start, udebug -->
   <arg name="launch_prefix"           default=""/>
   <!-- for debugging purpose, it fills launch-prefix tag of the nodes -->
@@ -75,8 +75,11 @@
       <param name="Vis/CorType" type="string" value="0"/>
       <param name="Vis/EstimationType" value="0"/>
 
-      <param name="Reg/Force3DoF"    value="true" if="2d_slam"/>
-      <param name="Optimizer/Slam2D" value="true" if="2d_slam"/>
+      <param name="Reg/Force3DoF"    value="true" if="$(arg 2d_slam)"/>
+      <param name="Optimizer/Slam2D" value="true" if="$(arg 2d_slam)"/>
+      <!-- Automatically reset odometry after lost -->
+      <param name="Rtabmap/StartNewMapOnLoopClosure" value="true"/>
+      <param name="Odom/ResetCountdown"              value="true" />
       
     </node>
     <!-- Visual SLAM (robot side) -->
@@ -111,6 +114,7 @@
       <param if="$(arg subscribe_scan_cloud)" name="Reg/Strategy"      type="string" value="1"/>
       <!-- Proj map parameters -->
       <param name="grid_cell_size" value="0.05"/>
+      <!-- enable this if you want to customize the grid size -->
       <!-- <param name="grid_size" value="50"/> -->
       <param name="grid_eroded" value="true"/>
       <param name="grid_unknown_space_filled" value="false"/>
@@ -124,8 +128,8 @@
       <!-- <param name="cloud_voxel_size" value="0.05"/> -->
       <!-- <param name="cloud_output_voxelized" value="true"/> -->
 
-      <param name="Reg/Force3DoF"    value="true" if="2d_slam"/>
-      <param name="Optimizer/Slam2D" value="true" if="2d_slam"/>
+      <param name="Reg/Force3DoF"    value="true" if="$(arg 2d_slam)"/>
+      <param name="Optimizer/Slam2D" value="true" if="$(arg 2d_slam)"/>
     </node>
     <!-- Visualisation RTAB-Map -->
     <node if="$(arg rtabmapviz)" pkg="rtabmap_ros" type="rtabmapviz" name="rtabmapviz" args="$(arg rtabmapviz_cfg)" output="screen" launch-prefix="$(arg launch_prefix)">
