@@ -79,7 +79,7 @@
       <param name="Optimizer/Slam2D" value="true" if="$(arg 2d_slam)"/>
       <!-- Automatically reset odometry after lost -->
       <param name="Rtabmap/StartNewMapOnLoopClosure" value="true"/>
-      <param name="Odom/ResetCountdown"              value="true" />
+      <param name="Odom/ResetCountdown"              value="5" />
       
     </node>
     <!-- Visual SLAM (robot side) -->
