@@ -9,6 +9,7 @@
 #include <boost/assign.hpp>
 #include <arti_msgs/DiffOdom.h>
 #include <arti_msgs/DiffCmd.h>
+#include <arti_msgs/Ultrasound.h>
 #include <nav_msgs/Odometry.h>
 #include <realtime_tools/realtime_buffer.h>
 #include <realtime_tools/realtime_publisher.h>
@@ -43,8 +44,8 @@ private:
 	boost::mutex serial_mutex_;
 	std::queue<arti_msgs::DiffOdom> diff_odom_queue_;
 	int odom_window_;
-	ros::Publisher diff_odom_pub_, odom_pub_;
-	double wheel_multiplier_;
+	ros::Publisher diff_odom_pub_, odom_pub_, ultra_pub_;
+	double wheel_multiplier_,ultra_dist_multipiler_;
 	double maximum_vel_;
 	double odom_bias_;
 	bool flip_lr_, publish_tf_;
@@ -60,12 +61,12 @@ public:
 	~ArtiHardware();
 	void cmdVelCallback(const geometry_msgs::Twist::ConstPtr& msg);
 	void controlLoop();
-	void odomLoop();
+	void sensorLoop();
 	void sendMotorCmd(const double& left, const double right);
 	void test();
 	bool parseOdomStr(const std::string& str, int& left, int& right);
 	void printOdom(const arti_msgs::DiffOdom& odom);
-	void processOdom(const int& left, const int& right);
+	void processOdom(const std::vector<int>& odom);
 	void diffCmdCallback(const arti_msgs::DiffCmd::ConstPtr& msg);
 	void thresholdVelocity();
 	void integrateRungeKutta2(const double& linear, const double& angular);
@@ -74,6 +75,10 @@ public:
 	void LRtoDiff(const double& vl, const double& vr, double& vx, double& wz);
 	void setPose(const double&x, const double& y, const double& theta);
 	void publishOdomTF();
+	void publishUltrasound(const std::vector<int>& ultra);
+
+	template<class dataType>
+	bool parseDataStr(const std::string& str, std::vector<dataType>& data_vector);
 };
 
 }

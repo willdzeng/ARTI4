@@ -58,13 +58,12 @@ void Ultrasound::readValue() {
 }
 
 void Ultrasound::printValue() {
-    Serial.print("ULTS,");
+    Serial.print("\r$ULTR,");
     for (int i = 0; i < num_; i++) {
         // Serial.print(i);
         // Serial.print(": ");
         Serial.print(ultra_values_[i]);
         Serial.print(",");
     }
-    Serial.print("ULTE");
-    Serial.println();
+    Serial.print("\n");
 }
