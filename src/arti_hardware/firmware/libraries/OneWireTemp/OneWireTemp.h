@@ -5,7 +5,10 @@
 
 class OneWireTemp{
 public:
+	OneWireTemp();
 	OneWireTemp(int pin);
+	~OneWireTemp();
+	void initialize(int pin);
 	float getTemp();
 
 private:

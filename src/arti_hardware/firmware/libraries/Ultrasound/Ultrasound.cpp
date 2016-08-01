@@ -24,13 +24,6 @@ void Ultrasound::initialize(byte* ultra_value_pins, int size , byte ultra_trigge
     }
     ultra_trigger_pin_ = ultra_trigger_pin;
 
-    // initialize value and pins
-    int i = 0;
-    while (i < num_) {
-        ultra_values_[i] = 0;
-        i++;
-    }
-
     frequency_ = frequency;
     interval_ = 1 / frequency * 1000;
 
@@ -58,13 +51,10 @@ void Ultrasound::readValue() {
 }
 
 void Ultrasound::printValue() {
-    Serial.print("ULTS,");
+    Serial.print("\r$ULTR,");
     for (int i = 0; i < num_; i++) {
-        // Serial.print(i);
-        // Serial.print(": ");
         Serial.print(ultra_values_[i]);
         Serial.print(",");
     }
-    Serial.print("ULTE");
-    Serial.println();
+    Serial.print("\n");
 }

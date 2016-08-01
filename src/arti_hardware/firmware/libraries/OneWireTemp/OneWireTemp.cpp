@@ -1,8 +1,20 @@
 #include <OneWireTemp.h>
 
+OneWireTemp::OneWireTemp(){
+
+}
+OneWireTemp::~OneWireTemp(){
+    delete sensor_;
+}
+
 OneWireTemp::OneWireTemp(int pin) {
     pin_  = pin;
     sensor_ = new OneWire (pin_);
+}
+
+void OneWireTemp::initialize(int pin){
+    pin_ = pin;
+    sensor_ = new OneWire(pin_);
 }
 
 float OneWireTemp::getTemp(){
