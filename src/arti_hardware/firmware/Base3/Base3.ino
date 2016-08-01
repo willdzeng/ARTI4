@@ -9,11 +9,6 @@
 //#include <Encoder.h>
 #include <Rotary.h>
 
-// Change these pin numbers to the pins connected to your encoder.
-//   Best Performance: both pins have interrupt capability
-//   Good Performance: only the first pin has interrupt capability
-//   Low Performance:  neither pin has interrupt capability
-
 Rotary knobLeft(50, 52);
 Rotary knobRight(53, 51);
 

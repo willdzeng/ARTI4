@@ -50,7 +50,7 @@ void MultiTemp::readValue() {
 }
 
 void MultiTemp::printValue() {
-    Serial.print("\rTEMP,");
+    Serial.print("\r$TEMP,");
     for (int i = 0; i < num_; i++) {
         Serial.print(values_[i]);
         Serial.print(",");
