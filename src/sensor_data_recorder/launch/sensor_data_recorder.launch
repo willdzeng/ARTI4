@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<launch>
+
+    <node pkg="sensor_data_recorder" type="sensor_data_recorder_node" name="sensor_data_recorder" respawn="true" output="screen">
+        <param name="ekf_topic" value="/odometry/filtered"/>
+        <param name="odom_topic" value="/odom" />        
+        <param name="imu_topic" value="/imu/data" />
+        <param name="diagnostic_topic" value="/diagnostics" />
+        <param name="robot_namespace" value="" />
+        <!-- <param name="status_name" value=" husky_node: system_status" /> -->
+        <param name="output_file" value="$(env HOME)/recoder_data.csv" />
+        <param name="body_link_name" value="base_link" />
+        <param name="odom_link_name" value="odom" />
+        <!-- <param name="power_topic" value="/husky/power_status" /> -->
+        <!-- <param name="cmd_diff_topic" value="/husky/cmd_diff" /> -->
+        <param name="record_frequency" value="5.0" />
+        <param name="record_tf" value="false" />
+        <remap from="cmd_vel" to="/cmd_vel"/>
+        <remap from="temperature" to="/temperature"/>
+        <remap from="ultrasound" to="/ultrasound"/>
+    </node>
+
+</launch>

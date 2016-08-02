@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<launch>
+
+<node pkg="rosbag" type="record" name="rosbag_recorder" output="screen" args="/cmd_vel /husky_velocity_controller/odom /imu/data /diagnostics /gps /odometry/filtered"/>
+
+</launch>
