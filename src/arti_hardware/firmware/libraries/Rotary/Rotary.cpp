@@ -1,6 +1,6 @@
 /* Rotary encoder handler for arduino.
  *
- * Copyright 2011 Ben Buxton. Licenced under the GNU GPL Version 3.
+ * Copyright 2011-2016 Ben Buxton. Licenced under the GNU GPL Version 3.
  * Contact: bb@cactii.net
  *
  */
@@ -68,7 +68,11 @@ const unsigned char ttable[7][4] = {
 /*
  * Constructor. Each arg is the pin number for each encoder contact.
  */
-Rotary::Rotary(char _pin1, char _pin2) {
+Rotary::Rotary() {
+
+}
+
+void Rotary::initialize(char _pin1, char _pin2) {
   // Assign variables.
   pin1 = _pin1;
   pin2 = _pin2;

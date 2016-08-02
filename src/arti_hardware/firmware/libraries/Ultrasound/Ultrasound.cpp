@@ -19,8 +19,8 @@ void Ultrasound::initialize(byte* ultra_value_pins, int size , byte ultra_trigge
     ultra_values_ = new int [size];
     num_ = size;
     for (int i = 0; i < size; i++) {
-        this->ultra_value_pins_[i] = ultra_value_pins[i];
-        this->ultra_values_[i] = 0;
+        ultra_value_pins_[i] = ultra_value_pins[i];
+        ultra_values_[i] = 0;
     }
     ultra_trigger_pin_ = ultra_trigger_pin;
 
@@ -28,7 +28,10 @@ void Ultrasound::initialize(byte* ultra_value_pins, int size , byte ultra_trigge
     interval_ = 1 / frequency * 1000;
 
     pinMode(ultra_trigger_pin_, OUTPUT);
-    delay(200);
+    delay(300);
+    digitalWrite(ultra_trigger_pin_, HIGH);
+    delay(1);
+    digitalWrite(ultra_trigger_pin_, LOW);
 }
 
 bool Ultrasound::isReady() 
@@ -45,6 +48,7 @@ void Ultrasound::readValue() {
     delay(1);
     digitalWrite(ultra_trigger_pin_, LOW);
     for (int i = 0; i < num_; i++) {
+        // Serial.print(analogRead(ultra_value_pins_[i]) * 2);
         ultra_values_[i] = analogRead(ultra_value_pins_[i]) * 2;
     }
     time_ = millis();

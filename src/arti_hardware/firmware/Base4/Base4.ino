@@ -8,8 +8,11 @@
 #define ENCODER_DO_NOT_USE_INTERRUPTS
 #include <Rotary.h>
 
-Rotary knobLeft(54, 55);
-Rotary knobRight(56, 57);
+bool use_odom = false;
+bool use_ultrasound = true;
+bool use_temp = true;
+
+Rotary knobLeft,knobRight;
 
 #include <Sabertooth.h>
 Sabertooth ST(128, Serial1);
@@ -19,7 +22,7 @@ Ultrasound US;
 
 byte ultra_value_pins[] = {0, 1};
 byte ultra_trigger_pin = 52;
-float ultrasound_frequency = 5;
+float ultrasound_frequency = 5.0;
 
 #include <MultiTemp.h>
 byte temp_value_pins[] = {50, 51};
@@ -37,9 +40,7 @@ String data_str = "";
 long positionLeft  = 0;
 long positionRight = 0;
 
-bool use_odom = false;
-bool use_ultrasound = true;
-bool use_temp = true;
+
 
 bool parseMotorCmd(String str, int& left, int& right);
 void processOdom();
@@ -50,6 +51,11 @@ void setup() {
     Serial1.begin(baud_rate);
     ST.setBaudRate(baud_rate);
     ST.setTimeout(time_out);
+
+    if (use_odom) {
+        knobLeft.initialize(54,55);
+        knobRight.initialize(56,57);
+    }
 
     if (use_ultrasound) {
         // initialzed Ultrasound
@@ -86,8 +92,8 @@ void loop() {
     processCmd();
 }
 
-void processCmd(){
-	// read motor input
+void processCmd() {
+    // read motor input
     if (Serial.available() > 0) {
         tmp_str = Serial.readStringUntil('\r');
         use_str = Serial.readStringUntil('\n');

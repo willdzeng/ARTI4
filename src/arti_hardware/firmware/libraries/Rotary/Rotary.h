@@ -24,8 +24,9 @@
 class Rotary
 {
   public:
-    Rotary(char, char);
+    Rotary();
     unsigned char process();
+    void initialize(char _pin1, char _pin2);
   private:
     unsigned char state;
     unsigned char pin1;
