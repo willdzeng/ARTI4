@@ -8,8 +8,8 @@
 #define ENCODER_DO_NOT_USE_INTERRUPTS
 #include <Rotary.h>
 
-Rotary knobLeft(50, 52);
-Rotary knobRight(53, 51);
+Rotary knobLeft(54, 55);
+Rotary knobRight(56, 57);
 
 #include <Sabertooth.h>
 Sabertooth ST(128, Serial1);
@@ -18,11 +18,11 @@ Sabertooth ST(128, Serial1);
 Ultrasound US;
 
 byte ultra_value_pins[] = {0, 1};
-byte ultra_trigger_pin = 49;
+byte ultra_trigger_pin = 52;
 float ultrasound_frequency = 5;
 
 #include <MultiTemp.h>
-byte temp_value_pins[] = {22, 24};
+byte temp_value_pins[] = {50, 51};
 float temp_frequency = 5.0;
 MultiTemp MT;
 
@@ -37,7 +37,7 @@ String data_str = "";
 long positionLeft  = 0;
 long positionRight = 0;
 
-bool use_odom = true;
+bool use_odom = false;
 bool use_ultrasound = true;
 bool use_temp = true;
 
