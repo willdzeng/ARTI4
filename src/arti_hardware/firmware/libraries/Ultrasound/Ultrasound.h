@@ -13,13 +13,9 @@ public:
 	~Ultrasound();
 
 	void initialize(byte* ultra_value_pins, int size ,byte ultra_trigger_pin, double frequency_);
-
 	void triggerSensor();
-
 	void readValue();
-
 	void printValue();
-
 	bool isReady();
 
 private:

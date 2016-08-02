@@ -20,6 +20,12 @@ Ultrasound US;
 
 byte ultra_value_pins[] = {0, 1};
 byte ultra_trigger_pin = 49;
+float ultrasound_frequency = 5;
+
+#include <MultiTemp.h>
+byte temp_value_pins[] = {22, 24};
+float temp_frequency = 5.0;
+MultiTemp MT;
 
 int left = 0; // store motor value
 int right = 0; // store voltage value
@@ -27,10 +33,14 @@ long baud_rate = 9600;
 int time_out = 300;
 String use_str = "";
 String tmp_str = "";
-String data_str= "";
+String data_str = "";
 
 long positionLeft  = 0;
 long positionRight = 0;
+
+bool use_odom = true;
+bool use_ultrasound = true;
+bool use_temp = true;
 
 bool parseMotorCmd(String str, int& left, int& right);
 void processOdom();
@@ -43,25 +53,44 @@ void setup() {
     ST.setBaudRate(baud_rate);
     // ST.autobaud();
     ST.setTimeout(time_out);
-    // initialzed Ultrasound
-    double ultrasound_frequency = 5;
-    US.initialize(ultra_value_pins, sizeof(ultra_value_pins), ultra_trigger_pin, ultrasound_frequency);
+
+    if (use_ultrasound) {
+        // initialzed Ultrasound
+        US.initialize(ultra_value_pins, sizeof(ultra_value_pins), ultra_trigger_pin, ultrasound_frequency);
+    }
+
+    if (use_temp) {
+        // initialize Temprature sensor
+        MT.initialize(temp_value_pins, sizeof(temp_value_pins), temp_frequency);
+    }
+
 }
 
 void loop() {
-    // processOdom();
-
-    if (US.isReady()) {
-        US.readValue();
-        US.printValue();
+    // if use odometry
+    if (use_odom) {
+        processOdom();
     }
-
+    // if use ultrasound
+    if (use_ultrasound) {
+        if (US.isReady()) {
+            US.readValue();
+            US.printValue();
+        }
+    }
+    // if use tempraure sensor
+    if (use_temp) {
+        if (MT.isReady()) {
+            MT.readValue();
+            MT.printValue();
+        }
+    }
     // read motor input
     if (Serial.available() > 0) {
         tmp_str = Serial.readStringUntil('\r');
         use_str = Serial.readStringUntil('\n');
-        if (use_str[0] == '$'){
-            if (use_str.substring(1,6) == "MOTO,"){
+        if (use_str[0] == '$') {
+            if (use_str.substring(1, 6) == "MOTO,") {
                 data_str = use_str.substring(6);
             }
         }
@@ -78,7 +107,7 @@ void loop() {
     }
 }
 
-void processOdom(){
+void processOdom() {
     // read value
     bool newValue = false;
     unsigned char leftValue, rightValue;
