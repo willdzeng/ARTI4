@@ -6,7 +6,6 @@
 #include <Arduino.h>
 // #define ENCODER_OPTIMIZE_INTERRUPTS
 #define ENCODER_DO_NOT_USE_INTERRUPTS
-//#include <Encoder.h>
 #include <Rotary.h>
 
 Rotary knobLeft(50, 52);
@@ -44,14 +43,12 @@ bool use_temp = true;
 
 bool parseMotorCmd(String str, int& left, int& right);
 void processOdom();
+void processCmd();
 
 void setup() {
     Serial.begin(baud_rate);
-    // Serial.println("TwoKnobs Encoder Test:");
     Serial1.begin(baud_rate);
-    // Serial1.begin(baud_rate);
     ST.setBaudRate(baud_rate);
-    // ST.autobaud();
     ST.setTimeout(time_out);
 
     if (use_ultrasound) {
@@ -85,16 +82,22 @@ void loop() {
             MT.printValue();
         }
     }
-    // read motor input
+    // each loop must read the motor cmd
+    processCmd();
+}
+
+void processCmd(){
+	// read motor input
     if (Serial.available() > 0) {
         tmp_str = Serial.readStringUntil('\r');
         use_str = Serial.readStringUntil('\n');
+        // check token type
         if (use_str[0] == '$') {
             if (use_str.substring(1, 6) == "MOTO,") {
                 data_str = use_str.substring(6);
             }
         }
-        // Serial.print(dataString);
+        // parse the cmd
         if (parseMotorCmd(data_str, left, right)) {
             ST.motor(1, left);
             ST.motor(2, right);
