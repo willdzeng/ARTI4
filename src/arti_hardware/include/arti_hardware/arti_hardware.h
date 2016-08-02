@@ -10,6 +10,7 @@
 #include <arti_msgs/DiffOdom.h>
 #include <arti_msgs/DiffCmd.h>
 #include <arti_msgs/Ultrasound.h>
+#include <arti_msgs/Temperature.h>
 #include <nav_msgs/Odometry.h>
 #include <realtime_tools/realtime_buffer.h>
 #include <realtime_tools/realtime_publisher.h>
@@ -44,8 +45,8 @@ private:
 	boost::mutex serial_mutex_;
 	std::queue<arti_msgs::DiffOdom> diff_odom_queue_;
 	int odom_window_;
-	ros::Publisher diff_odom_pub_, odom_pub_, ultra_pub_;
-	double wheel_multiplier_,ultra_dist_multipiler_;
+	ros::Publisher diff_odom_pub_, odom_pub_, ultra_pub_, temp_pub_;
+	double wheel_multiplier_, ultra_dist_multipiler_, temp_multipiler_;
 	double maximum_vel_;
 	double odom_bias_;
 	bool flip_lr_, publish_tf_;
@@ -76,9 +77,13 @@ public:
 	void setPose(const double&x, const double& y, const double& theta);
 	void publishOdomTF();
 	void publishUltrasound(const std::vector<int>& ultra);
+	void publishTemperature(const std::vector<double> temp);
 
 	template<class dataType>
 	bool parseDataStr(const std::string& str, std::vector<dataType>& data_vector);
+
+	template<class T>
+	void printVector(const T& v);
 };
 
 }

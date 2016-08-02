@@ -28,6 +28,7 @@ add_message_files(
   DiffOdom.msg
   DiffCmd.msg
   Ultrasound.msg
+  Temperature.msg
 )
 generate_messages(
   DEPENDENCIES

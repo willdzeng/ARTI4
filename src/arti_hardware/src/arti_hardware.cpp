@@ -18,6 +18,7 @@ ArtiHardware::ArtiHardware(ros::NodeHandle nh, ros::NodeHandle private_nh): nh_(
 	private_nh.param("odom_bias", odom_bias_, 1.0);
 	private_nh.param("maximum_vel", maximum_vel_, 1.0);
 	private_nh.param("ultra_dist_multipiler", ultra_dist_multipiler_, 1.0);
+	private_nh.param("temp_multipiler", temp_multipiler_, 1.0);
 	private_nh.param("flip_lr", flip_lr_, false);
 	private_nh.param("publish_tf", publish_tf_, false);
 	private_nh.param("base_frame_id", base_frame_id_, std::string("base_link"));
@@ -35,6 +36,7 @@ ArtiHardware::ArtiHardware(ros::NodeHandle nh, ros::NodeHandle private_nh): nh_(
 	diff_odom_pub_ = nh.advertise<arti_msgs::DiffOdom>("diff_odom", 1);
 	odom_pub_ = nh.advertise<nav_msgs::Odometry>("odom", 1);
 	ultra_pub_ = nh.advertise<arti_msgs::Ultrasound>("ultrasound", 1);
+	temp_pub_ = nh.advertise<arti_msgs::Temperature>("temperature", 1);
 
 	cmd_sub_ = nh.subscribe<geometry_msgs::Twist>("cmd_vel", 1, boost::bind(&ArtiHardware::cmdVelCallback, this, _1));
 	diff_cmd_sub_ = nh.subscribe<arti_msgs::DiffCmd>("diff_cmd_vel", 1, boost::bind(&ArtiHardware::diffCmdCallback, this, _1));
@@ -154,6 +156,7 @@ void ArtiHardware::sensorLoop()
 	unsigned char token[1];
 	std::vector<int> ultra;
 	std::vector<int> odom;
+	std::vector<double> temp;
 	while (nh_.ok()) {
 
 		if (serial_->available()) {
@@ -173,14 +176,14 @@ void ArtiHardware::sensorLoop()
 					// std::cout << "data_str: " << data_str;
 					if (type_str == "ODOM") {
 						parseDataStr(data_str, odom);
+						processOdom(odom);
 					} else if (type_str == "ULTR") {
-						// std::cout << "receved ultrasound: ";
 						parseDataStr(data_str, ultra);
 						publishUltrasound(ultra);
-						// for (int i = 0; i < ultra.size(); i++) {
-						// 	std::cout << ultra[i] << " " ;
-						// }
-						// std::cout << std::endl;
+					} else if (type_str == "TEMP") {
+						parseDataStr(data_str, temp);
+						publishTemperature(temp);
+
 					}
 				}
 			}
@@ -195,7 +198,7 @@ void ArtiHardware::sensorLoop()
 				// continue;
 			}
 		}
-		processOdom(odom);
+
 		if (publish_tf_) {
 			publishOdomTF();
 		}
@@ -206,9 +209,22 @@ void ArtiHardware::sensorLoop()
 		tmp_str = "";
 		odom.clear();
 		ultra.clear();
+		temp.clear();
 		num = 0;
 		r.sleep();
 	}
+}
+
+void ArtiHardware::publishTemperature(const std::vector<double> temp)
+{
+	ROS_INFO_ONCE("Start publish temperature information");
+	// std::vector<double> temp;
+	arti_msgs::Temperature temp_msg;
+	temp_msg.header.stamp = ros::Time::now();
+	for (int i = 0; i < temp.size(); i++) {
+		temp_msg.value.push_back(temp[i] * temp_multipiler_);
+	}
+	temp_pub_.publish(temp_msg);
 }
 
 void ArtiHardware::printOdom(const arti_msgs::DiffOdom& odom)
@@ -216,6 +232,15 @@ void ArtiHardware::printOdom(const arti_msgs::DiffOdom& odom)
 	std::cout << "left travel: " << odom.left_travel << " right travel: " <<
 	          odom.right_travel << " left speed: " << odom.left_speed << " right speed:" << odom.right_speed
 	          << std::endl;
+}
+
+template<class T>
+void ArtiHardware::printVector(const T& v)
+{
+	for (int i = 0; i < v.size(); i++) {
+		std::cout << v[i] << " " ;
+	}
+	std::cout << std::endl;
 }
 
 void ArtiHardware::processOdom(const std::vector<int>& odom) {
@@ -284,6 +309,7 @@ void ArtiHardware::processOdom(const std::vector<int>& odom) {
  */
 void ArtiHardware::publishUltrasound(const std::vector<int>& ultra)
 {
+	ROS_INFO_ONCE("Start publish ultrasound information");
 	std::vector<double> dist;
 	arti_msgs::Ultrasound ultra_msg;
 	ultra_msg.header.stamp = ros::Time::now();
