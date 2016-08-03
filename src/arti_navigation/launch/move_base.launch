@@ -87,5 +87,5 @@
       <param name="output_frame_id" value="zed_camera_link"/>
     </node> -->
   </group>
-  <!-- <include file="$(find arti_navigation)/launch/multi_goal_publisher.launch" /> -->
+  <include file="$(find arti_navigation)/launch/multi_goal_publisher.launch" />
 </launch>
