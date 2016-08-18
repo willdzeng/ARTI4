@@ -3,7 +3,7 @@
 namespace arti_hardware
 {
 
-ArtiHardware::ArtiHardware(ros::NodeHandle nh, ros::NodeHandle private_nh): nh_(nh)
+ArtiHardware::ArtiHardware(ros::NodeHandle nh, ros::NodeHandle private_nh): nh_(nh), temp_cutoff_(false)
 {
 	private_nh.param("port", port_, std::string("/dev/ttyACM0"));
 	private_nh.param("body_width", body_width_, 1.0);
@@ -19,6 +19,7 @@ ArtiHardware::ArtiHardware(ros::NodeHandle nh, ros::NodeHandle private_nh): nh_(
 	private_nh.param("maximum_vel", maximum_vel_, 1.0);
 	private_nh.param("ultra_dist_multipiler", ultra_dist_multipiler_, 1.0);
 	private_nh.param("temp_multipiler", temp_multipiler_, 1.0);
+	private_nh.param("temp_cutoff_value", temp_cutoff_value_, 65.0);
 	private_nh.param("flip_lr", flip_lr_, false);
 	private_nh.param("publish_tf", publish_tf_, false);
 	private_nh.param("base_frame_id", base_frame_id_, std::string("base_link"));
@@ -128,6 +129,11 @@ void ArtiHardware::controlLoop()
 			// std::cout << "inter time: " << inter_time << std::endl;
 			cmd_time_ = ros::Time::now();
 		}
+		if (temp_cutoff_ == 1) {
+			cmd_left_ = 0;
+			cmd_right_ = 0;
+			cmd_time_ = ros::Time::now();
+		}
 		sendMotorCmd(cmd_left_, cmd_right_);
 
 		r.sleep();
@@ -151,9 +157,6 @@ void ArtiHardware::sensorLoop()
 	std::string data_str;
 	std::string type_str;
 	std::string tmp_str, use_str;
-	int num = 0;
-	int left = 0, right = 0;
-	unsigned char token[1];
 	std::vector<int> ultra;
 	std::vector<int> odom;
 	std::vector<double> temp;
@@ -162,8 +165,8 @@ void ArtiHardware::sensorLoop()
 		if (serial_->available()) {
 			try
 			{
-				tmp_str = serial_->readline(100, "\r");
-				use_str = serial_->readline(30, "\n");
+				tmp_str = serial_->readline(50, "\r");
+				use_str = serial_->readline(50, "\n");
 				if (use_str[0] == '$') {
 					// std::cout << "get some data\n";
 					// there is no way that the useful data would be smaller than 10;
@@ -182,6 +185,7 @@ void ArtiHardware::sensorLoop()
 						publishUltrasound(ultra);
 					} else if (type_str == "TEMP") {
 						parseDataStr(data_str, temp);
+						tempCheck(temp);
 						publishTemperature(temp);
 
 					}
@@ -210,9 +214,21 @@ void ArtiHardware::sensorLoop()
 		odom.clear();
 		ultra.clear();
 		temp.clear();
-		num = 0;
 		r.sleep();
 	}
+}
+
+void ArtiHardware::tempCheck(const std::vector<double>& temp)
+{
+	for (int i = 0; i < temp.size(); i++) {
+		if (temp[i] > temp_cutoff_value_) {
+			ROS_WARN("Temp %d reached %f higher than the cut off value %f, Robot is too hot, Shutting Down the Robot", i, temp[i], temp_cutoff_value_);
+			temp_cutoff_ = true;
+			return;
+		}
+	}
+	temp_cutoff_ = false;
+	return;
 }
 
 void ArtiHardware::publishTemperature(const std::vector<double> temp)
@@ -400,15 +416,19 @@ bool ArtiHardware::parseDataStr(const std::string& str, std::vector<dataType>& d
  * @param[in]  left   The left command
  * @param[in]  right  The right command
  */
-void ArtiHardware::sendMotorCmd(const double& left, const double right)
+void ArtiHardware::sendMotorCmd(const double& left, const double& right)
 {
 	if (!serial_->isOpen())
 	{
 		ROS_ERROR("Serial port not available");
 		return;
 	}
+	if (flip_lr_) {
+		sprintf(cmd_, "\r$MOTO,%d,%d,\n", (int) (left * 127), (int) (right * 127));
+	} else {
 
-	sprintf(cmd_, "\r$MOTO,%d,%d,\n", (int) (left * 127), (int) (right * 127));
+		sprintf(cmd_, "\r$MOTO,%d,%d,\n", (int) (right * 127), (int) (left * 127));
+	}
 	try
 	{
 

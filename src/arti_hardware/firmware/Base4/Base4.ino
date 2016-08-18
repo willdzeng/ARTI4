@@ -25,14 +25,14 @@ byte ultra_trigger_pin = 31;
 float ultrasound_frequency = 5.0;
 
 #include <MultiTemp.h>
-byte temp_value_pins[] = {48, 49, 50, 51, 52, 53};
+byte temp_value_pins[] = {46, 47, 48, 49, 50, 51};
 float temp_frequency = 5.0;
 MultiTemp MT;
 
 int left = 0; // store motor value
 int right = 0; // store voltage value
 long baud_rate = 9600;
-int time_out = 300;
+int time_out = 500;
 String use_str = "";
 String tmp_str = "";
 String data_str = "";
