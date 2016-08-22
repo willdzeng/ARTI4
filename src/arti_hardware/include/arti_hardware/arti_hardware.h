@@ -53,6 +53,8 @@ private:
 	double px_, py_, theta_;
 	double vx_, wz_;
 	double vl_, vr_;
+	bool temp_cutoff_;
+	double temp_cutoff_value_;
 
 	arti_msgs::DiffOdom diff_odom_old_;
 	boost::shared_ptr<realtime_tools::RealtimePublisher<tf::tfMessage> > tf_odom_pub_;
@@ -63,7 +65,7 @@ public:
 	void cmdVelCallback(const geometry_msgs::Twist::ConstPtr& msg);
 	void controlLoop();
 	void sensorLoop();
-	void sendMotorCmd(const double& left, const double right);
+	void sendMotorCmd(const double& left, const double& right);
 	void test();
 	bool parseOdomStr(const std::string& str, int& left, int& right);
 	void printOdom(const arti_msgs::DiffOdom& odom);
@@ -78,6 +80,7 @@ public:
 	void publishOdomTF();
 	void publishUltrasound(const std::vector<int>& ultra);
 	void publishTemperature(const std::vector<double> temp);
+	void tempCheck(const std::vector<double>& temp);
 
 	template<class dataType>
 	bool parseDataStr(const std::string& str, std::vector<dataType>& data_vector);

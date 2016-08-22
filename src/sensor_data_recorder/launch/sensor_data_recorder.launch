@@ -9,7 +9,7 @@
         <param name="diagnostic_topic" value="/diagnostics" />
         <param name="robot_namespace" value="" />
         <!-- <param name="status_name" value=" husky_node: system_status" /> -->
-        <param name="output_file" value="$(env HOME)/recoder_data2.csv" />
+        <param name="output_file" value="$(env HOME)/recoder_data3.csv" />
         <param name="body_link_name" value="base_link" />
         <param name="odom_link_name" value="odom" />
         <!-- <param name="power_topic" value="/husky/power_status" /> -->
