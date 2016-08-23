@@ -3,6 +3,12 @@
 namespace arti_hardware
 {
 
+/**
+ * @brief      Constructs the object.
+ *
+ * @param[in]  nh          The public node handle
+ * @param[in]  private_nh  The private node handle
+ */
 ArtiHardware::ArtiHardware(ros::NodeHandle nh, ros::NodeHandle private_nh): nh_(nh), temp_cutoff_(false)
 {
 	private_nh.param("port", port_, std::string("/dev/ttyACM0"));
@@ -16,7 +22,6 @@ ArtiHardware::ArtiHardware(ros::NodeHandle nh, ros::NodeHandle private_nh): nh_(
 	private_nh.param("wheel_multiplier", wheel_multiplier_, 0.5);
 	private_nh.param("maximum_vel", maximum_vel_, 1.0);
 	private_nh.param("odom_bias", odom_bias_, 1.0);
-	private_nh.param("maximum_vel", maximum_vel_, 1.0);
 	private_nh.param("ultra_dist_multipiler", ultra_dist_multipiler_, 1.0);
 	private_nh.param("temp_multipiler", temp_multipiler_, 1.0);
 	private_nh.param("temp_cutoff_value", temp_cutoff_value_, 65.0);
@@ -85,34 +90,6 @@ ArtiHardware::~ArtiHardware()
 	delete odom_thread_;
 }
 
-void ArtiHardware::test()
-{
-	ros::Rate r(control_rate_);
-	while (nh_.ok()) {
-		std::string tmpStr;
-		if (serial_->isOpen()) {
-			try
-			{
-				tmpStr = serial_->readline(100);
-				std::cout << tmpStr << std::endl;
-			}
-			catch (serial::SerialException ex) //No data received
-			{
-				ROS_WARN("Serial read exception: %s", ex.what());
-				// continue;
-			}
-			catch (std::runtime_error ex)
-			{
-				ROS_WARN("Serial read exception: %s", ex.what());
-				// continue;
-			}
-		} else {
-			ROS_WARN("Serial is not open\n");
-		}
-
-	}
-}
-
 /**
  * @brief      the main control loop of a the hardware
  */
@@ -140,6 +117,9 @@ void ArtiHardware::controlLoop()
 	}
 }
 
+/**
+ * @brief      publish odometry TF
+ */
 void ArtiHardware::publishOdomTF()
 {
 	geometry_msgs::TransformStamped& odom_frame = tf_odom_pub_->msg_.transforms[0];
@@ -150,6 +130,9 @@ void ArtiHardware::publishOdomTF()
 	tf_odom_pub_->unlockAndPublish();
 }
 
+/**
+ * @brief      The main sensor loop
+ */
 void ArtiHardware::sensorLoop()
 {
 	ROS_INFO_ONCE("Start to publish odom");
@@ -187,7 +170,6 @@ void ArtiHardware::sensorLoop()
 						parseDataStr(data_str, temp);
 						tempCheck(temp);
 						publishTemperature(temp);
-
 					}
 				}
 			}
@@ -218,6 +200,11 @@ void ArtiHardware::sensorLoop()
 	}
 }
 
+/**
+ * @brief      check if the temperature reaches the cutoff value
+ *
+ * @param[in]  temp  The temporary
+ */
 void ArtiHardware::tempCheck(const std::vector<double>& temp)
 {
 	for (int i = 0; i < temp.size(); i++) {
@@ -231,6 +218,11 @@ void ArtiHardware::tempCheck(const std::vector<double>& temp)
 	return;
 }
 
+/**
+ * @brief      publish temperature value
+ *
+ * @param[in]  temp  The temporary
+ */
 void ArtiHardware::publishTemperature(const std::vector<double> temp)
 {
 	ROS_INFO_ONCE("Start publish temperature information");
@@ -243,6 +235,11 @@ void ArtiHardware::publishTemperature(const std::vector<double> temp)
 	temp_pub_.publish(temp_msg);
 }
 
+/**
+ * @brief      print the odometry
+ *
+ * @param[in]  odom  The odom
+ */
 void ArtiHardware::printOdom(const arti_msgs::DiffOdom& odom)
 {
 	std::cout << "left travel: " << odom.left_travel << " right travel: " <<
@@ -250,6 +247,13 @@ void ArtiHardware::printOdom(const arti_msgs::DiffOdom& odom)
 	          << std::endl;
 }
 
+/**
+ * @brief      print the vector
+ *
+ * @param[in]  v     vector
+ *
+ * @tparam     T     template class
+ */
 template<class T>
 void ArtiHardware::printVector(const T& v)
 {
@@ -259,6 +263,11 @@ void ArtiHardware::printVector(const T& v)
 	std::cout << std::endl;
 }
 
+/**
+ * @brief      Process odom data, filtering using window, and publish odometry
+ *
+ * @param[in]  odom  The odom
+ */
 void ArtiHardware::processOdom(const std::vector<int>& odom) {
 	if (odom.size() != 2) {
 		return;
@@ -380,7 +389,7 @@ bool ArtiHardware::parseOdomStr(const std::string& str, int& left, int& right)
  * @param[in]  str   The string
  * @param[in]  data  The data
  *
- * @return     { description_of_the_return_value }
+ * @return     { success or not }
  */
 template<class dataType>
 bool ArtiHardware::parseDataStr(const std::string& str, std::vector<dataType>& data_vector)
@@ -452,7 +461,7 @@ void ArtiHardware::sendMotorCmd(const double& left, const double& right)
 }
 
 /**
- * @brief      { function_description }
+ * @brief      callback function for subscribe command velcoty
  *
  * @param[in]  msg   The message
  */
@@ -464,6 +473,11 @@ void ArtiHardware::cmdVelCallback(const geometry_msgs::Twist::ConstPtr& msg)
 	cmd_time_ = ros::Time::now();
 }
 
+/**
+ * @brief      callback function to subscribe the differetial command
+ *
+ * @param[in]  msg   The message
+ */
 void ArtiHardware::diffCmdCallback(const arti_msgs::DiffCmd::ConstPtr& msg)
 {
 	ROS_INFO_ONCE("Arti Hardware Get Diff Command");
@@ -475,6 +489,12 @@ void ArtiHardware::diffCmdCallback(const arti_msgs::DiffCmd::ConstPtr& msg)
 }
 
 
+/**
+ * @brief      integration function using Runge Kutta
+ *
+ * @param[in]  linear   The linear
+ * @param[in]  angular  The angular
+ */
 void ArtiHardware::integrateRungeKutta2(const double& linear, const double& angular)
 {
 	const double direction = theta_ + angular * 0.5;
@@ -486,9 +506,10 @@ void ArtiHardware::integrateRungeKutta2(const double& linear, const double& angu
 }
 
 /**
- * \brief Other possible integration method provided by the class
- * \param linear
- * \param angular
+ * @brief      Other possible integration method provided by the class
+ *
+ * @param      linear   The linear
+ * @param      angular  The angular
  */
 void ArtiHardware::integrateExact(const double& linear, const double& angular)
 {
@@ -506,6 +527,9 @@ void ArtiHardware::integrateExact(const double& linear, const double& angular)
 }
 
 
+/**
+ * @brief      threshold veloctiy
+ */
 void ArtiHardware::thresholdVelocity()
 {
 	if (cmd_left_ > maximum_vel_) {
@@ -525,18 +549,41 @@ void ArtiHardware::thresholdVelocity()
 	}
 }
 
+/**
+ * @brief      diffrential to Left and Right value
+ *
+ * @param[in]  vx    linear velocity
+ * @param[in]  wz    angular velocity
+ * @param      vl    left velocity
+ * @param      vr    right velocity
+ */
 void ArtiHardware::diffToLR(const double& vx, const double& wz, double& vl, double& vr)
 {
 	vl = vx - body_width_ / 2 * wz;
 	vr = vx + body_width_ / 2 * wz;
 }
 
+/**
+ * @brief      Left and Right value to differential value
+ *
+ * @param[in]  vl    left velocity
+ * @param[in]  vr    right velocity
+ * @param      vx    linear velocity
+ * @param      wz    angular velocity
+ */
 void ArtiHardware::LRtoDiff(const double& vl, const double& vr, double& vx, double& wz)
 {
 	vx  = (vr + vl) * 0.5 ;
 	wz = (vr - vl) / body_width_;
 }
 
+/**
+ * @brief      Sets the initial pose.
+ *
+ * @param[in]  x      x postion
+ * @param[in]  y      y position
+ * @param[in]  theta  The theta
+ */
 void ArtiHardware::setPose(const double&x, const double& y, const double& theta)
 {
 	px_ = x;

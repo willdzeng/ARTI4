@@ -1,6 +1,4 @@
 <launch>
-<!--   <env name="ROSCONSOLE_CONFIG_FILE" 
-       value="$(find arti_hardware)/rosconfig.yaml"/> -->
   <node pkg="arti_hardware" type="arti_base" name="arti_base" output="screen">
     <param name="port" value="/dev/ttyACM0"/>
     <param name="baud_rate" value="9600"/>
@@ -17,5 +15,4 @@
     <param name="odom_bias" value="0.98"/>
     <remap from="odom" to="/arti/odom"/>
   </node>
-
 </launch>
