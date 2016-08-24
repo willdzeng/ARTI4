@@ -1,0 +1,7 @@
+<launch>
+<include file="$(find arti_hardware)/launch/arti_base.launch"/>
+<include file="$(find arti_control)/launch/joy_teleop.launch"/>
+<include file="$(find arti_vision)/launch/zed.launch"/>
+<include file="$(find arti_vision)/launch/rgbd_mapping_3d.launch"/>
+<include file="$(find arti_navigation)/launch/move_base.launch"/>
+</launch>

@@ -1,4 +1,4 @@
-# arti_hardware
+# arti_hardware  [Transcend Robotics](http://transcendrobotics.com/)
 The Hardware ROS package for ARTI3 robot
 ## How to install
 ```
