@@ -4,7 +4,7 @@
     <param name="baud_rate" value="9600"/>
     <param name="body_width" value="1.078"/>
     <param name="serial_time_out" value="50"/>
-    <param name="cmd_time_out" value="0.1"/>
+    <param name="cmd_time_out" value="100"/>
     <param name="control_rate" value="10"/>
     <param name="odom_rate" value="60"/>
     <param name="odom_window" value="20"/>
@@ -13,6 +13,7 @@
     <param name="flip_lr" value="false"/>
     <param name="publish_tf" value="false"/>
     <param name="odom_bias" value="0.98"/>
+    <param name="temp_cutoff_value" value="65.0"/>
     <remap from="odom" to="/arti/odom"/>
   </node>
 </launch>

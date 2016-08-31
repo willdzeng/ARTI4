@@ -11,7 +11,7 @@
   <arg name="2d_slam"                 default="true"/>
   
   <!-- Corresponding config files -->
-  <arg name="rtabmapviz_cfg"          default="-d $(find rtabmap_ros)/launch/config/rgbd_gui.ini" />
+  <arg name="rtabmapviz_cfg"          default="-d $(find arti_vision)/config/rgbd_gui.ini" />
   <arg name="rviz_cfg"                default="-d $(find rtabmap_ros)/launch/config/rgbd.rviz" />
   <arg name="frame_id"                default="/base_link"/>
   <!-- Fixed frame id, you may set "base_link" or "base_footprint" if they are published -->
@@ -138,7 +138,7 @@
       <param name="subscribe_scan_cloud"  type="bool"   value="$(arg subscribe_scan_cloud)"/>
       <param name="subscribe_odom_info"   type="bool"   value="$(arg visual_odometry)"/>
       <param name="frame_id"              type="string" value="$(arg frame_id)"/>
-      <param name="wait_for_transform_duration"  type="double"   value="$(arg wait_for_transform)"/>
+      <param name="wait_for_transform_duration"        type="double"   value="$(arg wait_for_transform)"/>
       <remap from="rgb/image"       to="$(arg rgb_topic)"/>
       <remap from="depth/image"     to="$(arg depth_registered_topic)"/>
       <remap from="rgb/camera_info" to="$(arg camera_info_topic)"/>

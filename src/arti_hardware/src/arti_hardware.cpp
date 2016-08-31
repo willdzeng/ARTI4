@@ -18,7 +18,7 @@ ArtiHardware::ArtiHardware(ros::NodeHandle nh, ros::NodeHandle private_nh): nh_(
 	private_nh.param("control_rate", control_rate_, 30.0);
 	private_nh.param("odom_rate", odom_rate_, 50.0);
 	private_nh.param("odom_window", odom_window_, 5);
-	private_nh.param("cmd_time_out", cmd_time_out_, 0.5);
+	private_nh.param("cmd_time_out", cmd_time_out_, 500.0);
 	private_nh.param("wheel_multiplier", wheel_multiplier_, 0.5);
 	private_nh.param("maximum_vel", maximum_vel_, 1.0);
 	private_nh.param("odom_bias", odom_bias_, 1.0);
@@ -33,10 +33,10 @@ ArtiHardware::ArtiHardware(ros::NodeHandle nh, ros::NodeHandle private_nh): nh_(
 	ROS_INFO("Set Serial Timeout %d ms", serial_time_out_);
 	ROS_INFO("Baud Rate %d", baud_rate_);
 	ROS_INFO("Control Rate %f", control_rate_);
-	ROS_INFO("Command Time out is %f s", cmd_time_out_);
+	ROS_INFO("Command Time out is %f ms", cmd_time_out_);
+	cmd_time_out_ = cmd_time_out_/1000;
 
 	serial::Timeout to = serial::Timeout::simpleTimeout(serial_time_out_);
-	// serial::Timeout to(serial::Timeout::max(), serial_time_out_, serial_time_out_, serial_time_out_, serial_time_out_);
 	serial_ = new serial::Serial(port_, baud_rate_, to, serial::eightbits, serial::parity_none, serial::stopbits_one, serial::flowcontrol_none);
 
 	diff_odom_pub_ = nh.advertise<arti_msgs::DiffOdom>("diff_odom", 1);
