@@ -24,7 +24,8 @@
       <remap from="fake_scan" to="/camera/fake_scan"/>
       <remap from="obstacles_cloud" to="/obstacles_cloud"/>
       <remap from="ground_cloud" to="/ground_cloud"/>
-      <remap from="map" to="/rtabmap/proj_map"/>
+      <!-- <remap from="map" to="/rtabmap/proj_map"/> -->
+      <remap from="map" to="/rtabmap/octomap_proj"/>
       <remap from="move_base_simple/goal" to="/move_base_simple/goal"/>
     </node>
   </group>
