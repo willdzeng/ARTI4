@@ -117,16 +117,13 @@
       <!-- enable this if you want to customize the grid size -->
       <!-- <param name="grid_size" value="50"/> -->
       <param name="grid_eroded" value="true"/>
-      <param name="grid_unknown_space_filled" value="false"/>
-      <param name="proj_max_ground_angle" value="45"/>
-      <param name="proj_min_cluster_size" value="30"/>
-      <param name="proj_max_obstacles_height" value="2"/>
-      <param name="proj_max_ground_height" value="0.1"/>
-      <param name="cloud_noise_filtering_radius" value="0.05"/>
-      <!-- <param name="cloud_floor_culling_height" value="0.1"/> -->
-      <param name="cloud_noise_filtering_min_neighbors" value="2"/>
-      <!-- <param name="cloud_voxel_size" value="0.05"/> -->
-      <!-- <param name="cloud_output_voxelized" value="true"/> -->
+
+      <param name="Grid/MaxGroundAngle"             value="45"/>
+      <param name="Grid/MinClusterSize"             value="30"/>
+      <param name="Grid/MaxObstacleHeight"          value="2"/>
+      <param name="Grid/MaxGroundHeight"            value="0.1"/>
+      <param name="Grid/NoiseFilteringRadius"       value="0.05"/>
+      <param name="Grid/NoiseFilteringMinNeighbors" value="2"/>
 
       <param name="Reg/Force3DoF"    value="true" if="$(arg 2d_slam)"/>
       <param name="Optimizer/Slam2D" value="true" if="$(arg 2d_slam)"/>
@@ -139,6 +136,9 @@
       <param name="subscribe_odom_info"   type="bool"   value="$(arg visual_odometry)"/>
       <param name="frame_id"              type="string" value="$(arg frame_id)"/>
       <param name="wait_for_transform_duration"        type="double"   value="$(arg wait_for_transform)"/>
+      <param name="General/octomap"                    value="false"/>
+      <param name="General/octomap_depth"              value="16"/>
+      <param name="General/octomap_ground_is_obstacle" value="true"/>
       <remap from="rgb/image"       to="$(arg rgb_topic)"/>
       <remap from="depth/image"     to="$(arg depth_registered_topic)"/>
       <remap from="rgb/camera_info" to="$(arg camera_info_topic)"/>

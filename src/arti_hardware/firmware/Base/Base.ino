@@ -1,16 +1,19 @@
-/* Encoder Library - TwoKnobs Example
- * http://www.pjrc.com/teensy/td_libs_Encoder.html
+/* This is the hardware Arduino code for ARTI from Transcend Robotics
+ * transcend.ai
  *
- * This example code is in the public domain.
+ * 
  */
 #include <Arduino.h>
+
 // #define ENCODER_OPTIMIZE_INTERRUPTS
 #define ENCODER_DO_NOT_USE_INTERRUPTS
 #include <Rotary.h>
-
+// whether to use odometry
 bool use_odom = false;
+// whether to use ultrasound
 bool use_ultrasound = false;
-bool use_temp = true;
+// whether to use temperature
+bool use_temp = false;
 
 Rotary knobLeft, knobRight;
 
@@ -39,8 +42,6 @@ String data_str = "";
 
 long positionLeft  = 0;
 long positionRight = 0;
-
-
 
 bool parseMotorCmd(String str, int& left, int& right);
 void processOdom();
@@ -172,10 +173,5 @@ bool parseMotorCmd(String str, int& left, int& right) {
 	String rightstr = str.substring(id1 + 1, id2);
 	left = leftstr.toInt();
 	right = rightstr.toInt();
-	// Serial.println();
-	// Serial.println(left);
-	// Serial.println(right);
-	// left = 0;
-	// right = 0;
 	return 1;
 }
